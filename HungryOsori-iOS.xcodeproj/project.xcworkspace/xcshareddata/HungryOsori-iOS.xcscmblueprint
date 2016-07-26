@@ -1,21 +1,28 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "9F606CE4BA291BE0D8AAFEA5CECA477E513A4190",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "67620B5EFA902936DF04070AF595B76AB0333747" : 0,
     "9F606CE4BA291BE0D8AAFEA5CECA477E513A4190" : 0,
-    "67620B5EFA902936DF04070AF595B76AB0333747" : 0
+    "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A235FC64-FC21-4AB9-9129-F29A84552838",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "9F606CE4BA291BE0D8AAFEA5CECA477E513A4190" : "HungryOsori-iOS\/",
-    "67620B5EFA902936DF04070AF595B76AB0333747" : "HungryOsori-iOS\/Alamofire\/"
+    "67620B5EFA902936DF04070AF595B76AB0333747" : "Alamofire\/",
+    "9F606CE4BA291BE0D8AAFEA5CECA477E513A4190" : "",
+    "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D" : "HungryOsori-iOS\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "HungryOsori-iOS",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
-  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HungryOsori-iOS\/HungryOsori-iOS.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "HungryOsori-iOS.xcodeproj",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/seubseub\/HungryOsori-iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Alamofire\/Alamofire.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",

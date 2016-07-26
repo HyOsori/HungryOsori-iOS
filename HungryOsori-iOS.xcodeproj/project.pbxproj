@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764D39031D4601ED003C4A4D /* ProtectedViewController.swift */; };
 		7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76D1D409DC60071288E /* LoginViewController.swift */; };
 		7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76F1D40A1220071288E /* RegisterViewController.swift */; };
 		76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9121D34D53C0051FBDD /* AppDelegate.swift */; };
@@ -95,6 +96,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		764D39031D4601ED003C4A4D /* ProtectedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectedViewController.swift; sourceTree = "<group>"; };
 		7660F76D1D409DC60071288E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7660F76F1D40A1220071288E /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		76A0E90F1D34D53C0051FBDD /* HungryOsori-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HungryOsori-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,6 +206,7 @@
 				76A0E9801D3CBFA10051FBDD /* Alamofire.xcodeproj */,
 				7660F76D1D409DC60071288E /* LoginViewController.swift */,
 				7660F76F1D40A1220071288E /* RegisterViewController.swift */,
+				764D39031D4601ED003C4A4D /* ProtectedViewController.swift */,
 			);
 			path = "HungryOsori-iOS";
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 			files = (
 				76A0E9171D34D53C0051FBDD /* SecondViewController.swift in Sources */,
 				76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */,
+				764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */,
 				76A0E95F1D3790020051FBDD /* Osori.swift in Sources */,
 				7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,

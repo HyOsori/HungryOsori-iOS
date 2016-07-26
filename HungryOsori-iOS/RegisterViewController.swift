@@ -34,19 +34,22 @@ class RegisterViewController: UIViewController {
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(okAction)
         
-        self.presentedViewController
+        self.presentViewController(alert, animated:true, completion: nil)
     }
     
     @IBAction func RegisterUIButton(sender: AnyObject) {
         let NewIdUIText = NewIdUITextField.text
         
-        if((NewIdUIText?.isEmpty) != nil)
+        
+        //Check For whether empty or not
+        if((NewIdUIText?.isEmpty) == nil)
         {
             displayAlertMassage("Put your ID that you want to use")
             return
         }
         
-        NSUserDefaults.standardUserDefaults().setObject(NewIdUIText, forKey: "NewId")
+        //Storing Data
+        NSUserDefaults.standardUserDefaults().setObject(NewIdUIText, forKey: "NewID")
         NSUserDefaults.standardUserDefaults().synchronize()
         
         var alert = UIAlertController(title: "alert", message: "Register Successful", preferredStyle: UIAlertControllerStyle.Alert)
@@ -59,7 +62,7 @@ class RegisterViewController: UIViewController {
         
 
         alert.addAction(okAction)
-        self.presentedViewController
+        self.presentViewController(alert, animated:true, completion: nil)
 
     }
     /*

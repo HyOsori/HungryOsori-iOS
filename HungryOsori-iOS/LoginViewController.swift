@@ -9,73 +9,88 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    var messageDecision:String?
 
     @IBOutlet weak var KeyUITextField: UITextField!
     @IBOutlet weak var IDUITextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         makePostRequest()
+        
         
         
 
         // Do any additional setup after loading the view.
     }
+    func displayAlertMassage(Massge : String)
+    {
+        var alert = UIAlertController(title: "Alert", message: Massge, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(okAction)
+        
+        self.presentViewController(alert, animated:true, completion: nil)
+    }
     
     func makePostRequest(){
-        //       let urlPath: String = "192.168.0.89"
-        
-        //       let myURL:NSURL = NSURL(string: urlPath)!
+
         
         let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_login")!)
-        //       let request = NSMutableURLRequest(URL: myURL)
+
         request.HTTPMethod = "POST"
-        //let json = ["result":"0","message":"success","crawlers":["crawler_id":"string","title":"string","Descrption":"string","item_URL":"URL"]]
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
+
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) {
-            data, response, error in
-            
-            if let httpResponse = response as? NSHTTPURLResponse {
-                print("success for login view! \(httpResponse.statusCode)")
-            }
-            
-            // Check for error
-            if error != nil
-            {
+        print("user id! \(IDUITextField.text!)")
+        
+        let postString:String = "user_id=\(IDUITextField.text!)"
+        
+        
+        print("postString! : \(postString)")
+        
+        
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+
+        
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {                                                          // check for fundamental networking error
                 print("error=\(error)")
                 return
             }
             
-            // Print out response string
-            // let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            // print("responseString = \(responseString)")
-            
-            // Convert server json response to NSDictionary
-            
-            
-            do {
-                if let JsontoDic = try NSJSONSerialization.JSONObjectWithData(data!, options:[]) as? NSDictionary {
-                    
-                    //                if let dictionary = JsontoDic as? [String : AnyObject]
-                    //               {
-                    //                  self.readJSONObject(dictionary)
-                    //            }
-                    
-                    // Get value by key
-                    let firstNameValue = JsontoDic["user_key"] as? String
-                    //let Crawlers = JsontoDic["crawlers.sdhfi3"] as? [[String: AnyObject]]
-             //       print(Crawlers)
-                    print(firstNameValue)
-                    
-                }
-            } catch let error as NSError {
-                print(error.localizedDescription)
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
             }
             
+            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print("responseString = \(responseString!)")
+            
+            do {
+                let JsonData =  try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
+                
+                if let parseJSON = JsonData {
+                    
+                    // Now we can access value of First Name by its key
+                    //messageDecision = parseJSON["message"] as? String
+                    self.messageDecision = (parseJSON["message"] as? String)!
+                    
+                    print("message: \(self.messageDecision)")
+                }
+            } catch {
+                print(error)
+            }
         }
-        
         task.resume()
+
         
+        
+    }
+    
+    func URLEncode(s: String) -> String? {
+        return (s as NSString).stringByAddingPercentEncodingWithAllowedCharacters(
+            .URLHostAllowedCharacterSet())
     }
     
     
@@ -89,6 +104,23 @@ class LoginViewController: UIViewController {
         let userId = IDUITextField.text
         let userKey = KeyUITextField.text
         
+        let userIDStored = NSUserDefaults.standardUserDefaults().stringForKey("NewID")
+        
+        if (userId == userIDStored)
+        {
+            //Login successsful
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+            
+        else
+        {
+            displayAlertMassage("Put your ID that you want to use")
+            return
+            
+        }
+        
         if(userId == nil)
         {
             var alertView:UIAlertView = UIAlertView()
@@ -98,9 +130,21 @@ class LoginViewController: UIViewController {
             alertView.addButtonWithTitle("OK")
             alertView.show()
         }
-        if(userId != nil)
+        else
         {
-            print("You have RealID = \(userId!)")
+            
+            print("message!!! : \(messageDecision!)")
+            print("selfmessage!! : \(self.messageDecision!)")
+            if(messageDecision != "Success")
+            {
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
+                self.presentViewController(vc, animated: true, completion: nil)
+            }
+            else
+            {
+                let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("Second") as! SecondViewController
+                self.presentViewController(vc2, animated: true, completion: nil)
+            }
         }
 }
 
