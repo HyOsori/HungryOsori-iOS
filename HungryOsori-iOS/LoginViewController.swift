@@ -14,10 +14,9 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var KeyUITextField: UITextField!
     @IBOutlet weak var IDUITextField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        makePostRequest()
-        
         
         
 
@@ -25,7 +24,7 @@ class LoginViewController: UIViewController {
     }
     func displayAlertMassage(Massge : String)
     {
-        var alert = UIAlertController(title: "Alert", message: Massge, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert", message: Massge, preferredStyle: UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(okAction)
@@ -35,19 +34,19 @@ class LoginViewController: UIViewController {
     
     func makePostRequest(){
 
+        let userid_in_req = IDUITextField.text
+        
         
         let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_login")!)
-
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
 
         
-        print("user id! \(IDUITextField.text!)")
+        print(userid_in_req!)
         
-        let postString:String = "user_id=\(IDUITextField.text!)"
+        let postString:String = "user_id=\(userid_in_req!)"
         
-        
-        print("postString! : \(postString)")
+
         
         
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
@@ -76,13 +75,38 @@ class LoginViewController: UIViewController {
                     //messageDecision = parseJSON["message"] as? String
                     self.messageDecision = (parseJSON["message"] as? String)!
                     
-                    print("message: \(self.messageDecision)")
+                    let user_key:String = (parseJSON["user_key"] as? String)!
+                    
+                    NSUserDefaults.standardUserDefaults().setObject(user_key, forKey: "New_user_key")
+                    NSUserDefaults.standardUserDefaults().synchronize()
+                    
+                    print("USER_KEY : \(user_key)")
+                    
+                    print("message: \(self.messageDecision!)")
+                    if(self.messageDecision != "Success")
+                    {
+                        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.presentViewController(vc, animated: true, completion: nil)
+                        }
+                        
+                    }
+                    else
+                    {
+                        let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("Second") as! SecondViewController
+                        dispatch_async(dispatch_get_main_queue()) {
+                            self.presentViewController(vc2, animated: true, completion: nil)
+                        }
+                        
+                    }
                 }
             } catch {
                 print(error)
             }
         }
         task.resume()
+        
+        
 
         
         
@@ -101,14 +125,20 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func Login(sender: UIButton) {
+        
         let userId = IDUITextField.text
-        let userKey = KeyUITextField.text
+        
+        //let userKey = KeyUITextField.text
+        
         
         let userIDStored = NSUserDefaults.standardUserDefaults().stringForKey("NewID")
         
         if (userId == userIDStored)
         {
             //Login successsful
+            makePostRequest()
+            print("messageDecision!!!!!!1 :\(self.messageDecision)")
+
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
             NSUserDefaults.standardUserDefaults().synchronize()
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -120,12 +150,13 @@ class LoginViewController: UIViewController {
             return
             
         }
+
         
         if(userId == nil)
         {
             var alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign Up Failed!"
-            alertView.message = "Please enter Username]"
+            alertView.message = "Please enter Username!"
             alertView.delegate = self
             alertView.addButtonWithTitle("OK")
             alertView.show()
@@ -133,8 +164,12 @@ class LoginViewController: UIViewController {
         else
         {
             
-            print("message!!! : \(messageDecision!)")
-            print("selfmessage!! : \(self.messageDecision!)")
+
+            print("messageDecision!!!!!!2 :\(self.messageDecision)")
+            
+            NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "New_user_id")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            /*
             if(messageDecision != "Success")
             {
                 let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
@@ -145,6 +180,7 @@ class LoginViewController: UIViewController {
                 let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("Second") as! SecondViewController
                 self.presentViewController(vc2, animated: true, completion: nil)
             }
+ */
         }
 }
 

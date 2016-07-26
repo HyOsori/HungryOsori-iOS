@@ -25,8 +25,8 @@ class ProtectedViewController: UIViewController {
         let isUserLoggedin = NSUserDefaults.standardUserDefaults().boolForKey("isUserLoggedin")
         if (!isUserLoggedin)
         {
-            self.performSegueWithIdentifier("login View", sender: self)
-
+            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
+            self.presentViewController(vc, animated: true, completion: nil)
         }
         
     }
