@@ -137,8 +137,6 @@ class LoginViewController: UIViewController {
         {
             //Login successsful
             makePostRequest()
-            print("messageDecision!!!!!!1 :\(self.messageDecision)")
-
             NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
             NSUserDefaults.standardUserDefaults().synchronize()
             self.dismissViewControllerAnimated(true, completion: nil)
@@ -165,7 +163,6 @@ class LoginViewController: UIViewController {
         {
             
 
-            print("messageDecision!!!!!!2 :\(self.messageDecision)")
             
             NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "New_user_id")
             NSUserDefaults.standardUserDefaults().synchronize()
