@@ -15,7 +15,6 @@ class Osori
     var description:String
     var image:String
 
-    
 
     init(title : String,description: String, image : String)
     {

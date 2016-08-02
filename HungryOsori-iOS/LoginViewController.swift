@@ -166,18 +166,7 @@ class LoginViewController: UIViewController {
             
             NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "New_user_id")
             NSUserDefaults.standardUserDefaults().synchronize()
-            /*
-            if(messageDecision != "Success")
-            {
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
-                self.presentViewController(vc, animated: true, completion: nil)
-            }
-            else
-            {
-                let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("Second") as! SecondViewController
-                self.presentViewController(vc2, animated: true, completion: nil)
-            }
- */
+            
         }
 }
 
