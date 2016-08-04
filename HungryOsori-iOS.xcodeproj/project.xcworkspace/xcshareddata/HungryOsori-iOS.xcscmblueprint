@@ -4,15 +4,17 @@
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "67620B5EFA902936DF04070AF595B76AB0333747" : 0,
     "9F606CE4BA291BE0D8AAFEA5CECA477E513A4190" : 0,
-    "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D" : 0
+    "E28E36D423EC87798E52E2BF482E9F7A1E6479D6" : 0,
+    "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D" : 0,
+    "67620B5EFA902936DF04070AF595B76AB0333747" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "A235FC64-FC21-4AB9-9129-F29A84552838",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "67620B5EFA902936DF04070AF595B76AB0333747" : "Alamofire\/",
     "9F606CE4BA291BE0D8AAFEA5CECA477E513A4190" : "",
-    "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D" : "HungryOsori-iOS\/"
+    "E28E36D423EC87798E52E2BF482E9F7A1E6479D6" : "SDWebImage\/",
+    "14ABE223BB6AC11D4704A20C7C88FDB5F56E1E5D" : "HungryOsori-iOS\/",
+    "67620B5EFA902936DF04070AF595B76AB0333747" : "Alamofire\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "HungryOsori-iOS",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -32,6 +34,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/bitbucket.org\/hungryosori\/hungryosori-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "9F606CE4BA291BE0D8AAFEA5CECA477E513A4190"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/rs\/SDWebImage.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E28E36D423EC87798E52E2BF482E9F7A1E6479D6"
     }
   ]
 }
