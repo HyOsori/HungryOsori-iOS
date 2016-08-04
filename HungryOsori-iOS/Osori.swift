@@ -11,13 +11,15 @@ import UIKit
 
 class Osori
 {
+    var id:String
     var title:String
     var description:String
     var image:String
 
 
-    init(title : String,description: String, image : String)
+    init(id:String, title : String,description: String, image : String)
     {
+        self.id = id
         self.title = title
         self.description = description
         self.image = image

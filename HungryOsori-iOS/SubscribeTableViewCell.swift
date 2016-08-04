@@ -1,22 +1,18 @@
 //
-//  MyTableViewCell.swift
+//  SubscribeTableViewCell.swift
 //  HungryOsori-iOS
 //
-//  Created by Macbook Pro retina on 2016. 8. 1..
+//  Created by Macbook Pro retina on 2016. 8. 2..
 //  Copyright © 2016년 HanyangOsori. All rights reserved.
 //
 
 import UIKit
 
-class MyTableViewCell: UITableViewCell {
+class SubscribeTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imageurlresult: UIImageView!
-    //@IBOutlet weak var title: UITextField!
-    //@IBOutlet weak var des: UITextField!
-    @IBOutlet weak var title: UILabel!
-    @IBOutlet weak var des: UILabel!
-    @IBOutlet weak var subscribeButton: UIButton!
-
+    @IBOutlet weak var subimage: UIImageView!
+    @IBOutlet weak var subtitle: UILabel!
+    @IBOutlet weak var subdes: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,6 +23,5 @@ class MyTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 
 }

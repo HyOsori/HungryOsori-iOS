@@ -28,6 +28,7 @@
 		76A0E9641D3A02480051FBDD /* steam.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9611D3A02480051FBDD /* steam.png */; };
 		76A0E9651D3A02480051FBDD /* zang.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9621D3A02480051FBDD /* zang.png */; };
 		76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */; };
+		76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +126,7 @@
 		76A0E9621D3A02480051FBDD /* zang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zang.png; sourceTree = SOURCE_ROOT; };
 		76A0E9801D3CBFA10051FBDD /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				76A0E9141D34D53C0051FBDD /* FirstViewController.swift */,
 				76A0E9161D34D53C0051FBDD /* SecondViewController.swift */,
 				76A0E9181D34D53C0051FBDD /* Main.storyboard */,
+				76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */,
 				76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */,
 				76A0E91B1D34D53C0051FBDD /* Assets.xcassets */,
 				76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */,
@@ -438,6 +441,7 @@
 				764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */,
 				76A0E95F1D3790020051FBDD /* Osori.swift in Sources */,
 				7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */,
+				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,
 				76A0E9151D34D53C0051FBDD /* FirstViewController.swift in Sources */,
 			);
