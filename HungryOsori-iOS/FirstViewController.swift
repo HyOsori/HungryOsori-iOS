@@ -11,12 +11,42 @@ import UIKit
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet
-    var tableView: UITableView!
+    var tableview1: UITableView!
     
     var subscriptions = []
-    /*
+    let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
+    let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
+    var final_array = [Osori]()
+    var unscribe_id:String?
+
+    var subcount : Int?
+    public struct Crawler
+    {
+        let id:String
+        let title:String
+        let description:String
+        let thumbnailURL:String
+        
+        init(json:[String:AnyObject])
+        {
+            self.id = json["crawler_id"] as! String
+            self.title = json["title"] as! String
+            self.description = json["description"] as! String
+            self.thumbnailURL = json["thumbnail_url"] as! String
+        }
+        
+    }
+    
     public struct Crawlers
     {
+        var crawlers = [String:Crawler]()
+        var osori4 = [Osori]()
+        
+        init()
+        {
+            
+        }
+        
         init(jsonString:String)
         {
             let data: NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding)!
@@ -30,15 +60,9 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     {
                         let newCrawler = Crawler(json:(jsonCrawler as! [String : AnyObject]))
                         crawlers[newCrawler.id] = newCrawler
-                        //print(newCrawler.title)
-                        //print(newCrawler.description)
-                        //print(newCrawler.thumbnailURL)
                         osori4.append(Osori(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
-                        NSUserDefaults.standardUserDefaults().setObject(newCrawler.id, forKey: "Subscribe_id")
-                        NSUserDefaults.standardUserDefaults().synchronize()
                         
                     }
-                    
                 }
             }
             catch
@@ -48,60 +72,127 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    var crawlers:Crawlers?
-    
-    var items:[String] = ["한양대 컴퓨터전공 공지사항","네이버 실시간 검색어 순위","남도학숙 주간 시간표","디시인사이드 힛갤러리 목록","해외축구 일정 결과","Zangsisi 최신화","LOL 패치노트","Steam 세일"]
-    */
-    let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
-    let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
-    let sub_id = NSUserDefaults.standardUserDefaults().stringForKey("Subscribe_id")
-    
-    let sub_title = NSUserDefaults.standardUserDefaults().stringForKey("Subscribe_title")
-    let sub_des = NSUserDefaults.standardUserDefaults().stringForKey("Subscribe_des")
-    let sub_img = NSUserDefaults.standardUserDefaults().stringForKey("Subscribe_image")
-    let subarray = NSUserDefaults.standardUserDefaults().objectForKey("Subscribe")
-    var osori3 = [Osori]()
-    //var osori4 = [Osori]()
-    var count:Int?
-    //NSUserDefaults.standardUserDefaults().stringForKey("Subscribe")
+    var crawlers:Crawlers? = Crawlers()
 
     override func viewDidLoad() {
+        for i in 0...4
+        {
+            let temp_id = ShareData.sharedInstance.entireList[i].id
+            let temp_title = ShareData.sharedInstance.entireList[i].title
+            let temp_des = ShareData.sharedInstance.entireList[i].description
+            let temp_image = ShareData.sharedInstance.entireList[i].image
+            self.crawlers?.osori4.append(Osori(id: temp_id, title: temp_title, description: temp_des, image: temp_image))
+            print("idid : \(self.crawlers!.osori4[i].title)")
+        }
         super.viewDidLoad()
+        subscriptions = []
         
         if((userID != nil) && (userKey != nil))
         {
-            makePostRequest()
+            makePostRequestSubscribeList()
+            
         }
-        
-        //self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        // Do any additional setup after loading the view, typically from a nib.
-        
     }
-    
+    //전체 리스트를 받는 함수
     func makePostRequest(){
-        
-        
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_entire_list")!)
+        request.HTTPMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
+        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {
+                print("error=\(error)")
+                return
+            }
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            self.crawlers = Crawlers(jsonString: responseString as! String)
+        }
+        task.resume()
+    }
+
+    func makePostRequestSubscribeList(){
         let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_subscription_list")!)
         
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        
-        
-        
-        
-        print("user id! \(userID!)")
-        print("user key! \(userKey!)")
-        
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         
-        print("postString! : \(postString)")
+        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {
+                print("error=\(error)")
+                return
+            }
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            do {
+                let JsonData =  try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
+                
+                if let parseJSON = JsonData {
+                    self.subscriptions = (parseJSON["subscriptions"])! as! NSArray
+                }
+                self.subcount = self.subscriptions.count
+                print(self.subscriptions)
+                print(self.crawlers?.osori4)
+                self.final_array = []
+                for i in 0...4
+                {
+                    print("i value : \(i)")
+                    if (self.subcount == 0)
+                    {
+                        break
+                    }
+                    else
+                    {
+                        for j in 0...(self.subcount!-1)
+                        {
+                            print("j value : \(j)")
+                            if ((self.crawlers?.osori4[i].id)! == self.subscriptions[j] as! String)
+                            {
+                                print("entire i value : \(i) + subscribe j value : \(j)")
+                                let iid:String?  = self.crawlers?.osori4[i].id
+                                let ttile:String? = self.crawlers?.osori4[i].title
+                                let ddes:String? = self.crawlers?.osori4[i].description
+                                let iimage:String? = self.crawlers?.osori4[i].image
+                                self.final_array.append(Osori(id: iid! , title: ttile!, description: ddes!
+                                , image: iimage!))// append가 아니라 insert를해야하는지.
+                            }
+                        }
+                    }
+                }
+            } catch {
+                print(error)
+            }
+            self.tableview1.reloadData()
+        }
+        task.resume()
+    }
+    
+    
+    func makePostRequestUnsubscrcibe(){
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_unsubscribe_crawler")!)
+        let subid = unscribe_id
+        
+        request.HTTPMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
+        
+        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&crawler_id=\(subid!)"
+        print("Unnnnnnsubscribe_postString! : \(postString)!")
         
         
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
         
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+        let task2 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             guard error == nil && data != nil else {
                 print("error=\(error)")
                 return
@@ -112,75 +203,44 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 print("response = \(response)")
             }
             
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            
-            do {
-                let JsonData =  try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
-                
-                if let parseJSON = JsonData {
-                    
-                    // Now we can access value of First Name by its key
-                    //messageDecision = parseJSON["message"] as? String
-                    self.subscriptions = (parseJSON["subscriptions"])! as! NSArray
-                    
-                    print("Subscription list id : \(self.subscriptions)")
-                }
-            } catch {
-                print(error)
-            }
-            print("responseStringggggggggggggg + title + des + urlimg\(responseString)\(self.sub_title!)\(self.sub_des!)\(self.sub_img!)")
-            //print("responseStringggggggggggggg + title + des + urlimg\(responseString)\(self.subarray)")
-            //self.osori4.append(Osori.init(id: self.sub_id!, title: (self.subarray![1]! as? String)!, description: (self.subarray![2]! as? String)!, image: (self.subarray![3]! as? String)!))
-            //self.osori3.append(Osori(id: self.sub_id!, title: self.sub_title!, description: self.sub_des!, image: self.sub_img!))
-            self.appnd()
-            self.count = self.subscriptions.count
-            
-            self.count = (self.osori3.count)
-            print("count num!!!!!!!!!!!\((self.count)!)")
-            //self.tableView.reloadData()
+            let responseString2 = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print("UnSubscribe_responseString!! \(responseString2)")
         }
-        task.resume()
-        
+        task2.resume()
+        self.tableview1.reloadData()
         
         
     }
-    func appnd()
-    {
-        self.osori3.append(Osori(id: self.sub_id!, title: self.sub_title!, description: self.sub_des!, image: self.sub_img!))
-        self.count = self.osori3.count
-        self.tableView.reloadData()
-    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    //테이블 뷰에서 뿌려줄 셀의 갯수를 요청할때 사용되는 콜백
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if (self.count == nil)
+        if (subcount == nil)
         {
-            print("count if nil \(self.count)")
-            return 1
-        }else{
-            print("count if not nil \(self.count)")
-            return self.count!
+            return 0
+        }
+        else
+        {
+            return self.subcount!
         }
     }
 
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let subcell = tableView.dequeueReusableCellWithIdentifier("subcell", forIndexPath: indexPath) as! SubscribeTableViewCell
+        let subcell = tableview1.dequeueReusableCellWithIdentifier("subcell", forIndexPath: indexPath) as! SubscribeTableViewCell
         print("indexpath.row \(indexPath.row)")
-        print("count!!!! \(self.count)")
-        //self.tableView.reloadData()
+        let cc = self.final_array[indexPath.row]
+        print("self osori value \(cc.id)")
         
-        subcell.subtitle.text = self.osori3[indexPath.row].title
-        subcell.subdes.text = self.osori3[indexPath.row].description
-        
-        
-        let unwrapped:String = self.osori3[indexPath.row].image
+        subcell.subtitle.text = cc.title
+        subcell.subdes.text = cc.description
+        let unwrapped:String = cc.image
         let url = NSURL(string: unwrapped)!
         
         if let data = NSData(contentsOfURL : url)
@@ -194,8 +254,22 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }
         }
-                return subcell
+        subcell.unsubscribeButton.tag = indexPath.row
+        
+        return subcell
     }
+    
+    @IBAction func unsubscribeButton(sender: AnyObject) {
+        unscribe_id = self.final_array[sender.tag].id
+        print("remove index : \(unscribe_id)")
+        self.final_array.removeAtIndex(sender.tag)
+        makePostRequestUnsubscrcibe()
+        self.subcount! -= 1
+        self.tableview1.reloadData()
+        //makePostRequestSubscribeList()
+        
+    }
+    
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         

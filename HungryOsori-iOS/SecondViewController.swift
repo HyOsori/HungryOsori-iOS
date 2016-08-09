@@ -13,7 +13,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet
     var tableview2:UITableView!
     
-    
     public struct Crawler
     {
         let id:String
@@ -34,7 +33,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     public struct Crawlers
     {
         var crawlers = [String:Crawler]()
-        var osori4 = [Osori]()
+        var crawler_list = [Osori]()
         
         init(jsonString:String)
         {
@@ -49,15 +48,22 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     {
                         let newCrawler = Crawler(json:(jsonCrawler as! [String : AnyObject]))
                         crawlers[newCrawler.id] = newCrawler
-                        //print(newCrawler.title)
-                        //print(newCrawler.description)
-                        //print(newCrawler.thumbnailURL)
-                        osori4.append(Osori(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
+                        
+                        crawler_list.append(Osori(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
                         NSUserDefaults.standardUserDefaults().setObject(newCrawler.id, forKey: "Subscribe_id")
                         NSUserDefaults.standardUserDefaults().synchronize()
                     
                     }
                     
+                }
+               
+                for i in 0...4{
+                let iid:String?  = self.crawler_list[i].id
+                let ttile:String? = self.crawler_list[i].title
+                let ddes:String? = self.crawler_list[i].description
+                let iimage:String? = self.crawler_list[i].image
+                ShareData.sharedInstance.entireList.append(Osori(id: iid!, title: ttile!, description: ddes!, image: iimage!))
+                print("second view crawler liest \(self.crawler_list[i].title)")
                 }
             }
             catch
@@ -67,6 +73,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
+    
     var crawlers:Crawlers?
 
     let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
@@ -74,11 +81,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var Crawler:String?
     var imageURL:UIImageView?
     var realimage:UIImage?
-    var osori = [Osori]()
-    var osori2 = [Osori]()
     var count:Int?
-    var selected:String?
-    var subarray = [""]
+    var sub_id_for_reqe:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,24 +95,12 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func makePostRequest(){
-        
-        
         let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_entire_list")!)
         
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
         
-        
-        
-        
-        //print("user id! \(userID!)")
-        //print("user key! \(userKey!)")
-        
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
-        
-        
-        //print("postString! : \(postString)")
-        
         
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -128,28 +120,18 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             
             self.crawlers = Crawlers(jsonString: responseString as! String)
-            self.count = (self.crawlers?.osori4.count)!
+            self.count = (self.crawlers?.crawler_list.count)!
             self.tableview2.reloadData()
         }
         task.resume()
-        
-        
-        
     }
     func makePostRequestScrcibe(){
         
-        
         let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_subscribe_crawler")!)
-        let subid = NSUserDefaults.standardUserDefaults().stringForKey("Subscribe_id")
+        let subid = sub_id_for_reqe
         
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        
-        
-        
-        
-        //print("subscribe user id! \(userID!)")
-        //print("subscribe user key! \(userKey!)")
         
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&crawler_id=\(subid!)"
         
@@ -173,10 +155,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             let responseString2 = NSString(data: data!, encoding: NSUTF8StringEncoding)
             print("Subscribe_responseString!! \(responseString2)")
-            
-            //self.crawlers = Crawlers(jsonString: responseString as! String)
-            //self.count = (self.crawlers?.osori4.count)!
-            //self.tableview2.reloadData()
         }
         task2.resume()
         
@@ -198,16 +176,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell2 = tableview2.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! MyTableViewCell
-        
-        print("indexpathhhhhhhh:\(indexPath.row)")
-        let cc = self.crawlers!.osori4[indexPath.row]
+        let cc = self.crawlers!.crawler_list[indexPath.row]
     
         cell2.title.text = cc.title
         cell2.des.text = cc.description
-        
-        
-        
-        
         let unwrapped: String = cc.image
         let url = NSURL(string : unwrapped)!
 
@@ -221,93 +193,35 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         print("nillllll")
                     }
                 }
-                
-                   
         }
         cell2.subscribeButton.tag = indexPath.row
-        //cell2.subscribeButton.addTarget(self, action: #selector(SecondViewController.makePostRequestScrcibe), forControlEvents: UIControlEvents.TouchUpInside)
-        /*for i in 0 ..< 4 {
-            cell2.subscribeButton.tag = indexPath.row
-            cell2.subscribeButton.setValue(self.crawlers?.osori4[indexPath.row].id, forKey: "subi")
-            if let employed : AnyObject = cell2.subscribeButton.valueForKey("subi") {
-                print("\(employed)) is not available!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            }
-        }
-    */
-        
-    
-        return cell2
+            return cell2
         
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        selected = self.crawlers!.osori4[indexPath.row].id
-        subarray.append(selected!)
-        subarray.append((self.crawlers?.osori4[indexPath.row].title)!)
-        subarray.append((self.crawlers?.osori4[indexPath.row].description)!)
-        subarray.append((self.crawlers?.osori4[indexPath.row].image)!)
-        
-        NSUserDefaults.standardUserDefaults().objectForKey("Subscribe")
-        NSUserDefaults.standardUserDefaults().setObject(selected, forKey: "Subscribe_id")
-        NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[indexPath.row].title, forKey: "Subscribe_title")
-        NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[indexPath.row].description, forKey: "Subscribe_des")
-        NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[indexPath.row].image, forKey: "Subscribe_image")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        print("subscribeid!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\(selected)")
     }
-    
-    @IBAction func subscribebutton(sender: UIButton) {
-        makePostRequestScrcibe()
-        switch sender.tag {
-        case 0:
-                self.crawlers?.osori4[0].id
+    /*
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destination = segue.destinationViewController as? FirstViewController
+        {
+            print(self.crawlers?.crawler_list)
+            for i in 0...4{
+            destination.crawlers?.osori4[i] = (self.crawlers?.crawler_list[i])!
+            print("dess\(destination.crawlers!.osori4[i])")
                 
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[0].id, forKey: "Subscribe_id")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[0].title, forKey: "Subscribe_title")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[0].description, forKey: "Subscribe_des")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[0].image, forKey: "Subscribe_image")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                            print("subscribeid!!\((self.crawlers?.osori4[0].id)!)")
-        case 1:
-                self.crawlers?.osori4[1].id
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[1].id, forKey: "Subscribe_id")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[1].title, forKey: "Subscribe_title")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[1].description, forKey: "Subscribe_des")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[1].image, forKey: "Subscribe_image")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                print("subscribeid!\((self.crawlers?.osori4[1].id)!)")
-            
-        case 2: self.crawlers?.osori4[2].id
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[2].id, forKey: "Subscribe_id")
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[2].title, forKey: "Subscribe_title")
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[2].description, forKey: "Subscribe_des")
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[2].image, forKey: "Subscribe_image")
-            NSUserDefaults.standardUserDefaults().synchronize()
-        print("subscribeid!!\((self.crawlers?.osori4[2].id)!)")
-        case 3: self.crawlers?.osori4[3].id
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[3].id, forKey: "Subscribe_id")
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[3].title, forKey: "Subscribe_title")
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[3].description, forKey: "Subscribe_des")
-            NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[3].image, forKey: "Subscribe_image")
-            NSUserDefaults.standardUserDefaults().synchronize()
-        print("subscribeid!!!\((self.crawlers?.osori4[3].id)!)")
-        case 4: self.crawlers?.osori4[4].id
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[4].id, forKey: "Subscribe_id")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[4].title, forKey: "Subscribe_title")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[4].description, forKey: "Subscribe_des")
-                NSUserDefaults.standardUserDefaults().setObject(self.crawlers?.osori4[4].image, forKey: "Subscribe_image")
-                NSUserDefaults.standardUserDefaults().synchronize()
-                            print("subscribeid!!!!!!!\((self.crawlers?.osori4[4].id)!)")
-        default: break
-            
+    }
         }
     }
+ */
     
+    @IBAction func subscribebutton(sender: UIButton) {
+        sub_id_for_reqe = self.crawlers?.crawler_list[sender.tag].id
+        makePostRequestScrcibe()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
 

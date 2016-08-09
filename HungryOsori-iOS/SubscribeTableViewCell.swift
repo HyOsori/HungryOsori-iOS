@@ -13,6 +13,7 @@ class SubscribeTableViewCell: UITableViewCell {
     @IBOutlet weak var subimage: UIImageView!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var subdes: UILabel!
+    @IBOutlet weak var unsubscribeButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

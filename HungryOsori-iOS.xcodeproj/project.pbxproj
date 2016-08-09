@@ -13,7 +13,6 @@
 		76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9121D34D53C0051FBDD /* AppDelegate.swift */; };
 		76A0E9151D34D53C0051FBDD /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9141D34D53C0051FBDD /* FirstViewController.swift */; };
 		76A0E9171D34D53C0051FBDD /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9161D34D53C0051FBDD /* SecondViewController.swift */; };
-		76A0E91A1D34D53C0051FBDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9181D34D53C0051FBDD /* Main.storyboard */; };
 		76A0E91C1D34D53C0051FBDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E91B1D34D53C0051FBDD /* Assets.xcassets */; };
 		76A0E91F1D34D53C0051FBDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */; };
 		76A0E92A1D34D53C0051FBDD /* HungryOsori_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9291D34D53C0051FBDD /* HungryOsori_iOSTests.swift */; };
@@ -27,6 +26,9 @@
 		76A0E9631D3A02480051FBDD /* lol.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9601D3A02480051FBDD /* lol.png */; };
 		76A0E9641D3A02480051FBDD /* steam.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9611D3A02480051FBDD /* steam.png */; };
 		76A0E9651D3A02480051FBDD /* zang.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9621D3A02480051FBDD /* zang.png */; };
+		76CA91491D582DB100FAC76A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76CA91471D582DB100FAC76A /* Main.storyboard */; };
+		76CA91521D59A23100FAC76A /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CA91511D59A23100FAC76A /* SharedData.swift */; };
+		76CA91541D59A88B00FAC76A /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CA91531D59A88B00FAC76A /* Tabbar.swift */; };
 		76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */; };
 		76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -105,7 +107,6 @@
 		76A0E9121D34D53C0051FBDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76A0E9141D34D53C0051FBDD /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		76A0E9161D34D53C0051FBDD /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		76A0E9191D34D53C0051FBDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76A0E91B1D34D53C0051FBDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76A0E91E1D34D53C0051FBDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76A0E9201D34D53C0051FBDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +126,9 @@
 		76A0E9611D3A02480051FBDD /* steam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steam.png; sourceTree = SOURCE_ROOT; };
 		76A0E9621D3A02480051FBDD /* zang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zang.png; sourceTree = SOURCE_ROOT; };
 		76A0E9801D3CBFA10051FBDD /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = ../Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		76CA91481D582DB100FAC76A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		76CA91511D59A23100FAC76A /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
+		76CA91531D59A88B00FAC76A /* Tabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,7 +206,7 @@
 				76A0E9121D34D53C0051FBDD /* AppDelegate.swift */,
 				76A0E9141D34D53C0051FBDD /* FirstViewController.swift */,
 				76A0E9161D34D53C0051FBDD /* SecondViewController.swift */,
-				76A0E9181D34D53C0051FBDD /* Main.storyboard */,
+				76CA91471D582DB100FAC76A /* Main.storyboard */,
 				76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */,
 				76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */,
 				76A0E91B1D34D53C0051FBDD /* Assets.xcassets */,
@@ -213,6 +217,8 @@
 				7660F76D1D409DC60071288E /* LoginViewController.swift */,
 				7660F76F1D40A1220071288E /* RegisterViewController.swift */,
 				764D39031D4601ED003C4A4D /* ProtectedViewController.swift */,
+				76CA91511D59A23100FAC76A /* SharedData.swift */,
+				76CA91531D59A88B00FAC76A /* Tabbar.swift */,
 			);
 			path = "HungryOsori-iOS";
 			sourceTree = "<group>";
@@ -405,11 +411,11 @@
 				76A0E91C1D34D53C0051FBDD /* Assets.xcassets in Resources */,
 				76A0E95C1D378F9F0051FBDD /* naver.png in Resources */,
 				76A0E95D1D378F9F0051FBDD /* soccer.png in Resources */,
+				76CA91491D582DB100FAC76A /* Main.storyboard in Resources */,
 				76A0E95B1D378F9F0051FBDD /* namdo.png in Resources */,
 				76A0E9651D3A02480051FBDD /* zang.png in Resources */,
 				76A0E9641D3A02480051FBDD /* steam.png in Resources */,
 				76A0E9631D3A02480051FBDD /* lol.png in Resources */,
-				76A0E91A1D34D53C0051FBDD /* Main.storyboard in Resources */,
 				76A0E95A1D378F9F0051FBDD /* hanyang.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -438,11 +444,13 @@
 				76A0E9171D34D53C0051FBDD /* SecondViewController.swift in Sources */,
 				76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */,
 				76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */,
+				76CA91541D59A88B00FAC76A /* Tabbar.swift in Sources */,
 				764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */,
 				76A0E95F1D3790020051FBDD /* Osori.swift in Sources */,
 				7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */,
 				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,
+				76CA91521D59A23100FAC76A /* SharedData.swift in Sources */,
 				76A0E9151D34D53C0051FBDD /* FirstViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,20 +487,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		76A0E9181D34D53C0051FBDD /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				76A0E9191D34D53C0051FBDD /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				76A0E91E1D34D53C0051FBDD /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		76CA91471D582DB100FAC76A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				76CA91481D582DB100FAC76A /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
