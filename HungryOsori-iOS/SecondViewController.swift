@@ -63,7 +63,6 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let ddes:String? = self.crawler_list[i].description
                 let iimage:String? = self.crawler_list[i].image
                 ShareData.sharedInstance.entireList.append(Osori(id: iid!, title: ttile!, description: ddes!, image: iimage!))
-                print("second view crawler liest \(self.crawler_list[i].title)")
                 }
             }
             catch
@@ -83,6 +82,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var realimage:UIImage?
     var count:Int?
     var sub_id_for_reqe:String?
+    var temp_unsubscription = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,6 +92,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             makePostRequest()
         }
         
+    }
+    override func viewWillAppear(animated: Bool) {
+        self.tableview2.reloadData()
     }
     
     func makePostRequest(){
@@ -180,6 +183,21 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
         cell2.title.text = cc.title
         cell2.des.text = cc.description
+        
+        //var temp_count = ShareData.sharedInstance.unsubscriptionList.count
+        
+        if(ShareData.sharedInstance.unsubscriptionList.count != 0)
+        {
+            for j in 0...(ShareData.sharedInstance.unsubscriptionList.count-1)
+            {
+                if(cc.id == ShareData.sharedInstance.unsubscriptionList[j].id)
+                {
+                    cell2.subscribeButton.setTitle("구독", forState: .Normal)
+
+                }
+            }
+        }
+        
         let unwrapped: String = cc.image
         let url = NSURL(string : unwrapped)!
 
@@ -190,7 +208,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     cell2.imageurlresult.image = realimage
                     if(cell2.imageurlresult == nil)
                     {
-                        print("nillllll")
+                        print("nil")
                     }
                 }
         }
@@ -200,21 +218,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     }
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let destination = segue.destinationViewController as? FirstViewController
-        {
-            print(self.crawlers?.crawler_list)
-            for i in 0...4{
-            destination.crawlers?.osori4[i] = (self.crawlers?.crawler_list[i])!
-            print("dess\(destination.crawlers!.osori4[i])")
-                
-    }
-        }
-    }
- */
     
     @IBAction func subscribebutton(sender: UIButton) {
+        sender.setTitle("해제", forState: .Normal)
+        
         sub_id_for_reqe = self.crawlers?.crawler_list[sender.tag].id
         makePostRequestScrcibe()
     }

@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
                     }
                     else
                     {
-                        let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("Second") as! SecondViewController
+                        let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("tab bar") as! Tabbar
                         dispatch_async(dispatch_get_main_queue()) {
                             self.presentViewController(vc2, animated: true, completion: nil)
                         }

@@ -22,4 +22,6 @@ class ShareData {
         return Static.instance!
     }
     var entireList = [Osori]()
+    
+    var unsubscriptionList = [Osori]()
 }
