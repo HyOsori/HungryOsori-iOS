@@ -6,10 +6,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--First-->
+        <!--구독리스트-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
-                <viewController storyboardIdentifier="First" id="9pv-A4-QxB" customClass="FirstViewController" customModule="HungryOsori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="First" id="9pv-A4-QxB" customClass="SubscriptionListViewController" customModule="HungryOsori_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ia1-K6-d13"/>
                         <viewControllerLayoutGuide type="bottom" id="4ug-Mw-9AY"/>
@@ -18,12 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="현재 웹크롤러                                 " borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ULc-pQ-UYD">
-                                <rect key="frame" x="20" y="20" width="553" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="80" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ovu-5M-8qa">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="80" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="ovu-5M-8qa" userLabel="crawlerListTableView">
                                 <rect key="frame" x="20" y="58" width="560" height="670"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -31,10 +26,10 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="subcell" id="gpy-d8-0GM" customClass="SubscribeTableViewCell" customModule="HungryOsori_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="49.5" width="560" height="80"/>
+                                        <rect key="frame" x="0.0" y="50" width="560" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gpy-d8-0GM" id="FQX-vF-XyR">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bfD-CJ-MLw">
@@ -127,27 +122,24 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ovu-5M-8qa" firstAttribute="top" secondItem="ULc-pQ-UYD" secondAttribute="bottom" constant="8" symbolic="YES" id="4uJ-MK-yym"/>
+                            <constraint firstItem="ovu-5M-8qa" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" constant="38" id="Dr2-gH-p9e"/>
                             <constraint firstItem="ovu-5M-8qa" firstAttribute="trailing" secondItem="tsR-hK-woN" secondAttribute="trailingMargin" id="G5C-vp-x3h"/>
-                            <constraint firstItem="ULc-pQ-UYD" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="StC-TI-4td"/>
-                            <constraint firstItem="ULc-pQ-UYD" firstAttribute="top" secondItem="Ia1-K6-d13" secondAttribute="bottom" id="dyd-AJ-HTM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ULc-pQ-UYD" secondAttribute="trailing" constant="7" id="hbA-Aw-X0P"/>
-                            <constraint firstItem="ULc-pQ-UYD" firstAttribute="leading" secondItem="ovu-5M-8qa" secondAttribute="leading" id="mg0-xL-RTJ"/>
+                            <constraint firstItem="ovu-5M-8qa" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leadingMargin" id="bcf-ji-xS1"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="First" image="first" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="구독리스트" image="first" id="acW-dT-cKf"/>
                     <connections>
-                        <outlet property="tableview1" destination="ovu-5M-8qa" id="8VN-Pp-mMu"/>
+                        <outlet property="crawlerTableView" destination="ovu-5M-8qa" id="XV3-rH-bv1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="-378"/>
         </scene>
-        <!--Second-->
+        <!--전체리스트-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController storyboardIdentifier="Second" id="8rJ-Kc-sve" customClass="SecondViewController" customModule="HungryOsori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Second" id="8rJ-Kc-sve" customClass="CrawlerListViewController" customModule="HungryOsori_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -156,33 +148,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="전체 웹크롤러" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KFH-54-gbI">
-                                <rect key="frame" x="20" y="20" width="458" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="97" id="B6l-Vd-d0a"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="B6l-Vd-d0a"/>
-                                    </mask>
-                                </variation>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ksA-t2-IfI">
-                                <rect key="frame" x="486" y="20" width="82" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.55265817439999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="82" id="YCw-ie-48b"/>
-                                </constraints>
-                                <state key="normal" title="Login Page">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="pHC-gQ-OSq" kind="presentation" id="Whp-ws-Acd"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="90" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1bB-q0-uiA">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="90" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="1bB-q0-uiA" userLabel="crawlerListTableView">
                                 <rect key="frame" x="20" y="58" width="560" height="439"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
@@ -276,37 +242,28 @@
                                 </prototypes>
                                 <sections/>
                                 <connections>
-                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="1ap-qm-GBG"/>
-                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="XIf-vI-z3C"/>
+                                    <outlet property="dataSource" destination="8rJ-Kc-sve" id="YLC-Vf-4Uu"/>
+                                    <outlet property="delegate" destination="8rJ-Kc-sve" id="SE0-8Q-3lN"/>
                                 </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KFH-54-gbI" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="2yx-uL-Cud"/>
-                            <constraint firstItem="1bB-q0-uiA" firstAttribute="top" secondItem="KFH-54-gbI" secondAttribute="bottom" constant="8" symbolic="YES" id="7UB-CF-nuE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ksA-t2-IfI" secondAttribute="trailing" constant="12" id="PBT-tz-hoA"/>
-                            <constraint firstItem="1bB-q0-uiA" firstAttribute="leading" secondItem="KFH-54-gbI" secondAttribute="leading" id="Q0l-gn-Ufo"/>
                             <constraint firstItem="1bB-q0-uiA" firstAttribute="trailing" secondItem="QS5-Rx-YEW" secondAttribute="trailingMargin" id="SsK-Pj-794"/>
-                            <constraint firstItem="KFH-54-gbI" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" id="UcI-0o-JkP"/>
-                            <constraint firstItem="KFH-54-gbI" firstAttribute="leading" secondItem="1bB-q0-uiA" secondAttribute="leading" id="X6M-4K-8pH"/>
-                            <constraint firstItem="KFH-54-gbI" firstAttribute="top" secondItem="ksA-t2-IfI" secondAttribute="top" id="Yac-2z-c8D"/>
-                            <constraint firstItem="KFH-54-gbI" firstAttribute="centerX" secondItem="QS5-Rx-YEW" secondAttribute="centerX" id="gdl-WV-Cys"/>
+                            <constraint firstItem="1bB-q0-uiA" firstAttribute="top" secondItem="L7p-HK-0SC" secondAttribute="bottom" constant="38" id="efv-ON-kDR"/>
+                            <constraint firstItem="1bB-q0-uiA" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="jtR-RW-HS1"/>
                             <constraint firstItem="1bB-q0-uiA" firstAttribute="leading" secondItem="QS5-Rx-YEW" secondAttribute="leadingMargin" id="puN-zS-Irk"/>
                             <constraint firstItem="Djb-ko-YwX" firstAttribute="top" secondItem="1bB-q0-uiA" secondAttribute="bottom" constant="54" id="vcs-mp-rC0"/>
-                            <constraint firstItem="ksA-t2-IfI" firstAttribute="leading" secondItem="KFH-54-gbI" secondAttribute="trailing" constant="8" symbolic="YES" id="vkX-iN-UCF"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="gdl-WV-Cys"/>
-                                <exclude reference="Q0l-gn-Ufo"/>
                                 <exclude reference="puN-zS-Irk"/>
                             </mask>
                         </variation>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Second" image="second" id="cPa-gy-q4n"/>
+                    <tabBarItem key="tabBarItem" title="전체리스트" image="second" id="cPa-gy-q4n"/>
                     <connections>
-                        <outlet property="tableview2" destination="1bB-q0-uiA" id="agA-6h-b3S"/>
+                        <outlet property="crawlerTableview" destination="1bB-q0-uiA" id="BwB-oM-xRm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -599,6 +556,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Whp-ws-Acd"/>
+        <segue reference="ZnB-tR-Hxe"/>
     </inferredMetricsTieBreakers>
 </document>

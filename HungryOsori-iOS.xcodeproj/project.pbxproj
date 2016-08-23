@@ -11,8 +11,8 @@
 		7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76D1D409DC60071288E /* LoginViewController.swift */; };
 		7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76F1D40A1220071288E /* RegisterViewController.swift */; };
 		76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9121D34D53C0051FBDD /* AppDelegate.swift */; };
-		76A0E9151D34D53C0051FBDD /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9141D34D53C0051FBDD /* FirstViewController.swift */; };
-		76A0E9171D34D53C0051FBDD /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9161D34D53C0051FBDD /* SecondViewController.swift */; };
+		76A0E9151D34D53C0051FBDD /* SubscriptionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */; };
+		76A0E9171D34D53C0051FBDD /* CrawlerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */; };
 		76A0E91C1D34D53C0051FBDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E91B1D34D53C0051FBDD /* Assets.xcassets */; };
 		76A0E91F1D34D53C0051FBDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */; };
 		76A0E92A1D34D53C0051FBDD /* HungryOsori_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9291D34D53C0051FBDD /* HungryOsori_iOSTests.swift */; };
@@ -26,9 +26,12 @@
 		76A0E9631D3A02480051FBDD /* lol.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9601D3A02480051FBDD /* lol.png */; };
 		76A0E9641D3A02480051FBDD /* steam.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9611D3A02480051FBDD /* steam.png */; };
 		76A0E9651D3A02480051FBDD /* zang.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9621D3A02480051FBDD /* zang.png */; };
+		76BB948C1D6C259700A34C71 /* CrawlerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB948B1D6C259700A34C71 /* CrawlerList.swift */; };
+		76BB948E1D6C267B00A34C71 /* Crawler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BB948D1D6C267B00A34C71 /* Crawler.swift */; };
 		76CA91491D582DB100FAC76A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76CA91471D582DB100FAC76A /* Main.storyboard */; };
 		76CA91521D59A23100FAC76A /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CA91511D59A23100FAC76A /* SharedData.swift */; };
 		76CA91541D59A88B00FAC76A /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CA91531D59A88B00FAC76A /* Tabbar.swift */; };
+		76CA91561D64614900FAC76A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76CA91551D64614900FAC76A /* GoogleService-Info.plist */; };
 		76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */; };
 		76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -51,13 +54,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		5F7A9A27552DED39795AEA3A /* Pods_HungryOsori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungryOsori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		764D39031D4601ED003C4A4D /* ProtectedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectedViewController.swift; sourceTree = "<group>"; };
 		7660F76D1D409DC60071288E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7660F76F1D40A1220071288E /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		76A0E90F1D34D53C0051FBDD /* HungryOsori-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HungryOsori-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76A0E9121D34D53C0051FBDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		76A0E9141D34D53C0051FBDD /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
-		76A0E9161D34D53C0051FBDD /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewController.swift; sourceTree = "<group>"; };
+		76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrawlerListViewController.swift; sourceTree = "<group>"; };
 		76A0E91B1D34D53C0051FBDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76A0E91E1D34D53C0051FBDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76A0E9201D34D53C0051FBDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,9 +82,12 @@
 		76A0E9601D3A02480051FBDD /* lol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lol.png; sourceTree = SOURCE_ROOT; };
 		76A0E9611D3A02480051FBDD /* steam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steam.png; sourceTree = SOURCE_ROOT; };
 		76A0E9621D3A02480051FBDD /* zang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zang.png; sourceTree = SOURCE_ROOT; };
+		76BB948B1D6C259700A34C71 /* CrawlerList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrawlerList.swift; sourceTree = "<group>"; };
+		76BB948D1D6C267B00A34C71 /* Crawler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crawler.swift; sourceTree = "<group>"; };
 		76CA91481D582DB100FAC76A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76CA91511D59A23100FAC76A /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		76CA91531D59A88B00FAC76A /* Tabbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
+		76CA91551D64614900FAC76A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -115,6 +124,8 @@
 				76A0E9281D34D53C0051FBDD /* HungryOsori-iOSTests */,
 				76A0E9331D34D53C0051FBDD /* HungryOsori-iOSUITests */,
 				76A0E9101D34D53C0051FBDD /* Products */,
+				C750EDE5984C2FD7CA8BA9DC /* Pods */,
+				D230AFD92ED12170EC82BB2A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -131,6 +142,7 @@
 		76A0E9111D34D53C0051FBDD /* HungryOsori-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				76CA91551D64614900FAC76A /* GoogleService-Info.plist */,
 				76A0E9601D3A02480051FBDD /* lol.png */,
 				76A0E9611D3A02480051FBDD /* steam.png */,
 				76A0E9621D3A02480051FBDD /* zang.png */,
@@ -140,8 +152,8 @@
 				76A0E9571D378F9F0051FBDD /* naver.png */,
 				76A0E9581D378F9F0051FBDD /* soccer.png */,
 				76A0E9121D34D53C0051FBDD /* AppDelegate.swift */,
-				76A0E9141D34D53C0051FBDD /* FirstViewController.swift */,
-				76A0E9161D34D53C0051FBDD /* SecondViewController.swift */,
+				76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */,
+				76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */,
 				76CA91471D582DB100FAC76A /* Main.storyboard */,
 				76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */,
 				76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */,
@@ -154,6 +166,8 @@
 				764D39031D4601ED003C4A4D /* ProtectedViewController.swift */,
 				76CA91511D59A23100FAC76A /* SharedData.swift */,
 				76CA91531D59A88B00FAC76A /* Tabbar.swift */,
+				76BB948B1D6C259700A34C71 /* CrawlerList.swift */,
+				76BB948D1D6C267B00A34C71 /* Crawler.swift */,
 			);
 			path = "HungryOsori-iOS";
 			sourceTree = "<group>";
@@ -176,6 +190,23 @@
 			path = "HungryOsori-iOSUITests";
 			sourceTree = "<group>";
 		};
+		C750EDE5984C2FD7CA8BA9DC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */,
+				0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		D230AFD92ED12170EC82BB2A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F7A9A27552DED39795AEA3A /* Pods_HungryOsori_iOS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,9 +214,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76A0E9391D34D53C0051FBDD /* Build configuration list for PBXNativeTarget "HungryOsori-iOS" */;
 			buildPhases = (
+				1C7A2ED4F3DBA761DEA494F4 /* [CP] Check Pods Manifest.lock */,
 				76A0E90B1D34D53C0051FBDD /* Sources */,
 				76A0E90C1D34D53C0051FBDD /* Frameworks */,
 				76A0E90D1D34D53C0051FBDD /* Resources */,
+				A21F58A88DAD61EDF5CDF629 /* [CP] Embed Pods Frameworks */,
+				575935E181C330FD7883221D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -288,6 +322,7 @@
 				76A0E91C1D34D53C0051FBDD /* Assets.xcassets in Resources */,
 				76A0E95C1D378F9F0051FBDD /* naver.png in Resources */,
 				76A0E95D1D378F9F0051FBDD /* soccer.png in Resources */,
+				76CA91561D64614900FAC76A /* GoogleService-Info.plist in Resources */,
 				76CA91491D582DB100FAC76A /* Main.storyboard in Resources */,
 				76A0E95B1D378F9F0051FBDD /* namdo.png in Resources */,
 				76A0E9651D3A02480051FBDD /* zang.png in Resources */,
@@ -313,22 +348,72 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1C7A2ED4F3DBA761DEA494F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		575935E181C330FD7883221D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A21F58A88DAD61EDF5CDF629 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		76A0E90B1D34D53C0051FBDD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				76A0E9171D34D53C0051FBDD /* SecondViewController.swift in Sources */,
+				76A0E9171D34D53C0051FBDD /* CrawlerListViewController.swift in Sources */,
 				76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */,
+				76BB948E1D6C267B00A34C71 /* Crawler.swift in Sources */,
 				76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */,
 				76CA91541D59A88B00FAC76A /* Tabbar.swift in Sources */,
+				76BB948C1D6C259700A34C71 /* CrawlerList.swift in Sources */,
 				764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */,
 				76A0E95F1D3790020051FBDD /* Osori.swift in Sources */,
 				7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */,
 				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,
 				76CA91521D59A23100FAC76A /* SharedData.swift in Sources */,
-				76A0E9151D34D53C0051FBDD /* FirstViewController.swift in Sources */,
+				76A0E9151D34D53C0051FBDD /* SubscriptionListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +555,7 @@
 		};
 		76A0E93A1D34D53C0051FBDD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
@@ -481,6 +567,7 @@
 		};
 		76A0E93B1D34D53C0051FBDD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
