@@ -17,7 +17,6 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
 
     let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
     let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
-    var Crawler:String?
     var imageURL:UIImageView?
     var realimage:UIImage?
     var count:Int?
@@ -66,11 +65,11 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
             self.crawlers = Crawlers(jsonString: responseString as! String)
             
             for i in 0...4{
-                let iid:String?  = self.crawlers!.crawler_list[i].id
-                let ttile:String? = self.crawlers!.crawler_list[i].title
-                let ddes:String? = self.crawlers!.crawler_list[i].description
-                let iimage:String? = self.crawlers!.crawler_list[i].image
-                ShareData.sharedInstance.entireList.append(Osori(id: iid!, title: ttile!, description: ddes!, image: iimage!))
+                let id:String?  = self.crawlers!.crawler_list[i].id
+                let title:String? = self.crawlers!.crawler_list[i].title
+                let des:String? = self.crawlers!.crawler_list[i].description
+                let image:String? = self.crawlers!.crawler_list[i].thumbnailURL
+                ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!))
             }
             self.count = (self.crawlers!.crawler_list.count)
             self.crawlerTableview.reloadData()
@@ -147,7 +146,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
-        let unwrapped: String = cc.image
+        let unwrapped: String = cc.thumbnailURL
         let url = NSURL(string : unwrapped)!
 
         if let data = NSData(contentsOfURL: url)

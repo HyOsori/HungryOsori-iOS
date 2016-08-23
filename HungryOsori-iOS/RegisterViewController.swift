@@ -29,7 +29,7 @@ class RegisterViewController: UIViewController {
     
     func displayAlertMassage(Massge : String)
     {
-        var alert = UIAlertController(title: "Alert", message: Massge, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Alert", message: Massge, preferredStyle: UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(okAction)
@@ -52,7 +52,7 @@ class RegisterViewController: UIViewController {
         NSUserDefaults.standardUserDefaults().setObject(NewIdUIText, forKey: "NewID")
         NSUserDefaults.standardUserDefaults().synchronize()
         
-        var alert = UIAlertController(title: "alert", message: "Register Successful", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "alert", message: "Register Successful", preferredStyle: UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){
             ACTION in

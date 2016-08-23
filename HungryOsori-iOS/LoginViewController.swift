@@ -152,7 +152,7 @@ class LoginViewController: UIViewController {
         
         if(userId == nil)
         {
-            var alertView:UIAlertView = UIAlertView()
+            let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign Up Failed!"
             alertView.message = "Please enter Username!"
             alertView.delegate = self

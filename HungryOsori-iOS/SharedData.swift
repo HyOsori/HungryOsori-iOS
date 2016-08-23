@@ -21,7 +21,7 @@ class ShareData {
         
         return Static.instance!
     }
-    var entireList = [Osori]()
+    var entireList = [Crawler]()
     
-    var unsubscriptionList = [Osori]()
+    var unsubscriptionList = [Crawler]()
 }

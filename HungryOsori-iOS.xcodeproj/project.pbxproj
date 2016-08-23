@@ -22,7 +22,6 @@
 		76A0E95B1D378F9F0051FBDD /* namdo.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9561D378F9F0051FBDD /* namdo.png */; };
 		76A0E95C1D378F9F0051FBDD /* naver.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9571D378F9F0051FBDD /* naver.png */; };
 		76A0E95D1D378F9F0051FBDD /* soccer.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9581D378F9F0051FBDD /* soccer.png */; };
-		76A0E95F1D3790020051FBDD /* Osori.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E95E1D3790020051FBDD /* Osori.swift */; };
 		76A0E9631D3A02480051FBDD /* lol.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9601D3A02480051FBDD /* lol.png */; };
 		76A0E9641D3A02480051FBDD /* steam.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9611D3A02480051FBDD /* steam.png */; };
 		76A0E9651D3A02480051FBDD /* zang.png in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E9621D3A02480051FBDD /* zang.png */; };
@@ -78,7 +77,6 @@
 		76A0E9561D378F9F0051FBDD /* namdo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = namdo.png; sourceTree = SOURCE_ROOT; };
 		76A0E9571D378F9F0051FBDD /* naver.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = naver.png; sourceTree = SOURCE_ROOT; };
 		76A0E9581D378F9F0051FBDD /* soccer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soccer.png; sourceTree = SOURCE_ROOT; };
-		76A0E95E1D3790020051FBDD /* Osori.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Osori.swift; sourceTree = "<group>"; };
 		76A0E9601D3A02480051FBDD /* lol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lol.png; sourceTree = SOURCE_ROOT; };
 		76A0E9611D3A02480051FBDD /* steam.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = steam.png; sourceTree = SOURCE_ROOT; };
 		76A0E9621D3A02480051FBDD /* zang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zang.png; sourceTree = SOURCE_ROOT; };
@@ -160,7 +158,6 @@
 				76A0E91B1D34D53C0051FBDD /* Assets.xcassets */,
 				76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */,
 				76A0E9201D34D53C0051FBDD /* Info.plist */,
-				76A0E95E1D3790020051FBDD /* Osori.swift */,
 				7660F76D1D409DC60071288E /* LoginViewController.swift */,
 				7660F76F1D40A1220071288E /* RegisterViewController.swift */,
 				764D39031D4601ED003C4A4D /* ProtectedViewController.swift */,
@@ -408,7 +405,6 @@
 				76CA91541D59A88B00FAC76A /* Tabbar.swift in Sources */,
 				76BB948C1D6C259700A34C71 /* CrawlerList.swift in Sources */,
 				764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */,
-				76A0E95F1D3790020051FBDD /* Osori.swift in Sources */,
 				7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */,
 				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,

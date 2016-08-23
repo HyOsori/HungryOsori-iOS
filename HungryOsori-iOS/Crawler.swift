@@ -24,4 +24,11 @@ class Crawler
         self.thumbnailURL = json["thumbnail_url"] as! String
     }
     
+    init(id:String, title : String, description: String, image : String)
+    {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.thumbnailURL = image
+    }
 }

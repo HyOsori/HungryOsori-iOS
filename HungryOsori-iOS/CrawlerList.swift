@@ -11,7 +11,7 @@ import Foundation
 public struct Crawlers
 {
     var crawlers = [String:Crawler]()
-    var crawler_list = [Osori]()
+    var crawler_list = [Crawler]()
     
     init()
     {
@@ -31,7 +31,7 @@ public struct Crawlers
                 {
                     let newCrawler = Crawler(json:(jsonCrawler as! [String : AnyObject]))
                     crawlers[newCrawler.id] = newCrawler
-                    crawler_list.append(Osori(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
+                    crawler_list.append(Crawler(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
                     
                 }
             }
