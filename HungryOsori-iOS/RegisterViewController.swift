@@ -13,15 +13,8 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var NewIdUITextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
-    
-
-    
-    
-        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -39,7 +32,6 @@ class RegisterViewController: UIViewController {
     
     @IBAction func RegisterUIButton(sender: AnyObject) {
         let NewIdUIText = NewIdUITextField.text
-        
         
         //Check For whether empty or not
         if((NewIdUIText?.isEmpty) == nil)

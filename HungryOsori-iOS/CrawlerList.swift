@@ -12,12 +12,10 @@ public struct Crawlers
 {
     var crawlers = [String:Crawler]()
     var crawler_list = [Crawler]()
-    
     init()
     {
         
     }
-    
     init(jsonString:String)
     {
         let data: NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding)!

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764D39031D4601ED003C4A4D /* ProtectedViewController.swift */; };
 		7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76D1D409DC60071288E /* LoginViewController.swift */; };
 		7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76F1D40A1220071288E /* RegisterViewController.swift */; };
 		76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9121D34D53C0051FBDD /* AppDelegate.swift */; };
@@ -56,7 +55,6 @@
 		0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5F7A9A27552DED39795AEA3A /* Pods_HungryOsori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungryOsori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		764D39031D4601ED003C4A4D /* ProtectedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectedViewController.swift; sourceTree = "<group>"; };
 		7660F76D1D409DC60071288E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7660F76F1D40A1220071288E /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		76A0E90F1D34D53C0051FBDD /* HungryOsori-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HungryOsori-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +158,6 @@
 				76A0E9201D34D53C0051FBDD /* Info.plist */,
 				7660F76D1D409DC60071288E /* LoginViewController.swift */,
 				7660F76F1D40A1220071288E /* RegisterViewController.swift */,
-				764D39031D4601ED003C4A4D /* ProtectedViewController.swift */,
 				76CA91511D59A23100FAC76A /* SharedData.swift */,
 				76CA91531D59A88B00FAC76A /* Tabbar.swift */,
 				76BB948B1D6C259700A34C71 /* CrawlerList.swift */,
@@ -276,6 +273,14 @@
 					76A0E90E1D34D53C0051FBDD = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = JYF58Q7668;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					76A0E9241D34D53C0051FBDD = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -404,7 +409,6 @@
 				76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */,
 				76CA91541D59A88B00FAC76A /* Tabbar.swift in Sources */,
 				76BB948C1D6C259700A34C71 /* CrawlerList.swift in Sources */,
-				764D39041D4601ED003C4A4D /* ProtectedViewController.swift in Sources */,
 				7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */,
 				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,
@@ -569,7 +573,7 @@
 			baseConfigurationReference = 0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

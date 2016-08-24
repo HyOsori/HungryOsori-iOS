@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -17,10 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        FIRApp.configure()
+         FIRApp.configure()
         
-        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
-        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound]
+        let notificationSettings = UIUserNotificationSettings(forTypes: notificationTypes, categories: nil)
+        
+       // let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge , .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
         
         UIApplication.sharedApplication().registerForRemoteNotifications()
         // Override point for customization after application launch.
@@ -47,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject])
     {
+        print("MessageID : \(userInfo["gcm_message_id"]!)")
         print("노티피케이션을 받았습니다. : \(userInfo)")
     }
     

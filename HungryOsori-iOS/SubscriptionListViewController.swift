@@ -12,20 +12,13 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet
     var crawlerTableView: UITableView!
-    
     var subscriptions = []
     let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
     let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
     var final_array = [Crawler]()
     var unscribe_id:String?
-
     var subcount : Int?
-    
-
     var temp_crawler_list = [Crawler]()
-    
-    
-        
     var crawlers:Crawlers? = Crawlers()
 
     override func viewDidLoad() {
@@ -81,7 +74,6 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
-            //let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
             do {
                 let JsonData =  try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
                 
@@ -103,12 +95,12 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
                         {
                             if ((self.temp_crawler_list[i].id) == self.subscriptions[j] as! String)
                             {
-                                let iid:String?  = self.temp_crawler_list[i].id
-                                let ttile:String? = self.temp_crawler_list[i].title
-                                let ddes:String? = self.temp_crawler_list[i].description
-                                let iimage:String? = self.temp_crawler_list[i].thumbnailURL
-                                self.final_array.append(Crawler(id: iid! , title: ttile!, description: ddes!
-                                , image: iimage!))// append가 아니라 insert를해야하는지.
+                                let id:String?  = self.temp_crawler_list[i].id
+                                let title:String? = self.temp_crawler_list[i].title
+                                let des:String? = self.temp_crawler_list[i].description
+                                let image:String? = self.temp_crawler_list[i].thumbnailURL
+                                self.final_array.append(Crawler(id: id! , title: title!, description: des!
+                                , image: image!))
                             }
                         }
                     }
@@ -125,25 +117,17 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     func makePostRequestUnsubscrcibe(){
         let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_unsubscribe_crawler")!)
         let subid = unscribe_id!
-        
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&crawler_id=\(subid)"
-        print("Unnnnnnsubscribe_postString! : \(postString)!")
-        
-        
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        
         
         let task2 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             guard error == nil && data != nil else {
                 print("error=\(error)")
                 return
             }
-            
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {                print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
             

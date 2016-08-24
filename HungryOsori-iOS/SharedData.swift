@@ -22,6 +22,5 @@ class ShareData {
         return Static.instance!
     }
     var entireList = [Crawler]()
-    
     var unsubscriptionList = [Crawler]()
 }

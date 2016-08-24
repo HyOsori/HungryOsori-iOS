@@ -12,9 +12,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet
     var crawlerTableview:UITableView!
-    
     var crawlers:Crawlers? = Crawlers()
-
     let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
     let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
     var imageURL:UIImageView?
@@ -24,33 +22,23 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     var temp_unsubscription = [String]()
     
     override func viewDidLoad() {
-        
-        
         super.viewDidLoad()
-        
-        
-
         if((userID != nil) && (userKey != nil))
         {
             makePostRequest()
         }
-        
-        
     }
+    
     override func viewWillAppear(animated: Bool) {
         self.crawlerTableview.reloadData()
     }
     
     func makePostRequest(){
         let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_entire_list")!)
-        
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
-        
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        
         
         let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             guard error == nil && data != nil else {
@@ -85,16 +73,9 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
         
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&crawler_id=\(subid!)"
-        
-        
-        print("subscribe_postString! : \(postString)!")
-        
-        
         request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        
+    
         let task2 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
             guard error == nil && data != nil else {
                 print("error=\(error)")
@@ -110,11 +91,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
             print("Subscribe_responseString!! \(responseString2)")
         }
         task2.resume()
-        
-        
     }
-
-    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -133,8 +110,6 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     
         cell2.title.text = cc.title
         cell2.des.text = cc.description
-        
-        //var temp_count = ShareData.sharedInstance.unsubscriptionList.count
         
         if(ShareData.sharedInstance.unsubscriptionList.count != 0)
         {
@@ -171,7 +146,6 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func subscribebutton(sender: UIButton) {
         sender.setTitle("해제", forState: .Normal)
-        
         sub_id_for_reqe = self.crawlers?.crawler_list[sender.tag].id
         makePostRequestScrcibe()
     }

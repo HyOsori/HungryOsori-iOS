@@ -26,7 +26,7 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="subcell" id="gpy-d8-0GM" customClass="SubscribeTableViewCell" customModule="HungryOsori_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="560" height="80"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="560" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gpy-d8-0GM" id="FQX-vF-XyR">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="79.5"/>
@@ -153,7 +153,7 @@
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" id="3Vz-zC-H4r" customClass="MyTableViewCell" customModule="HungryOsori_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="560" height="90"/>
+                                        <rect key="frame" x="0.0" y="49.5" width="560" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Vz-zC-H4r" id="hWD-IP-P3Y">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="89.5"/>
@@ -269,42 +269,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="568"/>
-        </scene>
-        <!--Protected View Controller-->
-        <scene sceneID="Jrr-XF-eRD">
-            <objects>
-                <viewController id="CUq-zF-XYs" customClass="ProtectedViewController" customModule="HungryOsori_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="hAa-NJ-Diu"/>
-                        <viewControllerLayoutGuide type="bottom" id="oR6-FT-dAY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wji-jY-nCF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading.... Please Wait" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoW-xJ-H2o">
-                                <rect key="frame" x="129" y="350" width="342" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="342" id="ZIv-06-1GN"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="SoW-xJ-H2o" firstAttribute="centerX" secondItem="wji-jY-nCF" secondAttribute="centerX" id="XE2-CE-ubp"/>
-                            <constraint firstItem="oR6-FT-dAY" firstAttribute="top" secondItem="SoW-xJ-H2o" secondAttribute="bottom" constant="229" id="zJk-R6-i7t"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <segue destination="pHC-gQ-OSq" kind="presentation" id="SvL-HY-ksa"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tCq-9s-AAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1428" y="6"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Ojw-p8-CBf">
@@ -555,7 +519,4 @@
         <image name="first" width="30" height="30"/>
         <image name="second" width="30" height="30"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="SvL-HY-ksa"/>
-    </inferredMetricsTieBreakers>
 </document>
