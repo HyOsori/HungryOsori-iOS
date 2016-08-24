@@ -24,6 +24,8 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     var temp_unsubscription = [String]()
     
     override func viewDidLoad() {
+        
+        
         super.viewDidLoad()
         
         

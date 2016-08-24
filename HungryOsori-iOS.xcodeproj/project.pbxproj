@@ -275,7 +275,7 @@
 				TargetAttributes = {
 					76A0E90E1D34D53C0051FBDD = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = LVRKUWY6HJ;
+						DevelopmentTeam = JYF58Q7668;
 					};
 					76A0E9241D34D53C0051FBDD = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -554,10 +554,13 @@
 			baseConfigurationReference = 3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -566,10 +569,13 @@
 			baseConfigurationReference = 0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

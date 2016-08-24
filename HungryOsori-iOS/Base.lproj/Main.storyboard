@@ -29,7 +29,7 @@
                                         <rect key="frame" x="0.0" y="50" width="560" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gpy-d8-0GM" id="FQX-vF-XyR">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bfD-CJ-MLw">
@@ -156,7 +156,7 @@
                                         <rect key="frame" x="0.0" y="50" width="560" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Vz-zC-H4r" id="hWD-IP-P3Y">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="90"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qWv-or-bCX">
@@ -556,6 +556,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZnB-tR-Hxe"/>
+        <segue reference="SvL-HY-ksa"/>
     </inferredMetricsTieBreakers>
 </document>
