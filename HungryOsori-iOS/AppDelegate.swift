@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData)
     {
+        let refreshedToken = FIRInstanceID.instanceID().token()!
+        print("InstanceID token: \(refreshedToken)")
         
         let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
         
@@ -42,7 +44,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print( "노티피케이션 등록을 성공함, 디바이스 토큰 : \(deviceTokenString)" )
     }
-    
+    /*
+    func connectToFcm() {
+        FIRMessaging.messaging().connectWithCompletion { (error) in
+            if (error != nil) {
+                print("Unable to connect with FCM. \(error)")
+            } else {
+                print("Connected to FCM.")
+            }
+        }
+    }
+ 
+    func tokenRefreshNotification(notification: NSNotification) {
+        let refreshedToken = FIRInstanceID.instanceID().token()!
+        print("InstanceID token: \(refreshedToken)")
+        
+        // Connect to FCM since connection may have failed when attempted before having a token.
+        connectToFcm()
+    }
+    */
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError)
     {
         
@@ -51,8 +71,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject])
     {
-        print("MessageID : \(userInfo["gcm_message_id"]!)")
-        print("노티피케이션을 받았습니다. : \(userInfo)")
+        
+        print("Message ID: \(userInfo["gcm.message_id"]!)")
+        print("노티피케이션을 받았습니다. :\(userInfo)")
     }
     
     func applicationWillResignActive(application: UIApplication) {
