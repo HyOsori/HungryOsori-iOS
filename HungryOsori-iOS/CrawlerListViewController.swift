@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
@@ -20,21 +21,54 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     var count:Int?
     var sub_id_for_reqe:String?
     var temp_unsubscription = [String]()
+    var temp_pushToken:String?
+    
     
     override func viewDidLoad() {
+        
+        let refreshedToken = FIRInstanceID.instanceID().token()!
+        temp_pushToken = refreshedToken
+        print("InstanceID token: \(refreshedToken)")
         super.viewDidLoad()
         if((userID != nil) && (userKey != nil))
         {
             makePostRequest()
         }
+        makePostRequestPush()
     }
     
     override func viewWillAppear(animated: Bool) {
         self.crawlerTableview.reloadData()
     }
     
+    func makePostRequestPush(){
+        
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/register_push_token")!)
+        request.HTTPMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
+        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&token=\(temp_pushToken!)"
+        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        let task3 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
+            guard error == nil && data != nil else {
+                print("error=\(error)")
+                return
+            }
+            
+            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            let responseString2 = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print("Push_Register_responseString!! \(responseString2)")
+        }
+        task3.resume()
+    }
+
+    
     func makePostRequest(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_entire_list")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_entire_list")!)
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
@@ -68,7 +102,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func makePostRequestScrcibe(){
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_subscribe_crawler")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_subscribe_crawler")!)
         let subid = sub_id_for_reqe
         
         request.HTTPMethod = "POST"

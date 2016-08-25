@@ -57,7 +57,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func makePostRequestSubscribeList(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_subscription_list")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_subscription_list")!)
         
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
@@ -115,7 +115,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func makePostRequestUnsubscrcibe(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_unsubscribe_crawler")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_unsubscribe_crawler")!)
         let subid = unscribe_id!
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")

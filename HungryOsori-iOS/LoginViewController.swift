@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
         let userid_in_req = IDUITextField.text
         
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://0.0.0.0:8000/req_login")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_login")!)
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
 
@@ -144,8 +144,13 @@ class LoginViewController: UIViewController {
             
         else
         {
-            displayAlertMassage("Put your ID that you want to use")
-            return
+            //displayAlertMassage("Put your ID that you want to use")
+            
+            makePostRequest()
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            self.dismissViewControllerAnimated(true, completion: nil)
+            //return
             
         }
 
@@ -161,9 +166,6 @@ class LoginViewController: UIViewController {
         }
         else
         {
-            
-
-            
             NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "New_user_id")
             NSUserDefaults.standardUserDefaults().synchronize()
             
