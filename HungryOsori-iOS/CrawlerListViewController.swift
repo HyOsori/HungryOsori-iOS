@@ -22,7 +22,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     var sub_id_for_reqe:String?
     var temp_unsubscription = [String]()
     var temp_pushToken:String?
-    
+    let string_url = "http://192.168.0.28:20003"
     
     override func viewDidLoad() {
         
@@ -43,7 +43,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func makePostRequestPush(){
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/register_push_token")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/register_push_token")!)
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&token=\(temp_pushToken!)"
@@ -68,7 +68,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
 
     
     func makePostRequest(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_entire_list")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_entire_list")!)
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
         let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
@@ -102,7 +102,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func makePostRequestScrcibe(){
         
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_subscribe_crawler")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_subscribe_crawler")!)
         let subid = sub_id_for_reqe
         
         request.HTTPMethod = "POST"

@@ -20,6 +20,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     var subcount : Int?
     var temp_crawler_list = [Crawler]()
     var crawlers:Crawlers? = Crawlers()
+    private let string_url = "http://192.168.0.28:20003"
 
     override func viewDidLoad() {
         for i in 0...4
@@ -57,7 +58,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func makePostRequestSubscribeList(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_subscription_list")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_subscription_list")!)
         
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
@@ -115,7 +116,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func makePostRequestUnsubscrcibe(){
-        let request = NSMutableURLRequest(URL: NSURL(string: "http://192.168.0.7:8000/req_unsubscribe_crawler")!)
+        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_unsubscribe_crawler")!)
         let subid = unscribe_id!
         request.HTTPMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
