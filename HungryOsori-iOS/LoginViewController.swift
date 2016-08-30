@@ -8,18 +8,15 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 class LoginViewController: UIViewController {
-    
     var messageDecision:String?
-    let string_url = "http://192.168.0.28:20003"
-
+    //let string_url = "http://192.168.0.35:20003"
     @IBOutlet weak var KeyUITextField: UITextField!
     @IBOutlet weak var IDUITextField: UITextField!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     func displayAlertMassage(Massge : String)
@@ -31,92 +28,49 @@ class LoginViewController: UIViewController {
         
         self.presentViewController(alert, animated:true, completion: nil)
     }
-    
     func makePostRequest(){
-
         let userid_in_req = IDUITextField.text
         let refreshedToken = FIRInstanceID.instanceID().token()!
-        let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: string_url+"/req_login")!)
-        print(string_url,"/req_login")
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-
-        
-        print(userid_in_req!)
-        
-        let postString:String = "user_id=\(userid_in_req!)"
-        
-
-        
-        
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {                                                          // check for fundamental networking error
-                print("error=\(error)")
-                return
-            }
+        var parameters:[String: String] = Dictionary()
+        if (refreshedToken.isEmpty){
+            parameters = ["user_id" : userid_in_req!, "token" : refreshedToken]
+            print("refreshetoken non exist ")
             
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("responseString = \(responseString!)")
-            
-            do {
-                let JsonData =  try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
-                
-                if let parseJSON = JsonData {
-                    
-                    // Now we can access value of First Name by its key
-                    //messageDecision = parseJSON["message"] as? String
-                    self.messageDecision = (parseJSON["message"] as? String)!
-                    
-                    let user_key:String = (parseJSON["user_key"] as? String)!
-                    
-                    NSUserDefaults.standardUserDefaults().setObject(user_key, forKey: "New_user_key")
-                    NSUserDefaults.standardUserDefaults().synchronize()
-                    
-                    print("USER_KEY : \(user_key)")
-                    
-                    print("message: \(self.messageDecision!)")
-                    if(self.messageDecision != "Success")
-                    {
-                        let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.presentViewController(vc, animated: true, completion: nil)
-                        }
-                        
-                    }
-                    else
-                    {
-                        let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("tab bar") as! Tabbar
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.presentViewController(vc2, animated: true, completion: nil)
-                        }
-                        
-                    }
+        }
+        else{
+            parameters = ["user_id" : userid_in_req!]
+            print("refreshetoken exist \(refreshedToken)")
+        }
+
+        Alamofire.request(.POST, string_url+"/req_login", parameters: parameters).responseJSON { (response) in
+            let responseUserKey = (response.result.value!["user_key"])!
+            self.messageDecision = (response.result.value!["message"] as? String)!
+            NSUserDefaults.standardUserDefaults().setObject(responseUserKey, forKey: "New_user_key")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            if(self.messageDecision != "Success")
+            {
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
+                print("message non success")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(vc, animated: true, completion: nil)
                 }
-            } catch {
-                print(error)
+            }
+            else
+            {
+                let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("tab bar") as! Tabbar
+                print("messae sucess!!!")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(vc2, animated: true, completion: nil)
+                }
             }
         }
-        task.resume()
     }
-    
+   /*
     func URLEncode(s: String) -> String? {
         return (s as NSString).stringByAddingPercentEncodingWithAllowedCharacters(
             .URLHostAllowedCharacterSet())
     }
-    
-    
-    
-    
+ */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -124,33 +78,7 @@ class LoginViewController: UIViewController {
     @IBAction func Login(sender: UIButton) {
         
         let userId = IDUITextField.text
-        
-        //let userKey = KeyUITextField.text
-        
-        
         let userIDStored = NSUserDefaults.standardUserDefaults().stringForKey("NewID")
-        
-        if (userId == userIDStored)
-        {
-            //Login successsful
-            makePostRequest()
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
-            NSUserDefaults.standardUserDefaults().synchronize()
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
-            
-        else
-        {
-            //displayAlertMassage("Put your ID that you want to use")
-            
-            makePostRequest()
-            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
-            NSUserDefaults.standardUserDefaults().synchronize()
-            self.dismissViewControllerAnimated(true, completion: nil)
-            //return
-            
-        }
-
         
         if(userId == nil)
         {
@@ -167,7 +95,13 @@ class LoginViewController: UIViewController {
             NSUserDefaults.standardUserDefaults().synchronize()
             
         }
-}
+
+        makePostRequest()
+        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
+        NSUserDefaults.standardUserDefaults().synchronize()
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        }
 
     /*
     // MARK: - Navigation

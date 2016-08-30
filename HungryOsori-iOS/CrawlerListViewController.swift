@@ -8,21 +8,22 @@
 
 import UIKit
 import Firebase
+import Alamofire
+//import Alamofire_Synchronous
 
 class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet
     var crawlerTableview:UITableView!
     var crawlers:Crawlers? = Crawlers()
-    let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
-    let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
+    
     var imageURL:UIImageView?
     var realimage:UIImage?
     var count:Int?
     var sub_id_for_reqe:String?
     var temp_unsubscription = [String]()
     var temp_pushToken:String?
-    let string_url = "http://192.168.0.28:20003"
+    var responsestring:NSString?
     
     override func viewDidLoad() {
         
@@ -42,52 +43,16 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     func makePostRequestPush(){
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/register_push_token")!)
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&token=\(temp_pushToken!)"
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let task3 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString2 = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("Push_Register_responseString!! \(responseString2)")
+        Alamofire.request(.POST, string_url+"/register_push_token", parameters: ["user_id" : userID!, "user_key" : userKey!, "token" : temp_pushToken!]).responseJSON{(requestPush) in
+            let pushResult = requestPush.result.value!["message"]
+            print("push result!\(pushResult)")
         }
-        task3.resume()
     }
 
-    
     func makePostRequest(){
-        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_entire_list")!)
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            self.crawlers = Crawlers(jsonString: responseString as! String)
-            
+        Alamofire.request(.POST, string_url+"/req_entire_list", parameters: ["user_id" : userID!,"user_key" : userKey!]).responseString { (response) in
+            self.responsestring = NSString(data: response.data!, encoding: NSUTF8StringEncoding)
+            self.crawlers = Crawlers(jsonString: (self.responsestring as! String))
             for i in 0...4{
                 let id:String?  = self.crawlers!.crawler_list[i].id
                 let title:String? = self.crawlers!.crawler_list[i].title
@@ -95,36 +60,16 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
                 let image:String? = self.crawlers!.crawler_list[i].thumbnailURL
                 ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!))
             }
+            
             self.count = (self.crawlers!.crawler_list.count)
             self.crawlerTableview.reloadData()
         }
-        task.resume()
     }
-    func makePostRequestScrcibe(){
-        
-        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_subscribe_crawler")!)
-        let subid = sub_id_for_reqe
-        
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&crawler_id=\(subid!)"
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
     
-        let task2 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {
-                print("error=\(error)")
-                return
-            }
-            
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString2 = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("Subscribe_responseString!! \(responseString2)")
+    func makePostRequestScrcibe(){
+        let subid = sub_id_for_reqe
+        Alamofire.request(.POST, string_url+"/req_subscribe_crawler", parameters: ["user_id" : userID!,"user_key" : userKey!,"crawler_id" : subid!]).responseString { (response) in
         }
-        task2.resume()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -141,10 +86,8 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell2 = crawlerTableview.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! MyTableViewCell
         let cc = self.crawlers!.crawler_list[indexPath.row]
-    
         cell2.title.text = cc.title
         cell2.des.text = cc.description
-        
         if(ShareData.sharedInstance.unsubscriptionList.count != 0)
         {
             for j in 0...(ShareData.sharedInstance.unsubscriptionList.count-1)
@@ -156,10 +99,8 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
             }
         }
-        
         let unwrapped: String = cc.thumbnailURL
         let url = NSURL(string : unwrapped)!
-
         if let data = NSData(contentsOfURL: url)
         {
             if let realimage = UIImage(data: data)
@@ -177,13 +118,11 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     }
-    
     @IBAction func subscribebutton(sender: UIButton) {
         sender.setTitle("해제", forState: .Normal)
         sub_id_for_reqe = self.crawlers?.crawler_list[sender.tag].id
         makePostRequestScrcibe()
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

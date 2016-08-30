@@ -7,20 +7,18 @@
 //
 
 import UIKit
+import Alamofire
 
 class SubscriptionListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet
     var crawlerTableView: UITableView!
     var subscriptions = []
-    let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
-    let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
     var final_array = [Crawler]()
     var unscribe_id:String?
     var subcount : Int?
     var temp_crawler_list = [Crawler]()
     var crawlers:Crawlers? = Crawlers()
-    private let string_url = "http://192.168.0.28:20003"
 
     override func viewDidLoad() {
         for i in 0...4
@@ -56,27 +54,10 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         }
         self.crawlerTableView.reloadData()
     }
-    
     func makePostRequestSubscribeList(){
-        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_subscription_list")!)
-        
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)"
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        
-        let task = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {
-                print("error=\(error)")
-                return
-            }
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {           // check for http errors
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
+        Alamofire.request(.POST, string_url+"/req_subscription_list", parameters: ["user_id" : userID!, "user_key" : userKey!]).responseJSON { (response) in
             do {
-                let JsonData =  try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableContainers) as? NSDictionary
+                let JsonData =  try NSJSONSerialization.JSONObjectWithData(response.data!, options: .MutableContainers) as? NSDictionary
                 
                 if let parseJSON = JsonData {
                     self.subscriptions = (parseJSON["subscriptions"])! as! NSArray
@@ -101,7 +82,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
                                 let des:String? = self.temp_crawler_list[i].description
                                 let image:String? = self.temp_crawler_list[i].thumbnailURL
                                 self.final_array.append(Crawler(id: id! , title: title!, description: des!
-                                , image: image!))
+                                    , image: image!))
                             }
                         }
                     }
@@ -111,37 +92,13 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
             }
             self.crawlerTableView.reloadData()
         }
-        task.resume()
     }
-    
-    
     func makePostRequestUnsubscrcibe(){
-        let request = NSMutableURLRequest(URL: NSURL(string: string_url + "/req_unsubscribe_crawler")!)
         let subid = unscribe_id!
-        request.HTTPMethod = "POST"
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField:"Content-Type")
-        let postString:String = "user_id=\(userID!)&user_key=\(userKey!)&crawler_id=\(subid)"
-        request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        let task2 = NSURLSession.sharedSession().dataTaskWithRequest(request) { data, response, error in
-            guard error == nil && data != nil else {
-                print("error=\(error)")
-                return
-            }
-            if let httpStatus = response as? NSHTTPURLResponse where httpStatus.statusCode != 200 {                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
-            
-            let responseString2 = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print("UnSubscribe_responseString!! \(responseString2)")
+        Alamofire.request(.POST, string_url+"/req_unsubscribe_crawler", parameters: ["user_id" : userID!, "user_key" : userKey!,"crawler_id" : subid]).responseString { (response) in
         }
-        task2.resume()
         self.crawlerTableView.reloadData()
-        
-        
     }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -191,9 +148,6 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         let description = self.final_array[sender.tag].description
         let image =  self.final_array[sender.tag].thumbnailURL
         ShareData.sharedInstance.unsubscriptionList.append(Crawler(id: id, title: title, description: description, image: image))
-        print(ShareData.sharedInstance.unsubscriptionList.count)
-        print("remove index : \(unscribe_id)")
-        
         self.final_array.removeAtIndex(sender.tag)
         makePostRequestUnsubscrcibe()
         self.subcount! -= 1
