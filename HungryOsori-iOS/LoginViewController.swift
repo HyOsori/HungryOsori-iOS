@@ -10,14 +10,20 @@ import UIKit
 import Firebase
 import Alamofire
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     var messageDecision:String?
     //let string_url = "http://192.168.0.35:20003"
     @IBOutlet weak var KeyUITextField: UITextField!
     @IBOutlet weak var IDUITextField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
+        KeyUITextField.delegate = self
+        IDUITextField.delegate = self
         // Do any additional setup after loading the view.
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
     func displayAlertMassage(Massge : String)
     {
@@ -65,12 +71,11 @@ class LoginViewController: UIViewController {
             }
         }
     }
-   /*
-    func URLEncode(s: String) -> String? {
-        return (s as NSString).stringByAddingPercentEncodingWithAllowedCharacters(
-            .URLHostAllowedCharacterSet())
+   
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
- */
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
