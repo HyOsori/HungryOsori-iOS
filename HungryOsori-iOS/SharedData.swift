@@ -23,4 +23,7 @@ class ShareData {
     }
     var entireList = [Crawler]()
     var unsubscriptionList = [Crawler]()
+    var storedID : String?
+    var storedPW : String?
+    var storedKey : String?
 }

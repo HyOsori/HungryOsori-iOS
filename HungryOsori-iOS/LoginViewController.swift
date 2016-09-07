@@ -12,11 +12,14 @@ import Alamofire
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     var messageDecision:String?
-    //let string_url = "http://192.168.0.35:20003"
     @IBOutlet weak var KeyUITextField: UITextField!
     @IBOutlet weak var IDUITextField: UITextField!
+    //let userIDStored = NSUserDefaults.standardUserDefaults().stringForKey("NewID")
+    //let userPWStored = NSUserDefaults.standardUserDefaults().stringForKey("NewPW")
+    var mgr: Alamofire.Manager!
     override func viewDidLoad() {
         super.viewDidLoad()
+        mgr = configureManager()
         KeyUITextField.delegate = self
         IDUITextField.delegate = self
         // Do any additional setup after loading the view.
@@ -35,21 +38,95 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.presentViewController(alert, animated:true, completion: nil)
     }
     func makePostRequest(){
-        let userid_in_req = IDUITextField.text
+        let userIDStored = ShareData.sharedInstance.storedID!
+        let userPWStored = ShareData.sharedInstance.storedPW!
+        
+        //let userid_in_req = IDUITextField.text
+        //print("shareData info in LoginView : \(ShareData.sharedInstance.storedID) + \(ShareData.sharedInstance.storedPW)")
+        //print("login view ID : \(IDUITextField.text!)")
         let refreshedToken = FIRInstanceID.instanceID().token()!
         var parameters:[String: String] = Dictionary()
+        if(IDUITextField.text! != userIDStored)
+        {
+            print("idtextfield : \(IDUITextField.text!)")
+            displayAlertMassage("ID is Wrong")
+        }
+        else
+        {
+            if(KeyUITextField.text! != userPWStored)
+            {
+                displayAlertMassage("PW is Wrong")
+            }
+            else
+            {
+                
+            }
+        }
+    
         if (refreshedToken.isEmpty){
-            parameters = ["user_id" : userid_in_req!, "token" : refreshedToken]
+            parameters = ["user_id" : userIDStored,"password" : userPWStored]
             print("refreshetoken non exist ")
             
         }
         else{
-            parameters = ["user_id" : userid_in_req!]
+            parameters = ["user_id" : userIDStored,"password" : userPWStored, "token" : refreshedToken]
             print("refreshetoken exist \(refreshedToken)")
         }
 
-        Alamofire.request(.POST, string_url+"/req_login", parameters: parameters).responseJSON { (response) in
+        mgr.request(.POST, string_url+"/req_login", parameters: parameters).responseJSON { (response) in
+            print("response for req_login : \(response)")
             let responseUserKey = (response.result.value!["user_key"])!
+            ShareData.sharedInstance.storedKey = responseUserKey as? String
+            self.messageDecision = (response.result.value!["message"] as? String)!
+            NSUserDefaults.standardUserDefaults().setObject(responseUserKey, forKey: "New_user_key")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            print(cookies.cookiesForURL(NSURL(string: string_url+"/req_login")!))
+            var allCookies: [NSHTTPCookie]?
+            if let headerFields = response.response?.allHeaderFields as? [String: String],
+                URL = response.request?.URL {
+                allCookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
+                for cookie in allCookies! {
+                    print("cokiiiiiiiii : \(cookie)")
+                    let name = cookie.name
+                    if name == "message" {
+                        let value = cookie.value
+                        print("cokieeeee's valueeee : \(value)")
+                    }
+                }
+                print("wwwwwwww")
+                print(cookies.cookiesForURL(NSURL(string: string_url+"/req_login")!))
+                
+            }
+        
+        print("EEEEEEEe")
+        print(cookies.cookiesForURL(NSURL(string: string_url+"/req_login")!))
+        
+
+            
+            //let cookies = NSHTTPCookie.cookiesWithResponseHeaderFields(response.allHeaderFields as! [String: String], forURL: response.URL!)
+            if(self.messageDecision != "Success")
+            {
+                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
+                print("message non success")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(vc, animated: true, completion: nil)
+                }
+            }
+            else
+            {
+                let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("tab bar") as! Tabbar
+                print("messae sucess!!!")
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.presentViewController(vc2, animated: true, completion: nil)
+                }
+            }
+        }
+/*
+        Alamofire.request(.POST, string_url+"/req_login", parameters: parameters).responseJSON { (response) in
+            print("response for req_login : \(response)")
+            let responseUserKey = (response.result.value!["user_key"])!
+            ShareData.sharedInstance.storedKey = responseUserKey as! String
             self.messageDecision = (response.result.value!["message"] as? String)!
             NSUserDefaults.standardUserDefaults().setObject(responseUserKey, forKey: "New_user_key")
             NSUserDefaults.standardUserDefaults().synchronize()
@@ -70,6 +147,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+ */
     }
    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -82,8 +160,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     @IBAction func Login(sender: UIButton) {
         
-        let userId = IDUITextField.text
-        let userIDStored = NSUserDefaults.standardUserDefaults().stringForKey("NewID")
+        let userId = NSUserDefaults.standardUserDefaults().stringForKey("NewID")
+        
         
         if(userId == nil)
         {
@@ -96,15 +174,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         else
         {
-            NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "New_user_id")
-            NSUserDefaults.standardUserDefaults().synchronize()
+            //NSUserDefaults.standardUserDefaults().setObject(userId, forKey: "New_user_id")
+            //NSUserDefaults.standardUserDefaults().synchronize()
             
         }
 
         makePostRequest()
-        NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
-        NSUserDefaults.standardUserDefaults().synchronize()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        //NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isUserLoggedin")
+        //NSUserDefaults.standardUserDefaults().synchronize()
+        //self.dismissViewControllerAnimated(true, completion: nil)
         
         }
 

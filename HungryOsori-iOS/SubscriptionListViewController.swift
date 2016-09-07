@@ -32,7 +32,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         }
         subscriptions = []
         
-        if((userID != nil) && (userKey != nil))
+        if((userID.isEmpty == false) && (userKey.isEmpty == false))
         {
             makePostRequestSubscribeList()
             
@@ -47,7 +47,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         
         subscriptions = []
         
-        if((userID != nil) && (userKey != nil))
+        if((userID.isEmpty == false) && (userKey.isEmpty == false))
         {
             makePostRequestSubscribeList()
             
@@ -55,7 +55,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         self.crawlerTableView.reloadData()
     }
     func makePostRequestSubscribeList(){
-        Alamofire.request(.POST, string_url+"/req_subscription_list", parameters: ["user_id" : userID!, "user_key" : userKey!]).responseJSON { (response) in
+        Alamofire.request(.POST, string_url+"/req_subscription_list", parameters: ["user_id" : userID, "user_key" : userKey]).responseJSON { (response) in
             do {
                 let JsonData =  try NSJSONSerialization.JSONObjectWithData(response.data!, options: .MutableContainers) as? NSDictionary
                 
@@ -95,7 +95,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     }
     func makePostRequestUnsubscrcibe(){
         let subid = unscribe_id!
-        Alamofire.request(.POST, string_url+"/req_unsubscribe_crawler", parameters: ["user_id" : userID!, "user_key" : userKey!,"crawler_id" : subid]).responseString { (response) in
+        Alamofire.request(.POST, string_url+"/req_unsubscribe_crawler", parameters: ["user_id" : userID, "user_key" : userKey,"crawler_id" : subid]).responseString { (response) in
         }
         self.crawlerTableView.reloadData()
     }

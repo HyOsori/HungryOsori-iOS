@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import Alamofire
 
 class RegisterViewController: UIViewController {
 
     @IBOutlet weak var NewIdUITextField: UITextField!
+    @IBOutlet weak var NewPassword: UITextField!
+    
+    var mgr: Alamofire.Manager!
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    func validateEmail(candidate: String) -> Bool {
-        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(candidate)
+        mgr = configureManager()
     }
     
     override func didReceiveMemoryWarning() {
@@ -25,18 +25,59 @@ class RegisterViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func makePostRequest(){
+        let newid = NewIdUITextField.text
+        let newpw = NewPassword.text
+        mgr.request(.POST,  string_url+"/req_signup", parameters: ["user_id" : newid!,"password" : newpw!]).responseJSON { (response) in
+            print("Response Json  !!!!! : \(response)")
+            print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
+            var allCookies: [NSHTTPCookie]?
+            if let headerFields = response.response?.allHeaderFields as? [String: String],
+                URL = response.request?.URL {
+                allCookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
+                for cookie in allCookies! {
+                    print("cokiiiiiiiii : \(cookie)")
+                    let name = cookie.name
+                    if name == "message" {
+                        let value = cookie.value
+                        print("cokieeeee's valueeee : \(value)")
+                    }
+                }
+                print("wwwwwwww")
+                print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
+
+            }
+        }
+        print("EEEEEEEe")
+        print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
+
+        /*Alamofire.request(.POST, string_url+"/req_signup", parameters: ["user_id" : newid!,"password" : newpw!]).responseJSON { (response) in
+            print("Response Json  !!!!! : \(response)")
+            print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
+        }
+         */
+    }
+
+    
+    
     func displayAlertMassage(Massge : String)
     {
         let alert = UIAlertController(title: "Alert", message: Massge, preferredStyle: UIAlertControllerStyle.Alert)
         
         let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(okAction)
-        
+    
         self.presentViewController(alert, animated:true, completion: nil)
     }
     
     @IBAction func RegisterUIButton(sender: AnyObject) {
         let NewIdUIText = NewIdUITextField.text
+        let NewPWUIText = NewPassword.text
+        
+        ShareData.sharedInstance.storedID = NewIdUIText
+        ShareData.sharedInstance.storedPW = NewPWUIText
+        
+        print("shareData info : \(ShareData.sharedInstance.storedID) + \(ShareData.sharedInstance.storedPW)")
         
         //Check For whether empty or not
         if((NewIdUIText?.isEmpty) == nil)
@@ -54,10 +95,12 @@ class RegisterViewController: UIViewController {
                 displayAlertMassage("Invalid email")
             }
         }
+        makePostRequest()
         
         //Storing Data
-        NSUserDefaults.standardUserDefaults().setObject(NewIdUIText, forKey: "NewID")
-        NSUserDefaults.standardUserDefaults().synchronize()
+        //NSUserDefaults.standardUserDefaults().setObject(NewIdUIText, forKey: "NewID")
+        //NSUserDefaults.standardUserDefaults().setObject(NewPWUIText, forKey: "NewPW")
+        //NSUserDefaults.standardUserDefaults().synchronize()
         
         let alert = UIAlertController(title: "alert", message: "Register Successful", preferredStyle: UIAlertControllerStyle.Alert)
         
@@ -65,9 +108,6 @@ class RegisterViewController: UIViewController {
             ACTION in
             self.dismissViewControllerAnimated(true, completion: nil)
         }
-        
-        
-
         alert.addAction(okAction)
         self.presentViewController(alert, animated:true, completion: nil)
 
