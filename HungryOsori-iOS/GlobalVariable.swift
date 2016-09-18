@@ -12,8 +12,12 @@ import Alamofire
 let string_url = "http://192.168.0.35:8080"
 //let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
 //let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
-let userID = ShareData.sharedInstance.storedID!
+var userID = ShareData.sharedInstance.storedID!
 let userKey = ShareData.sharedInstance.storedKey!
+var uid : String?
+var uwd : String?
+
+
 let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage()
 //let cooky = NSHTTPCookie
 

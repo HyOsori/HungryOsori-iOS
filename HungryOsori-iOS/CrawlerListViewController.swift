@@ -29,6 +29,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         
+        
         let refreshedToken = FIRInstanceID.instanceID().token()!
         temp_pushToken = refreshedToken
         print("InstanceID token: \(refreshedToken)")
@@ -39,6 +40,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
         {
             makePostRequest()
         }
+ 
         makePostRequestPush()
     }
     
@@ -53,17 +55,11 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
             let pushResult = requestPush.result.value!["message"]
             print("push result!\(pushResult)")
         }
-        /*
-        Alamofire.request(.POST, string_url+"/register_push_token", parameters: ["user_id" : userID, "user_key" : userKey, "token" : temp_pushToken!]).responseJSON{(requestPush) in
-            let pushResult = requestPush.result.value!["message"]
-            print("push result!\(pushResult)")
-        }
- */
     }
 
     func makePostRequest(){
         mgr.request(.POST, string_url+"/req_entire_list", parameters: ["user_id" : userID,"user_key" : userKey]).responseString { (response) in
-            print("responseString for entirelist \(response)")
+            //print("responseString for entirelist \(response)")
             self.responsestring = NSString(data: response.data!, encoding: NSUTF8StringEncoding)
             self.crawlers = Crawlers(jsonString: (self.responsestring as! String))
             for i in 0...4{
@@ -77,33 +73,12 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
             self.count = (self.crawlers!.crawler_list.count)
             self.crawlerTableview.reloadData()
         }
-/*
-        Alamofire.request(.POST, string_url+"/req_entire_list", parameters: ["user_id" : userID,"user_key" : userKey]).responseString { (response) in
-            print("responseString for entirelist \(response)")
-            self.responsestring = NSString(data: response.data!, encoding: NSUTF8StringEncoding)
-            self.crawlers = Crawlers(jsonString: (self.responsestring as! String))
-            for i in 0...4{
-                let id:String?  = self.crawlers!.crawler_list[i].id
-                let title:String? = self.crawlers!.crawler_list[i].title
-                let des:String? = self.crawlers!.crawler_list[i].description
-                let image:String? = self.crawlers!.crawler_list[i].thumbnailURL
-                ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!))
-            }
-            
-            self.count = (self.crawlers!.crawler_list.count)
-            self.crawlerTableview.reloadData()
-        }
- */
     }
     
     func makePostRequestScrcibe(){
         let subid = sub_id_for_reqe
         mgr.request(.POST, string_url+"/req_subscribe_crawler", parameters: ["user_id" : userID,"user_key" : userKey,"crawler_id" : subid!]).responseString { (response) in
         }
-        /*
-        Alamofire.request(.POST, string_url+"/req_subscribe_crawler", parameters: ["user_id" : userID,"user_key" : userKey,"crawler_id" : subid!]).responseString { (response) in
-        }
- */
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

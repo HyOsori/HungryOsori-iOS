@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="pHC-gQ-OSq">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BB0-sz-FWv">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -269,6 +269,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="750" y="568"/>
+        </scene>
+        <!--Protected View Controller-->
+        <scene sceneID="msR-w6-J8w">
+            <objects>
+                <viewController storyboardIdentifier="proteced view" id="BB0-sz-FWv" customClass="ProtectedViewController" customModule="HungryOsori_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="04e-Yz-h1f"/>
+                        <viewControllerLayoutGuide type="bottom" id="vo2-pX-YOW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eUx-h1-qJB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading....." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPL-Jk-Goh">
+                                <rect key="frame" x="172" y="268" width="257" height="63"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="66Z-2I-Ae6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="rPL-Jk-Goh" firstAttribute="top" secondItem="04e-Yz-h1f" secondAttribute="bottom" constant="248" id="6Sg-w3-kQh"/>
+                            <constraint firstItem="rPL-Jk-Goh" firstAttribute="centerY" secondItem="eUx-h1-qJB" secondAttribute="centerY" id="gdP-Fo-La0"/>
+                            <constraint firstItem="rPL-Jk-Goh" firstAttribute="centerX" secondItem="eUx-h1-qJB" secondAttribute="centerX" id="jfv-ET-HjM"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ROC-mN-hEw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1340" y="11"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Ojw-p8-CBf">

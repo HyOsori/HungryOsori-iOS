@@ -33,6 +33,7 @@
 		76CA91561D64614900FAC76A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76CA91551D64614900FAC76A /* GoogleService-Info.plist */; };
 		76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */; };
 		76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */; };
+		76E6F3921D8CFF0700E6529C /* ProtectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E6F3911D8CFF0700E6529C /* ProtectedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeTableViewCell.swift; sourceTree = "<group>"; };
 		76E2759A1D74B8CE002C22FB /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
+		76E6F3911D8CFF0700E6529C /* ProtectedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +216,7 @@
 				76A0E9121D34D53C0051FBDD /* AppDelegate.swift */,
 				76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */,
 				7667D6A81D7D858900A78A56 /* Main.storyboard */,
+				76E6F3911D8CFF0700E6529C /* ProtectedViewController.swift */,
 				76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */,
 				7660F76D1D409DC60071288E /* LoginViewController.swift */,
 				7660F76F1D40A1220071288E /* RegisterViewController.swift */,
@@ -552,6 +555,7 @@
 				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,
 				76CA91521D59A23100FAC76A /* SharedData.swift in Sources */,
+				76E6F3921D8CFF0700E6529C /* ProtectedViewController.swift in Sources */,
 				76A0E9151D34D53C0051FBDD /* SubscriptionListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

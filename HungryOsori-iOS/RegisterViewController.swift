@@ -17,7 +17,8 @@ class RegisterViewController: UIViewController {
     var mgr: Alamofire.Manager!
     override func viewDidLoad() {
         super.viewDidLoad()
-        mgr = configureManager()
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -26,38 +27,20 @@ class RegisterViewController: UIViewController {
     }
     
     func makePostRequest(){
+        
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
+        mgr = Alamofire.Manager(configuration: configuration)
+        
         let newid = NewIdUITextField.text
         let newpw = NewPassword.text
         mgr.request(.POST,  string_url+"/req_signup", parameters: ["user_id" : newid!,"password" : newpw!]).responseJSON { (response) in
             print("Response Json  !!!!! : \(response)")
-            print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
-            var allCookies: [NSHTTPCookie]?
-            if let headerFields = response.response?.allHeaderFields as? [String: String],
-                URL = response.request?.URL {
-                allCookies = NSHTTPCookie.cookiesWithResponseHeaderFields(headerFields, forURL: URL)
-                for cookie in allCookies! {
-                    print("cokiiiiiiiii : \(cookie)")
-                    let name = cookie.name
-                    if name == "message" {
-                        let value = cookie.value
-                        print("cokieeeee's valueeee : \(value)")
-                    }
-                }
-                print("wwwwwwww")
-                print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
-
-            }
+            //print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
+            
+            print(NSHTTPCookieStorage.sharedHTTPCookieStorage().cookiesForURL(NSURL(string: string_url+"/req_signup")!))
         }
-        print("EEEEEEEe")
-        print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
-
-        /*Alamofire.request(.POST, string_url+"/req_signup", parameters: ["user_id" : newid!,"password" : newpw!]).responseJSON { (response) in
-            print("Response Json  !!!!! : \(response)")
-            print(cookies.cookiesForURL(NSURL(string: string_url+"/req_signup")!))
-        }
-         */
     }
-
     
     
     func displayAlertMassage(Massge : String)
@@ -98,9 +81,9 @@ class RegisterViewController: UIViewController {
         makePostRequest()
         
         //Storing Data
-        //NSUserDefaults.standardUserDefaults().setObject(NewIdUIText, forKey: "NewID")
-        //NSUserDefaults.standardUserDefaults().setObject(NewPWUIText, forKey: "NewPW")
-        //NSUserDefaults.standardUserDefaults().synchronize()
+        NSUserDefaults.standardUserDefaults().setObject(NewIdUIText, forKey: "NewID")
+        NSUserDefaults.standardUserDefaults().setObject(NewPWUIText, forKey: "NewPW")
+        NSUserDefaults.standardUserDefaults().synchronize()
         
         let alert = UIAlertController(title: "alert", message: "Register Successful", preferredStyle: UIAlertControllerStyle.Alert)
         
