@@ -20,7 +20,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         mgr = configureManager()
         
         for i in 0...2 {
-            ShareData.sharedInstance.unsubscription_count[i] = false
+            //ShareData.sharedInstance.unsubscription_count[i] = false
         }
         
         KeyUITextField.delegate = self
