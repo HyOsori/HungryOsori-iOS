@@ -20,8 +20,15 @@ class Crawler
     {
         self.id = json["crawler_id"] as! String
         self.title = json["title"] as! String
-        self.description = json["description"] as! String
+        self.description = json["created"] as! String
         self.thumbnailURL = json["thumbnail_url"] as! String
+    }
+    init(jso:[String:AnyObject])
+    {
+        self.id = jso["crawler_id"] as! String
+        self.title = jso["title"] as! String
+        self.description = jso["description"] as! String
+        self.thumbnailURL = jso["thumbnail_url"] as! String
     }
     
     init(id:String, title : String, description: String, image : String)

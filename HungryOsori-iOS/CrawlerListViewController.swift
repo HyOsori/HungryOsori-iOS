@@ -9,14 +9,14 @@
 import UIKit
 import Firebase
 import Alamofire
-//import Alamofire_Synchronous
+
+
 
 class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     @IBOutlet
     var crawlerTableview:UITableView!
     var crawlers:Crawlers? = Crawlers()
-    
     var imageURL:UIImageView?
     var realimage:UIImage?
     var count:Int?
@@ -24,52 +24,39 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     var temp_unsubscription = [String]()
     var temp_pushToken:String?
     var responsestring:NSString?
-    var mgr: Alamofire.Manager!
-    
-    
+    var mgr: Alamofire.SessionManager!
+
     override func viewDidLoad() {
-        
+        userKey = UserDefaults.standard.string(forKey: "New_user_key")
         
         let refreshedToken = FIRInstanceID.instanceID().token()!
         temp_pushToken = refreshedToken
         print("InstanceID token: \(refreshedToken)")
         super.viewDidLoad()
         mgr = configureManager()
-        if((userID.isEmpty == false) && (userKey
-            .isEmpty == false))
-        {
-            makePostRequest()
-        }
- 
-        makePostRequestPush()
+        makePostRequest()
+        
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         self.crawlerTableview.reloadData()
     }
     
-    func makePostRequestPush(){
-        print("user id ! : \(userID)")
-        print("user key ! : \(userKey)")
-        mgr.request(.POST, string_url+"/register_push_token", parameters: ["user_id" : userID, "user_key" : userKey, "token" : temp_pushToken!]).responseJSON{(requestPush) in
-            let pushResult = requestPush.result.value!["message"]
-            print("push result!\(pushResult)")
-        }
-    }
-
     func makePostRequest(){
-        mgr.request(.POST, string_url+"/req_entire_list", parameters: ["user_id" : userID,"user_key" : userKey]).responseString { (response) in
-            //print("responseString for entirelist \(response)")
-            self.responsestring = NSString(data: response.data!, encoding: NSUTF8StringEncoding)
+        
+        
+        mgr.request(string_url+"/crawlers/", method: .get).responseString { (response) in
+            print("=================================================")
+            print("response for crawlers : \(response)")
+            self.responsestring = NSString(data: response.data!, encoding: String.Encoding.utf8.rawValue)
             self.crawlers = Crawlers(jsonString: (self.responsestring as! String))
-            for i in 0...4{
+            for i in 0...2{
                 let id:String?  = self.crawlers!.crawler_list[i].id
                 let title:String? = self.crawlers!.crawler_list[i].title
                 let des:String? = self.crawlers!.crawler_list[i].description
                 let image:String? = self.crawlers!.crawler_list[i].thumbnailURL
                 ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!))
-            }
-            
+                }
             self.count = (self.crawlers!.crawler_list.count)
             self.crawlerTableview.reloadData()
         }
@@ -77,12 +64,23 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func makePostRequestScrcibe(){
         let subid = sub_id_for_reqe
-        mgr.request(.POST, string_url+"/req_subscribe_crawler", parameters: ["user_id" : userID,"user_key" : userKey,"crawler_id" : subid!]).responseString { (response) in
+        let latest_pushtime : String? =  "2016:12:28"
+        mgr.request(string_url+"/subscriptions/",method: .post,  parameters: ["user_id" : userID!,"user_key" : userKey!,"crawler_id" : subid!, "latest_pushtime" : latest_pushtime!]).responseString { (response) in
+            print("result ????? : \(response.result)")   // result of response serialization
+            switch(response.result) {
+            case .success(_):
+                    print("messae sucess!!!")
+                    break
+                
+            case .failure(_):
+                print("test response failure : \(response.result.error)")
+                break
+                
+            }
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (count == nil)
         {
             return 0
@@ -92,43 +90,30 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell2 = crawlerTableview.dequeueReusableCellWithIdentifier("cell2", forIndexPath: indexPath) as! MyTableViewCell
-        let cc = self.crawlers!.crawler_list[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell2 = crawlerTableview.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! MyTableViewCell
+        let cc = self.crawlers!.crawler_list[(indexPath as NSIndexPath).row]
         cell2.title.text = cc.title
         cell2.des.text = cc.description
-        if(ShareData.sharedInstance.unsubscriptionList.count != 0)
+        if((ShareData.sharedInstance.unsubscriptionList.count) != 0)
         {
             for j in 0...(ShareData.sharedInstance.unsubscriptionList.count-1)
             {
                 if(cc.id == ShareData.sharedInstance.unsubscriptionList[j].id)
                 {
-                    cell2.subscribeButton.setTitle("구독", forState: .Normal)
+                    cell2.subscribeButton.setTitle("구독", for: UIControlState())
 
                 }
             }
         }
-        let unwrapped: String = cc.thumbnailURL
-        let url = NSURL(string : unwrapped)!
-        if let data = NSData(contentsOfURL: url)
-        {
-            if let realimage = UIImage(data: data)
-                {
-                    cell2.imageurlresult.image = realimage
-                    if(cell2.imageurlresult == nil)
-                    {
-                        print("nil")
-                    }
-                }
-        }
-        cell2.subscribeButton.tag = indexPath.row
+        cell2.subscribeButton.tag = (indexPath as NSIndexPath).row
             return cell2
         
     }
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
-    @IBAction func subscribebutton(sender: UIButton) {
-        sender.setTitle("해제", forState: .Normal)
+    @IBAction func subscribebutton(_ sender: UIButton) {
+        sender.setTitle("해제", for: UIControlState())
         sub_id_for_reqe = self.crawlers?.crawler_list[sender.tag].id
         makePostRequestScrcibe()
     }

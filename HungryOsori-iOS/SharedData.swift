@@ -9,21 +9,14 @@
 import Foundation
 
 class ShareData {
-    class var sharedInstance: ShareData {
-        struct Static {
-            static var instance: ShareData?
-            static var token: dispatch_once_t = 0
-        }
-        
-        dispatch_once(&Static.token) {
-            Static.instance = ShareData()
-        }
-        
-        return Static.instance!
-    }
+    static let sharedInstance = ShareData()
+    
     var entireList = [Crawler]()
     var unsubscriptionList = [Crawler]()
+    var unsubscription_count : [Bool] = []
     var storedID : String?
     var storedPW : String?
     var storedKey : String?
+    var storedName : String?
+    
 }

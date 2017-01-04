@@ -9,25 +9,24 @@
 import Foundation
 import Alamofire
 
-let string_url = "http://192.168.0.35:8080"
-//let userID = NSUserDefaults.standardUserDefaults().stringForKey("New_user_id")
-//let userKey = NSUserDefaults.standardUserDefaults().stringForKey("New_user_key")
-var userID = ShareData.sharedInstance.storedID!
-let userKey = ShareData.sharedInstance.storedKey!
+
+let string_url = "http://52.78.113.6:8000"
+var userID :String?//= UserDefaults.standard.string(forKey: "New_user_id")
+var userKey :String?//UserDefaults.standard.string(forKey: "New_user_key")
 var uid : String?
 var uwd : String?
 
 
-let cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage()
-//let cooky = NSHTTPCookie
+let cookies = HTTPCookieStorage.shared
 
-func configureManager() -> Alamofire.Manager {
-    let cfg = NSURLSessionConfiguration.defaultSessionConfiguration()
-    cfg.HTTPCookieStorage = cookies
-    return Alamofire.Manager(configuration: cfg)
+func configureManager() -> Alamofire.SessionManager {
+    let cfg = URLSessionConfiguration.default
+    cfg.httpCookieStorage = cookies
+    return Alamofire.SessionManager(configuration: cfg)
 }
 
-func validateEmail(candidate: String) -> Bool {
+func validateEmail(_ candidate: String) -> Bool {
     let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-    return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(candidate)
+    return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
 }
+

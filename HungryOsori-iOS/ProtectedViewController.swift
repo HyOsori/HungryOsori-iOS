@@ -12,13 +12,13 @@ import Alamofire
 import Firebase
 
 class ProtectedViewController: UIViewController {
-    var mgr: Alamofire.Manager!
+    var mgr: Alamofire.SessionManager!
 
     func makePostRequest(){
         
-        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.HTTPAdditionalHeaders = Alamofire.Manager.defaultHTTPHeaders
-        mgr = Alamofire.Manager(configuration: configuration)
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+        mgr = Alamofire.SessionManager(configuration: configuration)
 
         let refreshedToken = FIRInstanceID.instanceID().token()!
         var parameters:[String: String] = Dictionary()
@@ -31,31 +31,54 @@ class ProtectedViewController: UIViewController {
             parameters = ["user_id" : uid!,"password" : uwd!, "token" : refreshedToken]
             print("refreshetoken exist \(refreshedToken)")
         }
-        mgr.request(.POST, string_url+"/req_login", parameters: parameters).responseJSON { (response) in
-            print("response for req_login : \(response)")
-            let responseUserKey = (response.result.value!["user_key"])!
-            ShareData.sharedInstance.storedKey = responseUserKey as? String
-            NSUserDefaults.standardUserDefaults().setObject(responseUserKey, forKey: "New_user_key")
-            NSUserDefaults.standardUserDefaults().synchronize()
-            let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("tab bar") as! Tabbar
+        /*
+        mgr.request(string_url+"/req_login",method: .post, parameters: parameters).responseJSON { (response) in
+    
+            switch response.result {
+            case .success( _) :
+                print(response.request!)  // original URL request
+                print(response.response!) // HTTP URL response
+                print(response.data!)     // server data
+                print(response.result)   // result of response serialization
+                
+                
+                if let JSON = response.result.value as! [String:AnyObject]!{
+                    //let message = JSON["user_key"]
+                    let responseUserKey = JSON["user_key"]!
+                    ShareData.sharedInstance.storedKey = responseUserKey as? String
+                    //self.messageDecision = (response.result.value!["ErrorCode"] as? String)!
+                    UserDefaults.standard.set(responseUserKey, forKey: "New_user_key")
+                    UserDefaults.standard.synchronize()
+                }
+            case .failure( _) :
+                print("error for encoding!!")
+            
+        
+                
+            let vc2 = self.storyboard?.instantiateViewController(withIdentifier: "tab bar") as! Tabbar
             print("Go to Tab bar!!!")
-            dispatch_async(dispatch_get_main_queue()) {
-                self.presentViewController(vc2, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(vc2, animated: true, completion: nil)
             }
         }
  
+        }
+        */
     }
 
     
     override func viewDidLoad() {
         
-        print("Stored user id : \(uid!) + Sotred user pwd : \(uwd!)")
-        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "login View") as! LoginViewController
+        DispatchQueue.main.async {
+            self.present(vc, animated: true, completion: nil)
+        }
+ 
         if(uid == nil && uwd == nil) // 전에 로그인 한 기록이 없는 경우
         {
-            let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
-            dispatch_async(dispatch_get_main_queue()) {
-                self.presentViewController(vc, animated: true, completion: nil)
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: "login View") as! LoginViewController
+            DispatchQueue.main.async {
+                self.present(vc, animated: true, completion: nil)
             }
         }
         else
@@ -67,5 +90,6 @@ class ProtectedViewController: UIViewController {
             
 
         }
+ 
     }
 }

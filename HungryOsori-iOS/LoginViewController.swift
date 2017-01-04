@@ -14,125 +14,85 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var messageDecision:String?
     @IBOutlet weak var KeyUITextField: UITextField!
     @IBOutlet weak var IDUITextField: UITextField!
-    var mgr: Alamofire.Manager!
+    var mgr: Alamofire.SessionManager!
     override func viewDidLoad() {
         super.viewDidLoad()
         mgr = configureManager()
+        
+        for i in 0...2 {
+            ShareData.sharedInstance.unsubscription_count[i] = false
+        }
+        
         KeyUITextField.delegate = self
         IDUITextField.delegate = self
-        // Do any additional setup after loading the view.
     }
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
-    func displayAlertMassage(Massge : String)
+    func displayAlertMassage(_ Massage : String)
     {
-        let alert = UIAlertController(title: "Alert", message: Massge, preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Sign Up Failed !", message: Massage, preferredStyle: UIAlertControllerStyle.alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil)
         alert.addAction(okAction)
         
-        self.presentViewController(alert, animated:true, completion: nil)
+        self.present(alert, animated:true, completion: nil)
     }
     func makePostRequest(){
-        print(uid! + uwd!)
-        //var userIDStored : String?
-        //var userPWStored : String?
         let refreshedToken = FIRInstanceID.instanceID().token()!
         var parameters:[String: String] = Dictionary()
-        /*
-        //print("Empty decide for NSUserDefault : \((userIDStored?.isEmpty)) + \(userPWStored?.isEmpty)")
-        
-        print("Empty decide : \((userIDStored?.isEmpty)) + \(userPWStored?.isEmpty)")
-        
-        
-        if(userIDStored?.isEmpty == false && userPWStored?.isEmpty == false)// 저장된게 있다면
-        {
-            userIDStored = ShareData.sharedInstance.storedID!
-            userPWStored = ShareData.sharedInstance.storedPW!
-        }
-        
-        else // 저장된게 없다면
-        {
-            if(uid?.isEmpty == false && uwd?.isEmpty == false)
-            {
-                userIDStored = uid!
-                userPWStored = uwd!
-                print("uid & uwd does exist ")
-            }
-            else
-            {
-                userIDStored = ShareData.sharedInstance.storedID!
-                userPWStored = ShareData.sharedInstance.storedPW!
-                
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.presentViewController(vc, animated: true, completion: nil)
-                }
-                
-            }
-            
-        }
-
-        
-        if(IDUITextField.text! != userIDStored)
-        {
-            print("idtextfield : \(IDUITextField.text!)")
-            displayAlertMassage("ID is Wrong")
-        }
-        else
-        {
-            if(KeyUITextField.text! != userPWStored)
-            {
-                displayAlertMassage("PW is Wrong")
-            }
-            else
-            {
-                
-            }
-        }
-    */
         if (refreshedToken.isEmpty){
             parameters = ["user_id" : IDUITextField.text!,"password" : KeyUITextField.text!]
             print("refreshetoken non exist ")
             
         }
         else{
-            parameters = ["user_id" : IDUITextField.text!,"password" : KeyUITextField.text!, "token" : refreshedToken]
+            parameters = ["user_id" : IDUITextField.text!,"password" : KeyUITextField.text!, "push_token" : refreshedToken]
             print("refreshetoken exist \(refreshedToken)")
         }
-
-        mgr.request(.POST, string_url+"/req_login", parameters: parameters).responseJSON { (response) in
-            print("response for req_login : \(response)")
-            let responseUserKey = (response.result.value!["user_key"])!
-            ShareData.sharedInstance.storedKey = responseUserKey as? String
-            self.messageDecision = (response.result.value!["message"] as? String)!
-            NSUserDefaults.standardUserDefaults().setObject(responseUserKey, forKey: "New_user_key")
-            NSUserDefaults.standardUserDefaults().synchronize()
+        
+        
+        
+        
+        mgr.request(string_url+"/user/",method: .get, parameters: parameters, encoding: URLEncoding.default, headers: nil).responseJSON { (response:DataResponse<Any>) in
+            print(response.data!)     // server data
+            print("result ????? : \(response.result)")   // result of response serialization
             
-            print(cookies.cookiesForURL(NSURL(string: string_url+"/req_login")!))
-            
-            if(self.messageDecision != "Success")
-            {
-                let vc = self.storyboard?.instantiateViewControllerWithIdentifier("login View") as! LoginViewController
-                print("message non success")
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.presentViewController(vc, animated: true, completion: nil)
-                }
-            }
-            else
-            {
-                let vc2 = self.storyboard?.instantiateViewControllerWithIdentifier("tab bar") as! Tabbar
+            switch(response.result) {
+            case .success(_):
+                    if let JSON = response.result.value as! [String:AnyObject]!{
+                        print("is This JASON : \(JSON)")
+                        
+                        let responseUserKey = JSON["user_key"]!
+                        ShareData.sharedInstance.storedKey = responseUserKey as? String
+                        UserDefaults.standard.set(responseUserKey, forKey: "New_user_key")
+                        UserDefaults.standard.synchronize()
+                    }
+                    
+                    print("test response \(response.result.value)")
+                    let vc2 = self.storyboard?.instantiateViewController(withIdentifier: "tab bar") as! Tabbar
+                    print("messae sucess!!!")
+                    DispatchQueue.main.async {
+                        self.present(vc2, animated: true, completion: nil)
+                    }
+                break
+                
+            case .failure(_):
+                print("test response failure : \(response.result.error)")
+                let vc2 = self.storyboard?.instantiateViewController(withIdentifier: "login View") as! LoginViewController
                 print("messae sucess!!!")
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.presentViewController(vc2, animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.present(vc2, animated: true, completion: nil)
                 }
+                break
+                
             }
         }
+       
     }
    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
@@ -140,24 +100,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    @IBAction func Login(sender: UIButton) {
-        
-        let userId = NSUserDefaults.standardUserDefaults().stringForKey("NewID")
-        print(userId)
-        print("Stored user id : " + uid!)
-        print("Stored user pwd : " + uwd!)
-        if(userId == nil)
+    @IBAction func Login(_ sender: UIButton) {
+        //userID = UserDefaults.standard.set
+        //let userId = UserDefaults.standard.string(forKey: "NewID")
+        userID = IDUITextField.text!
+        print("userID : \(userID)")
+        if(userID == nil)
         {
+            self.displayAlertMassage("Please enter User name!")
             let alertView:UIAlertView = UIAlertView()
             alertView.title = "Sign Up Failed!"
             alertView.message = "Please enter Username!"
             alertView.delegate = self
-            alertView.addButtonWithTitle("OK")
+            alertView.addButton(withTitle: "OK")
             alertView.show()
-        }
-        else
-        {
-            
         }
 
         makePostRequest()

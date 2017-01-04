@@ -13,15 +13,16 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet
     var crawlerTableView: UITableView!
-    var subscriptions = []
+    var subscriptions : NSArray = []
     var final_array = [Crawler]()
     var unscribe_id:String?
-    var subcount : Int?
+    var subcount = 0
     var temp_crawler_list = [Crawler]()
     var crawlers:Crawlers? = Crawlers()
+    var responsestring:NSString?
 
     override func viewDidLoad() {
-        for i in 0...4
+        for i in 0...2
         {
             let temp_id = ShareData.sharedInstance.entireList[i].id
             let temp_title = ShareData.sharedInstance.entireList[i].title
@@ -31,8 +32,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
             temp_crawler_list.append(Crawler(id: temp_id, title: temp_title, description: temp_des, image: temp_image))
         }
         subscriptions = []
-        
-        if((userID.isEmpty == false) && (userKey.isEmpty == false))
+        if((userID?.isEmpty == false) && (userKey?.isEmpty == false))
         {
             makePostRequestSubscribeList()
             
@@ -42,115 +42,111 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.subcount = 0
+        self.final_array.removeAll()
         
-        subscriptions = []
-        
-        if((userID.isEmpty == false) && (userKey.isEmpty == false))
+        if((userID?.isEmpty == false) && (userKey?.isEmpty == false))
         {
             makePostRequestSubscribeList()
             
         }
         self.crawlerTableView.reloadData()
     }
+    
     func makePostRequestSubscribeList(){
-        Alamofire.request(.POST, string_url+"/req_subscription_list", parameters: ["user_id" : userID, "user_key" : userKey]).responseJSON { (response) in
-            do {
-                let JsonData =  try NSJSONSerialization.JSONObjectWithData(response.data!, options: .MutableContainers) as? NSDictionary
+        Alamofire.request(string_url+"/subscription/",method: .post,  parameters: ["user_id" : userID!, "user_key" : userKey!]).responseString { (response) in
+            print("subscription result : \(response.result)")
+            switch response.result {
+            case .success(let data):
+                print(data)
+                let tempdata : Data? = data.data(using: .utf8)
+                let js = try? JSONSerialization.jsonObject(with: tempdata!, options: .allowFragments) as! [String : AnyObject]
                 
-                if let parseJSON = JsonData {
-                    self.subscriptions = (parseJSON["subscriptions"])! as! NSArray
-                }
-                self.subcount = self.subscriptions.count
-                print(self.subscriptions)
-                self.final_array = []
-                for i in 0...4
-                {
-                    if (self.subcount == 0)
-                    {
-                        break
-                    }
-                    else
-                    {
-                        for j in 0...(self.subcount!-1)
-                        {
-                            if ((self.temp_crawler_list[i].id) == self.subscriptions[j] as! String)
+                if let temp_subscriptions = js?["subscriptions"] as? [AnyObject] {
+                    print(temp_subscriptions)
+                    for temp_sub in temp_subscriptions {
+                        let v = ((temp_sub["crawler_id"])! as? String)
+                        
+                        
+                        for i in 0...(self.temp_crawler_list.count - 1){
+                            if ((self.temp_crawler_list[i].id) == v)// as! String)
                             {
                                 let id:String?  = self.temp_crawler_list[i].id
                                 let title:String? = self.temp_crawler_list[i].title
                                 let des:String? = self.temp_crawler_list[i].description
                                 let image:String? = self.temp_crawler_list[i].thumbnailURL
-                                self.final_array.append(Crawler(id: id! , title: title!, description: des!
-                                    , image: image!))
+                                self.final_array.append(Crawler(id: id! , title: title!, description: des!,image: image!))
+                                self.subcount += 1
+                                //self.subscriptions.
                             }
                         }
                     }
+                    self.crawlerTableView.reloadData()
                 }
-            } catch {
-                print(error)
+            case .failure :
+                print("fail")
+                
             }
-            self.crawlerTableView.reloadData()
         }
     }
+    
+    
     func makePostRequestUnsubscrcibe(){
         let subid = unscribe_id!
-        Alamofire.request(.POST, string_url+"/req_unsubscribe_crawler", parameters: ["user_id" : userID, "user_key" : userKey,"crawler_id" : subid]).responseString { (response) in
+        print("sub id : \(subid)")
+        
+        Alamofire.request(string_url+"/subscription/", method: .delete, parameters: ["user_id" : userID!, "user_key" : userKey!,"crawler_id" : subid], encoding: URLEncoding.httpBody).responseString { (response) in
+            print("unsubscription result : \(response.result)")
+            print("response for unsubscribe : \(response)")
+            switch response.result {
+            case .success(let data):
+                print("succcccccccesssss")
+            case .failure :
+                print("fail")
+            }
+            
         }
-        self.crawlerTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (subcount == nil)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (subcount == 0)
         {
             return 0
         }
         else
         {
-            return self.subcount!
+            return self.subcount
         }
     }
 
-    
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let subcell = crawlerTableView.dequeueReusableCellWithIdentifier("subcell", forIndexPath: indexPath) as! SubscribeTableViewCell
-        let cc = self.final_array[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let subcell = crawlerTableView.dequeueReusableCell(withIdentifier: "subcell", for: indexPath) as! SubscribeTableViewCell
+        let cc = self.final_array[(indexPath as NSIndexPath).row]
         
         subcell.subtitle.text = cc.title
         subcell.subdes.text = cc.description
-        let unwrapped:String = cc.thumbnailURL
-        let url = NSURL(string: unwrapped)!
-        
-        if let data = NSData(contentsOfURL : url)
-        {
-            if let realimage = UIImage(data: data)
-            {
-                subcell.subimage.image = realimage
-                if(subcell.subimage.image == nil)
-                {
-                    print("threre is no image!!")
-                }
-            }
-        }
-        subcell.unsubscribeButton.tag = indexPath.row
+        subcell.unsubscribeButton.tag = (indexPath as NSIndexPath).row
         
         return subcell
     }
     
-    @IBAction func unsubscribeButton(sender: AnyObject) {
+    @IBAction func unsubscribeButton(_ sender: AnyObject) {
         unscribe_id = self.final_array[sender.tag].id
         let id = self.final_array[sender.tag].id
         let title =  self.final_array[sender.tag].title
         let description = self.final_array[sender.tag].description
         let image =  self.final_array[sender.tag].thumbnailURL
         ShareData.sharedInstance.unsubscriptionList.append(Crawler(id: id, title: title, description: description, image: image))
-        self.final_array.removeAtIndex(sender.tag)
+        
+        
+        self.final_array.remove(at: sender.tag)
         makePostRequestUnsubscrcibe()
-        self.subcount! -= 1
+        self.subcount -= 1
         self.crawlerTableView.reloadData()
     }
    

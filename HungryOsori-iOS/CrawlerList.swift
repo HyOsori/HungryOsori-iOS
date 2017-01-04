@@ -18,16 +18,40 @@ public struct Crawlers
     }
     init(jsonString:String)
     {
-        let data: NSData = jsonString.dataUsingEncoding(NSUTF8StringEncoding)!
+        let data: Data = jsonString.data(using: String.Encoding.utf8)!
         
         do
         {
-            let json = try NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments)
-            if json["error"] as! Int == 0
+            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+            if json?["ErrorCode"] as! Int == 0
             {
-                for jsonCrawler in (json["crawlers"] as! [AnyObject])
+                for jsonCrawler in (json?["crawlers"] as! [AnyObject])
                 {
                     let newCrawler = Crawler(json:(jsonCrawler as! [String : AnyObject]))
+                    crawlers[newCrawler.id] = newCrawler
+                    crawler_list.append(Crawler(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
+                    
+                }
+            }
+        }
+        catch
+        {
+            print("error serializing JSON: \(error)")
+        }
+    }
+    
+    init(jsoString:String)
+    {
+        let data: Data = jsoString.data(using: String.Encoding.utf8)!
+        
+        do
+        {
+            let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any]
+            if json?["ErrorCode"] as! Int == 0
+            {
+                for jsonCrawler in (json?["subscriptions"] as! [AnyObject])
+                {
+                    let newCrawler = Crawler(jso:(jsonCrawler as! [String : AnyObject]))
                     crawlers[newCrawler.id] = newCrawler
                     crawler_list.append(Crawler(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
                     
