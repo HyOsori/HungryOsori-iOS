@@ -12,6 +12,7 @@
 		7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76D1D409DC60071288E /* LoginViewController.swift */; };
 		7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76F1D40A1220071288E /* RegisterViewController.swift */; };
 		7667D6AA1D7D858900A78A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7667D6A81D7D858900A78A56 /* Main.storyboard */; };
+		7695158C1E6C3E36000CF299 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7695158B1E6C3E36000CF299 /* WebViewController.swift */; };
 		76A0E9131D34D53C0051FBDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9121D34D53C0051FBDD /* AppDelegate.swift */; };
 		76A0E9151D34D53C0051FBDD /* SubscriptionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */; };
 		76A0E9171D34D53C0051FBDD /* CrawlerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */; };
@@ -30,7 +31,6 @@
 		76E6F39E1D8E83FD00E6529C /* FindPWD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E6F39D1D8E83FD00E6529C /* FindPWD.swift */; };
 		76E6F3A01D8E89FC00E6529C /* PWDChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E6F39F1D8E89FC00E6529C /* PWDChange.swift */; };
 		7F68912CCC994D6E0BAD985B /* Pods_HungryOsori_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5E1A3CAC5F6E2878AE8982F /* Pods_HungryOsori_iOS.framework */; };
-		8C03DD91693CCDA4DEF2FB9D /* Pods_HungryOsori_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26319198EA3ACB6D76A4149B /* Pods_HungryOsori_iOSTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,7 +114,6 @@
 
 /* Begin PBXFileReference section */
 		0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		18A4822C1BB7B4EEA1269695 /* Pods-HungryOsori-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOSTests/Pods-HungryOsori-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		26319198EA3ACB6D76A4149B /* Pods_HungryOsori_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungryOsori_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		76055BB81D7454CE00140E85 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
@@ -123,6 +122,7 @@
 		7660F76F1D40A1220071288E /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7667D6A91D7D858900A78A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		767D88211DEC4BC70029B5C0 /* HungryOsori-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "HungryOsori-iOS.entitlements"; sourceTree = "<group>"; };
+		7695158B1E6C3E36000CF299 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		76A0E90F1D34D53C0051FBDD /* HungryOsori-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HungryOsori-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		76A0E9121D34D53C0051FBDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionListViewController.swift; sourceTree = "<group>"; };
@@ -147,7 +147,6 @@
 		76E6F39B1D8E78BA00E6529C /* UserInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
 		76E6F39D1D8E83FD00E6529C /* FindPWD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPWD.swift; sourceTree = "<group>"; };
 		76E6F39F1D8E89FC00E6529C /* PWDChange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PWDChange.swift; sourceTree = "<group>"; };
-		83DDB233323EA4085A87CB6D /* Pods-HungryOsori-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOSTests/Pods-HungryOsori-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		E5E1A3CAC5F6E2878AE8982F /* Pods_HungryOsori_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungryOsori_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -164,7 +163,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C03DD91693CCDA4DEF2FB9D /* Pods_HungryOsori_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +223,7 @@
 				76CA91531D59A88B00FAC76A /* Tabbar.swift */,
 				76055BB81D7454CE00140E85 /* GlobalVariable.swift */,
 				76E6F39B1D8E78BA00E6529C /* UserInformation.swift */,
+				7695158B1E6C3E36000CF299 /* WebViewController.swift */,
 			);
 			path = "HungryOsori-iOS";
 			sourceTree = "<group>";
@@ -253,7 +252,7 @@
 				76E275A61D74B8CE002C22FB /* Alamofire.framework */,
 				76E275A81D74B8CE002C22FB /* Alamofire iOS Tests.xctest */,
 				76E275AA1D74B8CE002C22FB /* Alamofire.framework */,
-				76E275AC1D74B8CE002C22FB /* Alamofire OSX Tests.xctest */,
+				76E275AC1D74B8CE002C22FB /* Alamofire macOS Tests.xctest */,
 				76E275AE1D74B8CE002C22FB /* Alamofire.framework */,
 				76E275B01D74B8CE002C22FB /* Alamofire tvOS Tests.xctest */,
 				76E275B21D74B8CE002C22FB /* Alamofire.framework */,
@@ -267,8 +266,6 @@
 				76E2759A1D74B8CE002C22FB /* Alamofire.xcodeproj */,
 				3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */,
 				0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */,
-				18A4822C1BB7B4EEA1269695 /* Pods-HungryOsori-iOSTests.debug.xcconfig */,
-				83DDB233323EA4085A87CB6D /* Pods-HungryOsori-iOSTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -310,12 +307,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 76A0E93C1D34D53C0051FBDD /* Build configuration list for PBXNativeTarget "HungryOsori-iOSTests" */;
 			buildPhases = (
-				7257D21D25B0D5D0D6BC4BE0 /* [CP] Check Pods Manifest.lock */,
 				76A0E9211D34D53C0051FBDD /* Sources */,
 				76A0E9221D34D53C0051FBDD /* Frameworks */,
 				76A0E9231D34D53C0051FBDD /* Resources */,
-				B12B83DC100DEAB1E486B9CA /* [CP] Embed Pods Frameworks */,
-				EAD69F2D573F28ACB644E211 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -433,10 +427,10 @@
 			remoteRef = 76E275A91D74B8CE002C22FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		76E275AC1D74B8CE002C22FB /* Alamofire OSX Tests.xctest */ = {
+		76E275AC1D74B8CE002C22FB /* Alamofire macOS Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
-			path = "Alamofire OSX Tests.xctest";
+			path = "Alamofire macOS Tests.xctest";
 			remoteRef = 76E275AB1D74B8CE002C22FB /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -504,7 +498,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		575935E181C330FD7883221D /* [CP] Copy Pods Resources */ = {
@@ -522,21 +516,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7257D21D25B0D5D0D6BC4BE0 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		A21F58A88DAD61EDF5CDF629 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,36 +529,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B12B83DC100DEAB1E486B9CA /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryOsori-iOSTests/Pods-HungryOsori-iOSTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EAD69F2D573F28ACB644E211 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HungryOsori-iOSTests/Pods-HungryOsori-iOSTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -601,6 +550,7 @@
 				7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */,
 				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				76E6F3A01D8E89FC00E6529C /* PWDChange.swift in Sources */,
+				7695158C1E6C3E36000CF299 /* WebViewController.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,
 				76CA91521D59A23100FAC76A /* SharedData.swift in Sources */,
 				76E6F3921D8CFF0700E6529C /* ProtectedViewController.swift in Sources */,
@@ -755,7 +705,6 @@
 				CODE_SIGN_ENTITLEMENTS = "HungryOsori-iOS/HungryOsori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOS";
@@ -774,7 +723,6 @@
 				CODE_SIGN_ENTITLEMENTS = "HungryOsori-iOS/HungryOsori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOS";
@@ -786,7 +734,6 @@
 		};
 		76A0E93D1D34D53C0051FBDD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 18A4822C1BB7B4EEA1269695 /* Pods-HungryOsori-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "HungryOsori-iOSTests/Info.plist";
@@ -800,7 +747,6 @@
 		};
 		76A0E93E1D34D53C0051FBDD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 83DDB233323EA4085A87CB6D /* Pods-HungryOsori-iOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = "HungryOsori-iOSTests/Info.plist";

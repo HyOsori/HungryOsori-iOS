@@ -29,7 +29,7 @@ public struct Crawlers
                 {
                     let newCrawler = Crawler(json:(jsonCrawler as! [String : AnyObject]))
                     crawlers[newCrawler.id] = newCrawler
-                    crawler_list.append(Crawler(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
+                    crawler_list.append(Crawler(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL, link_url: newCrawler.link_url))
                     
                 }
             }
@@ -53,7 +53,7 @@ public struct Crawlers
                 {
                     let newCrawler = Crawler(jso:(jsonCrawler as! [String : AnyObject]))
                     crawlers[newCrawler.id] = newCrawler
-                    crawler_list.append(Crawler(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL))
+                    crawler_list.append(Crawler(id: newCrawler.id, title: newCrawler.title, description: newCrawler.description, image: newCrawler.thumbnailURL, link_url: newCrawler.link_url))
                     
                 }
             }

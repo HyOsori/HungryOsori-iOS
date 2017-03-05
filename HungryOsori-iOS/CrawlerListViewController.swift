@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import Alamofire
+import SDWebImage
 
 
 
@@ -55,7 +56,8 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
                 let title:String? = self.crawlers!.crawler_list[i].title
                 let des:String? = self.crawlers!.crawler_list[i].description
                 let image:String? = self.crawlers!.crawler_list[i].thumbnailURL
-                ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!))
+                let link_url: String? = self.crawlers!.crawler_list[i].link_url
+                ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!, link_url : link_url!))
                 }
             self.count = (self.crawlers!.crawler_list.count)
             self.crawlerTableview.reloadData()
@@ -96,9 +98,9 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
         print("cc.thumnailURL   \(cc.thumbnailURL)")
         cell2.title.text = cc.title
         cell2.des.text = cc.description
-//        cell2.imageurlresult.image = loadImageFromUrl(img_Url: cc.thumbnailURL)
-        cell2.imageurlresult.imageFromServerURL(urlString: "http://" + cc.thumbnailURL)
-//        cell2.imageurlresult.image = loadImageFromPath(path: cc.thumbnailURL)
+        let imgURL: URL = URL(string: cc.thumbnailURL)!
+
+        cell2.imageurlresult.sd_setImage(with: imgURL, placeholderImage: UIImage(named: "second"))
         if((ShareData.sharedInstance.unsubscriptionList.count) != 0)
         {
             for j in 0...(ShareData.sharedInstance.unsubscriptionList.count-1)
@@ -115,6 +117,15 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cc = self.crawlers!.crawler_list[(indexPath as NSIndexPath).row]
+        webURL = cc.link_url
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let dstination = storyboard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+        present(dstination, animated: true, completion: nil)
+        
+//        self.present(WebViewController(), animated: true, completion: nil)
+        
     }
     @IBAction func subscribebutton(_ sender: UIButton) {
         sender.setTitle("해제", for: UIControlState())

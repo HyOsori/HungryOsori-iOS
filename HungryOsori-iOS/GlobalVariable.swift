@@ -15,6 +15,7 @@ var userID :String?//= UserDefaults.standard.string(forKey: "New_user_id")
 var userKey :String?//UserDefaults.standard.string(forKey: "New_user_key")
 var uid : String?
 var uwd : String?
+var webURL = ""
 
 
 let cookies = HTTPCookieStorage.shared

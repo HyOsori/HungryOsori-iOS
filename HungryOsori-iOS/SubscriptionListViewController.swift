@@ -28,8 +28,9 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
             let temp_title = ShareData.sharedInstance.entireList[i].title
             let temp_des = ShareData.sharedInstance.entireList[i].description
             let temp_image = ShareData.sharedInstance.entireList[i].thumbnailURL
+            let temp_link_url = ShareData.sharedInstance.entireList[i].link_url
             
-            temp_crawler_list.append(Crawler(id: temp_id, title: temp_title, description: temp_des, image: temp_image))
+            temp_crawler_list.append(Crawler(id: temp_id, title: temp_title, description: temp_des, image: temp_image, link_url : temp_link_url))
         }
         subscriptions = []
         if((userID?.isEmpty == false) && (userKey?.isEmpty == false))
@@ -77,7 +78,8 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
                                 let title:String? = self.temp_crawler_list[i].title
                                 let des:String? = self.temp_crawler_list[i].description
                                 let image:String? = self.temp_crawler_list[i].thumbnailURL
-                                self.final_array.append(Crawler(id: id! , title: title!, description: des!,image: image!))
+                                let link_url:String? = self.temp_crawler_list[i].link_url
+                                self.final_array.append(Crawler(id: id! , title: title!, description: des!,image: image!, link_url: link_url!))
                                 self.subcount += 1
                                 break
                                 
@@ -145,7 +147,8 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         let title =  self.final_array[sender.tag].title
         let description = self.final_array[sender.tag].description
         let image =  self.final_array[sender.tag].thumbnailURL
-        ShareData.sharedInstance.unsubscriptionList.append(Crawler(id: id, title: title, description: description, image: image))
+        let link_url = self.final_array[sender.tag].link_url
+        ShareData.sharedInstance.unsubscriptionList.append(Crawler(id: id, title: title, description: description, image: image, link_url: link_url))
         
         
         self.final_array.remove(at: sender.tag)
