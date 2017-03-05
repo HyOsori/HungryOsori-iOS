@@ -11,6 +11,7 @@ target 'HungryOsori-iOS' do
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'Alamofire', '~> 4.0'
+  pod 'SDWebImage', '~> 4.0'
 
   target 'HungryOsori-iOSTests' do
     inherit! :search_paths

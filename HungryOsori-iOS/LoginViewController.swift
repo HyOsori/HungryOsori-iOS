@@ -19,10 +19,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         mgr = configureManager()
         
-        for i in 0...2 {
-            ShareData.sharedInstance.unsubscription_count[i] = false
-        }
-        
         KeyUITextField.delegate = self
         IDUITextField.delegate = self
     }
@@ -101,8 +97,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     @IBAction func Login(_ sender: UIButton) {
-        //userID = UserDefaults.standard.set
-        //let userId = UserDefaults.standard.string(forKey: "NewID")
         userID = IDUITextField.text!
         print("userID : \(userID)")
         if(userID == nil)

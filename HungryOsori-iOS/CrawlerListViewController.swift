@@ -93,8 +93,12 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell2 = crawlerTableview.dequeueReusableCell(withIdentifier: "cell2", for: indexPath) as! MyTableViewCell
         let cc = self.crawlers!.crawler_list[(indexPath as NSIndexPath).row]
+        print("cc.thumnailURL   \(cc.thumbnailURL)")
         cell2.title.text = cc.title
         cell2.des.text = cc.description
+//        cell2.imageurlresult.image = loadImageFromUrl(img_Url: cc.thumbnailURL)
+        cell2.imageurlresult.imageFromServerURL(urlString: "http://" + cc.thumbnailURL)
+//        cell2.imageurlresult.image = loadImageFromPath(path: cc.thumbnailURL)
         if((ShareData.sharedInstance.unsubscriptionList.count) != 0)
         {
             for j in 0...(ShareData.sharedInstance.unsubscriptionList.count-1)
@@ -121,4 +125,22 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
         super.didReceiveMemoryWarning()
     }
 }
+
+extension UIImageView {
+    public func imageFromServerURL(urlString: String) {
+        
+        URLSession.shared.dataTask(with: NSURL(string: urlString)! as URL, completionHandler: { (data, response, error) -> Void in
+            
+            if error != nil {
+                print("why error\(error)")
+                return
+            }
+            DispatchQueue.main.async(execute: { () -> Void in
+                let image = UIImage(data: data!)
+                self.image = image
+            })
+            
+        }).resume()
+    }}
+
 

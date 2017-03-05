@@ -49,7 +49,6 @@ class FindPWD: UIViewController, UITextFieldDelegate {
     
     @IBAction func Find(_ sender: UIButton) {
         makePostRequest()
-        //AlertMessage.displayAlertMassageeeee("Check your E-mail")
     }
     
 }

@@ -56,16 +56,13 @@ class RegisterViewController: UIViewController, UITextFieldDelegate {
         }
         
         mgr.request(string_url+"/users/",method: .post, parameters: ["user_id" : newid!,"password" : newpw!,"name" : newusername!]).responseJSON { (response) in
+            print("response    \(response.data)")
+            print("response.result   \(response.result)")
             switch response.result {
             case .success( _) :
                 print(response.result)   // result of response serialization
                 if let JSON = response.result.value as! [String:AnyObject]!{
-                    //let message = JSON["user_key"]
-                    let responseUserKey = JSON["user_key"]!
-                    ShareData.sharedInstance.storedKey = responseUserKey as? String
-                    //self.messageDecision = (response.result.value!["ErrorCode"] as? String)!
-                    UserDefaults.standard.set(responseUserKey, forKey: "New_user_key")
-                    UserDefaults.standard.synchronize()
+
                 }
             case .failure( _) :
                 print("error for encoding!!")

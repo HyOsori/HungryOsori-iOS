@@ -21,6 +21,7 @@ class ProtectedViewController: UIViewController {
         mgr = Alamofire.SessionManager(configuration: configuration)
 
         let refreshedToken = FIRInstanceID.instanceID().token()!
+        /*
         var parameters:[String: String] = Dictionary()
         if (refreshedToken.isEmpty){
             parameters = ["user_id" : uid!,"password" : uwd!]
@@ -31,7 +32,7 @@ class ProtectedViewController: UIViewController {
             parameters = ["user_id" : uid!,"password" : uwd!, "token" : refreshedToken]
             print("refreshetoken exist \(refreshedToken)")
         }
-        /*
+        
         mgr.request(string_url+"/req_login",method: .post, parameters: parameters).responseJSON { (response) in
     
             switch response.result {

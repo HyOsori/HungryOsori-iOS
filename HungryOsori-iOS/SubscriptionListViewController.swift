@@ -52,7 +52,6 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
             makePostRequestSubscribeList()
             
         }
-        self.crawlerTableView.reloadData()
     }
     
     func makePostRequestSubscribeList(){
@@ -65,7 +64,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
                 let js = try? JSONSerialization.jsonObject(with: tempdata!, options: .allowFragments) as! [String : AnyObject]
                 
                 if let temp_subscriptions = js?["subscriptions"] as? [AnyObject] {
-                    print(temp_subscriptions)
+                    print("temp_______\(temp_subscriptions)")
                     for temp_sub in temp_subscriptions {
                         let v = ((temp_sub["crawler_id"])! as? String)
                         
@@ -73,17 +72,22 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
                         for i in 0...(self.temp_crawler_list.count - 1){
                             if ((self.temp_crawler_list[i].id) == v)// as! String)
                             {
+                                //break
                                 let id:String?  = self.temp_crawler_list[i].id
                                 let title:String? = self.temp_crawler_list[i].title
                                 let des:String? = self.temp_crawler_list[i].description
                                 let image:String? = self.temp_crawler_list[i].thumbnailURL
                                 self.final_array.append(Crawler(id: id! , title: title!, description: des!,image: image!))
                                 self.subcount += 1
-                                //self.subscriptions.
+                                break
+                                
                             }
                         }
+                        break
                     }
                     self.crawlerTableView.reloadData()
+                    //self.final_array.removeAll()
+                    break
                 }
             case .failure :
                 print("fail")
@@ -101,7 +105,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
             print("unsubscription result : \(response.result)")
             print("response for unsubscribe : \(response)")
             switch response.result {
-            case .success(let data):
+            case .success( _):
                 print("succcccccccesssss")
             case .failure :
                 print("fail")
@@ -120,7 +124,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         }
         else
         {
-            return self.subcount
+            return (self.subcount - 1)
         }
     }
 
