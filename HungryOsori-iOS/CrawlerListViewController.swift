@@ -51,14 +51,18 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
             print("response for crawlers : \(response)")
             self.responsestring = NSString(data: response.data!, encoding: String.Encoding.utf8.rawValue)
             self.crawlers = Crawlers(jsonString: (self.responsestring as! String))
-            for i in 0...2{
-                let id:String?  = self.crawlers!.crawler_list[i].id
-                let title:String? = self.crawlers!.crawler_list[i].title
-                let des:String? = self.crawlers!.crawler_list[i].description
-                let image:String? = self.crawlers!.crawler_list[i].thumbnailURL
-                let link_url: String? = self.crawlers!.crawler_list[i].link_url
-                ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!, link_url : link_url!))
-                }
+            for crawler in (self.crawlers?.crawler_list)! {
+                ShareData.sharedInstance.entireList.append(Crawler(id: crawler.id, title: crawler.title, description: crawler.description, image: crawler.thumbnailURL, link_url : crawler.link_url))
+            }
+//
+//            for i in 0...2{
+//                let id:String?  = self.crawlers!.crawler_list[i].id
+//                let title:String? = self.crawlers!.crawler_list[i].title
+//                let des:String? = self.crawlers!.crawler_list[i].description
+//                let image:String? = self.crawlers!.crawler_list[i].thumbnailURL
+//                let link_url: String? = self.crawlers!.crawler_list[i].link_url
+//                ShareData.sharedInstance.entireList.append(Crawler(id: id!, title: title!, description: des!, image: image!, link_url : link_url!))
+//                }
             self.count = (self.crawlers!.crawler_list.count)
             self.crawlerTableview.reloadData()
         }
@@ -123,8 +127,6 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let dstination = storyboard.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
         present(dstination, animated: true, completion: nil)
-        
-//        self.present(WebViewController(), animated: true, completion: nil)
         
     }
     @IBAction func subscribebutton(_ sender: UIButton) {

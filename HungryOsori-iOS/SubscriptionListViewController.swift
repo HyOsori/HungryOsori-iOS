@@ -22,22 +22,13 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     var responsestring:NSString?
 
     override func viewDidLoad() {
-        for i in 0...2
-        {
-            let temp_id = ShareData.sharedInstance.entireList[i].id
-            let temp_title = ShareData.sharedInstance.entireList[i].title
-            let temp_des = ShareData.sharedInstance.entireList[i].description
-            let temp_image = ShareData.sharedInstance.entireList[i].thumbnailURL
-            let temp_link_url = ShareData.sharedInstance.entireList[i].link_url
-            
-            temp_crawler_list.append(Crawler(id: temp_id, title: temp_title, description: temp_des, image: temp_image, link_url : temp_link_url))
+        let entireList = ShareData.sharedInstance.entireList
+        for oneCrawler in entireList {
+            temp_crawler_list.append(Crawler(id: oneCrawler.id, title: oneCrawler.title, description: oneCrawler.description, image: oneCrawler.thumbnailURL, link_url: oneCrawler.link_url))
         }
+        
         subscriptions = []
-        if((userID?.isEmpty == false) && (userKey?.isEmpty == false))
-        {
-            makePostRequestSubscribeList()
-            
-        }
+
         self.crawlerTableView.reloadData()
         super.viewDidLoad()
         
@@ -46,8 +37,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.subcount = 0
-        self.final_array.removeAll()
-        
+        self.final_array.removeAll()        
         if((userID?.isEmpty == false) && (userKey?.isEmpty == false))
         {
             makePostRequestSubscribeList()
@@ -79,16 +69,17 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
                                 let des:String? = self.temp_crawler_list[i].description
                                 let image:String? = self.temp_crawler_list[i].thumbnailURL
                                 let link_url:String? = self.temp_crawler_list[i].link_url
+                                print("final_ title??? \(title)")
                                 self.final_array.append(Crawler(id: id! , title: title!, description: des!,image: image!, link_url: link_url!))
                                 self.subcount += 1
                                 break
                                 
                             }
                         }
-                        break
+                        
                     }
                     self.crawlerTableView.reloadData()
-                    //self.final_array.removeAll()
+                    
                     break
                 }
             case .failure :
@@ -126,7 +117,7 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         }
         else
         {
-            return (self.subcount - 1)
+            return (self.subcount)
         }
     }
 
@@ -137,6 +128,8 @@ class SubscriptionListViewController: UIViewController, UITableViewDelegate, UIT
         subcell.subtitle.text = cc.title
         subcell.subdes.text = cc.description
         subcell.unsubscribeButton.tag = (indexPath as NSIndexPath).row
+        let url = URL(string: cc.thumbnailURL)
+        subcell.subimage.sd_setImage(with: url, placeholderImage: UIImage(named: "second"))
         
         return subcell
     }
