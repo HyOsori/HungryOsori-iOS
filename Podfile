@@ -10,7 +10,8 @@ target 'HungryOsori-iOS' do
   # Pods for HungryOsori-iOS
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
-  pod 'Alamofire', '~> 4.0'
+  pod 'Alamofire', '~> 4.5'
   pod 'SDWebImage', '~> 4.0'
+  pod 'ObjectMapper', '~> 2.2'
 
 end

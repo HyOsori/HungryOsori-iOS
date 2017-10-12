@@ -26,7 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
         application.registerUserNotificationSettings(pushNotificationSettings)
         application.registerForRemoteNotifications()
-        
+                
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window?.rootViewController = LoginController()
+        self.window?.makeKeyAndVisible()
         // Override point for customization after application launch.
         return true
     }

@@ -1,5 +1,5 @@
 PODS:
-  - Alamofire (4.1.0)
+  - Alamofire (4.5.1)
   - Firebase/Analytics (3.4.0):
     - FirebaseAnalytics (~> 3.3)
   - Firebase/Core (3.4.0):
@@ -27,18 +27,20 @@ PODS:
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - SDWebImage (4.0.0):
-    - SDWebImage/Core (= 4.0.0)
-  - SDWebImage/Core (4.0.0)
+  - ObjectMapper (2.2.9)
+  - SDWebImage (4.1.2):
+    - SDWebImage/Core (= 4.1.2)
+  - SDWebImage/Core (4.1.2)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0)
+  - Alamofire (~> 4.5)
   - Firebase/Core
   - Firebase/Messaging
+  - ObjectMapper (~> 2.2)
   - SDWebImage (~> 4.0)
 
 SPEC CHECKSUMS:
-  Alamofire: e266cf991b933498df791e645e0d8ac294492153
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   Firebase: 754562547af419cc2f4b15247fee419081924bc2
   FirebaseAnalytics: 228be2991cb28efb96cdafc4d62f64680e615c69
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
@@ -47,8 +49,9 @@ SPEC CHECKSUMS:
   GoogleIPhoneUtilities: 63f25e93a3ddcb66884d182aab3a660d98f1479b
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
-  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  ObjectMapper: 63cfe41bc6f8e7c8f44344c49901b8ae7de14c52
+  SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
 
-PODFILE CHECKSUM: 6d9d43a1de6df818e995bfcdfcb5bde790c812e6
+PODFILE CHECKSUM: 57b875a0568c1216699dca652b8a2b1319b3df4b
 
 COCOAPODS: 1.2.0

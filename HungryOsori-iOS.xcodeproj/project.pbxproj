@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		76055BB91D7454CE00140E85 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76055BB81D7454CE00140E85 /* GlobalVariable.swift */; };
 		760CEEDF1E13D79F00A771B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 760CEEDE1E13D79F00A771B6 /* GoogleService-Info.plist */; };
+		7643EFD81F8FB5320065C537 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643EFD71F8FB5320065C537 /* LoginController.swift */; };
+		7643EFDA1F8FB5730065C537 /* Crawlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643EFD91F8FB5730065C537 /* Crawlers.swift */; };
 		7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76D1D409DC60071288E /* LoginViewController.swift */; };
 		7660F7701D40A1220071288E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7660F76F1D40A1220071288E /* RegisterViewController.swift */; };
 		7667D6AA1D7D858900A78A56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7667D6A81D7D858900A78A56 /* Main.storyboard */; };
@@ -118,6 +120,8 @@
 		3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		76055BB81D7454CE00140E85 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
 		760CEEDE1E13D79F00A771B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7643EFD71F8FB5320065C537 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		7643EFD91F8FB5730065C537 /* Crawlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crawlers.swift; sourceTree = "<group>"; };
 		7660F76D1D409DC60071288E /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7660F76F1D40A1220071288E /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		7667D6A91D7D858900A78A56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -176,6 +180,65 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7643EFCF1F8FB10C0065C537 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				7643EFD71F8FB5320065C537 /* LoginController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		7643EFD01F8FB1130065C537 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				76A0E9121D34D53C0051FBDD /* AppDelegate.swift */,
+				7643EFD91F8FB5730065C537 /* Crawlers.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		7643EFD11F8FB11A0065C537 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		7643EFD21F8FB1210065C537 /* SupportFile */ = {
+			isa = PBXGroup;
+			children = (
+				76A0E91B1D34D53C0051FBDD /* Assets.xcassets */,
+				76A0E9201D34D53C0051FBDD /* Info.plist */,
+			);
+			name = SupportFile;
+			sourceTree = "<group>";
+		};
+		7643EFD31F8FB1280065C537 /* PreviousCode */ = {
+			isa = PBXGroup;
+			children = (
+				76CA91511D59A23100FAC76A /* SharedData.swift */,
+				76CA91531D59A88B00FAC76A /* Tabbar.swift */,
+				76055BB81D7454CE00140E85 /* GlobalVariable.swift */,
+				76E6F39B1D8E78BA00E6529C /* UserInformation.swift */,
+				7695158B1E6C3E36000CF299 /* WebViewController.swift */,
+				760CEEDE1E13D79F00A771B6 /* GoogleService-Info.plist */,
+				767D88211DEC4BC70029B5C0 /* HungryOsori-iOS.entitlements */,
+				7667D6A81D7D858900A78A56 /* Main.storyboard */,
+				76E6F39F1D8E89FC00E6529C /* PWDChange.swift */,
+				76E6F3911D8CFF0700E6529C /* ProtectedViewController.swift */,
+				76E6F39D1D8E83FD00E6529C /* FindPWD.swift */,
+				76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */,
+				76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */,
+				76BB948B1D6C259700A34C71 /* CrawlerList.swift */,
+				76BB948D1D6C267B00A34C71 /* Crawler.swift */,
+				7660F76D1D409DC60071288E /* LoginViewController.swift */,
+				7660F76F1D40A1220071288E /* RegisterViewController.swift */,
+				76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */,
+				76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */,
+			);
+			name = PreviousCode;
+			sourceTree = "<group>";
+		};
 		76A0E9061D34D53C0051FBDD = {
 			isa = PBXGroup;
 			children = (
@@ -201,29 +264,12 @@
 		76A0E9111D34D53C0051FBDD /* HungryOsori-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				760CEEDE1E13D79F00A771B6 /* GoogleService-Info.plist */,
-				767D88211DEC4BC70029B5C0 /* HungryOsori-iOS.entitlements */,
-				76A0E9121D34D53C0051FBDD /* AppDelegate.swift */,
-				7667D6A81D7D858900A78A56 /* Main.storyboard */,
-				76E6F39F1D8E89FC00E6529C /* PWDChange.swift */,
-				76E6F3911D8CFF0700E6529C /* ProtectedViewController.swift */,
-				76E6F39D1D8E83FD00E6529C /* FindPWD.swift */,
-				76A0E9141D34D53C0051FBDD /* SubscriptionListViewController.swift */,
-				76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */,
-				76BB948B1D6C259700A34C71 /* CrawlerList.swift */,
-				76BB948D1D6C267B00A34C71 /* Crawler.swift */,
-				7660F76D1D409DC60071288E /* LoginViewController.swift */,
-				7660F76F1D40A1220071288E /* RegisterViewController.swift */,
-				76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */,
-				76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */,
-				76A0E91B1D34D53C0051FBDD /* Assets.xcassets */,
+				7643EFCF1F8FB10C0065C537 /* Controllers */,
+				7643EFD01F8FB1130065C537 /* Model */,
+				7643EFD11F8FB11A0065C537 /* Utils */,
+				7643EFD21F8FB1210065C537 /* SupportFile */,
+				7643EFD31F8FB1280065C537 /* PreviousCode */,
 				76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */,
-				76A0E9201D34D53C0051FBDD /* Info.plist */,
-				76CA91511D59A23100FAC76A /* SharedData.swift */,
-				76CA91531D59A88B00FAC76A /* Tabbar.swift */,
-				76055BB81D7454CE00140E85 /* GlobalVariable.swift */,
-				76E6F39B1D8E78BA00E6529C /* UserInformation.swift */,
-				7695158B1E6C3E36000CF299 /* WebViewController.swift */,
 			);
 			path = "HungryOsori-iOS";
 			sourceTree = "<group>";
@@ -351,7 +397,7 @@
 				TargetAttributes = {
 					76A0E90E1D34D53C0051FBDD = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = JYF58Q7668;
+						DevelopmentTeam = LVRKUWY6HJ;
 						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -540,6 +586,7 @@
 			files = (
 				76A0E9171D34D53C0051FBDD /* CrawlerListViewController.swift in Sources */,
 				76E6F39C1D8E78BA00E6529C /* UserInformation.swift in Sources */,
+				7643EFDA1F8FB5730065C537 /* Crawlers.swift in Sources */,
 				76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */,
 				76055BB91D7454CE00140E85 /* GlobalVariable.swift in Sources */,
 				76BB948E1D6C267B00A34C71 /* Crawler.swift in Sources */,
@@ -551,6 +598,7 @@
 				76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */,
 				76E6F3A01D8E89FC00E6529C /* PWDChange.swift in Sources */,
 				7695158C1E6C3E36000CF299 /* WebViewController.swift in Sources */,
+				7643EFD81F8FB5320065C537 /* LoginController.swift in Sources */,
 				7660F76E1D409DC60071288E /* LoginViewController.swift in Sources */,
 				76CA91521D59A23100FAC76A /* SharedData.swift in Sources */,
 				76E6F3921D8CFF0700E6529C /* ProtectedViewController.swift in Sources */,
@@ -700,14 +748,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "HungryOsori-iOS/HungryOsori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LVRKUWY6HJ;
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.osori-crawler.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -718,14 +766,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0A4ED7D59F220AD1A029129B /* Pods-HungryOsori-iOS.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "HungryOsori-iOS/HungryOsori-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LVRKUWY6HJ;
 				INFOPLIST_FILE = "HungryOsori-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.osori-crawler.ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
