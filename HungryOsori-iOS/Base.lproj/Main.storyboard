@@ -64,7 +64,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ulw-of-i5v">
-                                                    <rect key="frame" x="756" y="25" width="30" height="30"/>
+                                                    <rect key="frame" x="305" y="25" width="30" height="30"/>
                                                     <state key="normal" title="해제"/>
                                                     <connections>
                                                         <action selector="unsubscribeButton:" destination="9pv-A4-QxB" eventType="touchUpInside" id="jsi-au-gXz"/>

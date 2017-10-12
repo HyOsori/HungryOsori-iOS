@@ -10,11 +10,11 @@ import Foundation
 import ObjectMapper
 
 class CrawlerList : Mappable {
-    var id : String?
-    var title : String?
-    var description : String?
-    var thumnailURL : String?
-    var link_url : String?
+    var id: String?
+    var title: String?
+    var description: String?
+    var thumnailURL: String?
+    var link_url: String?
     
     required init?(map: Map) {
         
