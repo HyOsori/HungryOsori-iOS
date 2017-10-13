@@ -89,6 +89,7 @@ extension LoginController {
         registerBtn.setTitle("Register", for: .normal)
         registerBtn.setTitleColor(.white, for: .normal)
         registerBtn.backgroundColor = .orange
+        registerBtn.addTarget(self, action: #selector(onClickRegisterBtn(_:)), for: .touchUpInside)
         
         orLabel = UILabel(frame: CGRect(x: self.view.frame.width/2 - 25, y: registerBtn.frame.origin.y + registerBtn.frame.height + 5, width: 50, height: idLabel.frame.height))
         orLabel.text = "OR"
@@ -109,5 +110,9 @@ extension LoginController {
         self.view.addSubview(registerBtn)
         self.view.addSubview(orLabel)
         self.view.addSubview(findPWBtn)
+    }
+    
+    func onClickRegisterBtn(_ sender: UIButton) {
+        self.present(RegisterController(), animated: false, completion: nil)
     }
 }
