@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		76055BB91D7454CE00140E85 /* GlobalVariable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76055BB81D7454CE00140E85 /* GlobalVariable.swift */; };
+		7608E00A1F93181E00B64EDA /* FindPasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7608E0091F93181E00B64EDA /* FindPasswordController.swift */; };
 		760CEEDF1E13D79F00A771B6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 760CEEDE1E13D79F00A771B6 /* GoogleService-Info.plist */; };
 		763B5E5C1F90BF12000C6402 /* RegisterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 763B5E5B1F90BF12000C6402 /* RegisterController.swift */; };
 		7643EFD81F8FB5320065C537 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643EFD71F8FB5320065C537 /* LoginController.swift */; };
@@ -122,6 +123,7 @@
 		26319198EA3ACB6D76A4149B /* Pods_HungryOsori_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HungryOsori_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3878C9AFF8B6BA306CC33FB7 /* Pods-HungryOsori-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HungryOsori-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HungryOsori-iOS/Pods-HungryOsori-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		76055BB81D7454CE00140E85 /* GlobalVariable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariable.swift; sourceTree = "<group>"; };
+		7608E0091F93181E00B64EDA /* FindPasswordController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindPasswordController.swift; sourceTree = "<group>"; };
 		760CEEDE1E13D79F00A771B6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		763B5E5B1F90BF12000C6402 /* RegisterController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterController.swift; sourceTree = "<group>"; };
 		7643EFD71F8FB5320065C537 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 			children = (
 				7643EFD71F8FB5320065C537 /* LoginController.swift */,
 				763B5E5B1F90BF12000C6402 /* RegisterController.swift */,
+				7608E0091F93181E00B64EDA /* FindPasswordController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -596,6 +599,7 @@
 				76A0E9171D34D53C0051FBDD /* CrawlerListViewController.swift in Sources */,
 				76E6F39C1D8E78BA00E6529C /* UserInformation.swift in Sources */,
 				763B5E5C1F90BF12000C6402 /* RegisterController.swift in Sources */,
+				7608E00A1F93181E00B64EDA /* FindPasswordController.swift in Sources */,
 				7643EFDA1F8FB5730065C537 /* Crawlers.swift in Sources */,
 				76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */,
 				7643EFDE1F8FB6EE0065C537 /* Util.swift in Sources */,

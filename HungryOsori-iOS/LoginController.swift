@@ -100,6 +100,7 @@ extension LoginController {
         findPWBtn.setTitle("비밀번호 찾기", for: .normal)
         findPWBtn.backgroundColor = .red
         findPWBtn.titleLabel?.adjustsFontSizeToFitWidth = true
+        findPWBtn.addTarget(self, action: #selector(onClickfindPWBtn(_:)), for: .touchUpInside)
         
         self.view.addSubview(titleLabel)
         self.view.addSubview(idLabel)
@@ -114,5 +115,9 @@ extension LoginController {
     
     func onClickRegisterBtn(_ sender: UIButton) {
         self.present(RegisterController(), animated: false, completion: nil)
+    }
+    
+    func onClickfindPWBtn(_ sender: UIButton) {
+        self.present(FindPasswordController(), animated: false, completion: nil)
     }
 }
