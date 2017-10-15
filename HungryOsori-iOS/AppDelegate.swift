@@ -26,9 +26,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
         application.registerUserNotificationSettings(pushNotificationSettings)
         application.registerForRemoteNotifications()
-                
+        
+        guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView else { return true}
+        statusHeight = statusBar.frame.height
+        
+        let rootNaviController = RootNaviController(rootViewController: LoginController())
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = LoginController()
+        self.window?.rootViewController = rootNaviController
         self.window?.makeKeyAndVisible()
         // Override point for customization after application launch.
         return true

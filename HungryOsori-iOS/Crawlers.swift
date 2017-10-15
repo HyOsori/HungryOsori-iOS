@@ -16,6 +16,14 @@ class CrawlerList : Mappable {
     var thumnailURL: String?
     var link_url: String?
     
+    init(id: String, title: String, description: String, thumnailURL: String, link_url: String) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.thumnailURL = thumnailURL
+        self.link_url = link_url
+    }
+    
     required init?(map: Map) {
         
     }

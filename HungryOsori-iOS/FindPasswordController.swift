@@ -51,7 +51,6 @@ extension FindPasswordController {
         previousPage.setTitle("이전 페이지", for: .normal)
         previousPage.setTitleColor(.blue, for: .normal)
         previousPage.contentHorizontalAlignment = .left
-//        previousPage.titleLabel?.textAlignment = .center
         previousPage.addTarget(self, action: #selector(onClickPreviousPage(_:)), for: .touchUpInside)
         
         inputIDLabel = UILabel(frame: CGRect(x: self.view.frame.width/2 - self.view.frame.width/4, y: self.view.frame.height - self.view.frame.height*4/5, width: self.view.frame.width/2, height: previousPage.frame.height))

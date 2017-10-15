@@ -33,6 +33,7 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white
         viewConfig()
         // Do any additional setup after loading the view.
@@ -84,6 +85,7 @@ extension LoginController {
         loginBtn.setTitle("Log in", for: .normal)
         loginBtn.setTitleColor(.white, for: .normal)
         loginBtn.backgroundColor = .blue
+        loginBtn.addTarget(self, action: #selector(onClickLoginBtn(_:)), for: .touchUpInside)
         
         registerBtn = UIButton(frame: CGRect(x: self.view.frame.width/2 + 10, y: loginBtn.frame.origin.y, width: self.view.frame.width/4, height: loginBtn.frame.height))
         registerBtn.setTitle("Register", for: .normal)
@@ -119,5 +121,13 @@ extension LoginController {
     
     func onClickfindPWBtn(_ sender: UIButton) {
         self.present(FindPasswordController(), animated: false, completion: nil)
+    }
+    
+    func onClickLoginBtn(_ sender: UIButton) {
+        let mainTabbar = CrawlerTabBarController()
+        let entireController = RootNaviController(rootViewController: EntireCrawlerController())
+        let subscribedController = RootNaviController(rootViewController: SubscribedCrawlerController())
+        mainTabbar.viewControllers = [entireController, subscribedController]
+        self.navigationController?.pushViewController(mainTabbar, animated: false)
     }
 }
