@@ -8,7 +8,9 @@
 
 import UIKit
 import Alamofire
+import Firebase
 import ObjectMapper
+import FBSDKLoginKit
 
 class LoginController: UIViewController {
 
@@ -30,6 +32,7 @@ class LoginController: UIViewController {
     
     var findPWBtn: UIButton!
     
+    var fbLoginBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,17 +46,6 @@ class LoginController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
@@ -80,6 +72,7 @@ extension LoginController {
         pwTextField = UITextField(frame: CGRect(x: pwLabel.frame.origin.x + pwLabel.frame.width + 10, y: pwLabel.frame.origin.y, width: idTextField.frame.width, height: idLabel.frame.height))
         pwTextField.borderStyle = .roundedRect
         pwTextField.placeholder = "Password"
+        pwTextField.isSecureTextEntry = true
         
         loginBtn = UIButton(frame: CGRect(x: self.view.frame.width/2 - self.view.frame.width/4 - 10, y: pwTextField.frame.origin.y + pwTextField.frame.height + 10, width: self.view.frame.width/4, height: self.view.frame.height/20))
         loginBtn.setTitle("Log in", for: .normal)
@@ -104,6 +97,14 @@ extension LoginController {
         findPWBtn.titleLabel?.adjustsFontSizeToFitWidth = true
         findPWBtn.addTarget(self, action: #selector(onClickfindPWBtn(_:)), for: .touchUpInside)
         
+        fbLoginBtn = UIButton(frame: CGRect(x: 0, y: findPWBtn.frame.origin.y + findPWBtn.frame.height + 5, width: self.view.frame.width/4, height: loginBtn.frame.height))
+        fbLoginBtn.backgroundColor = UIColor(netHex: 0x295798)
+        fbLoginBtn.center.x = UIScreen.main.bounds.width/2
+        
+        fbLoginBtn.setTitle("facebook", for: .normal)
+        fbLoginBtn.setTitleColor(.white, for: .normal)
+        fbLoginBtn.addTarget(self, action: #selector(onClickFBButton(_:)), for: .touchUpInside)
+        
         self.view.addSubview(titleLabel)
         self.view.addSubview(idLabel)
         self.view.addSubview(idTextField)
@@ -113,6 +114,75 @@ extension LoginController {
         self.view.addSubview(registerBtn)
         self.view.addSubview(orLabel)
         self.view.addSubview(findPWBtn)
+        self.view.addSubview(fbLoginBtn)
+    }
+    
+    @objc func onClickFBButton(_ sender: UIButton) {
+        let manager = FBSDKLoginManager()
+        manager.loginBehavior = .native
+        manager.logIn(withReadPermissions: ["email", "public_profile", "user_friends"], from: self) { (result, err) in
+            if err != nil {
+                print("[FB로그인] handleCustomFBLogin실패: \(String(describing: err))")
+                return
+            } else {
+                print("[FB로그인] handleCustomFBLogin성공")
+            }
+            print("result \(result)")
+            self.fbLogin()
+        }
+    }
+    
+    func fbLogin() {
+        let accessToken = FBSDKAccessToken.current()
+        guard let accessTokenString = accessToken?.tokenString else {
+            return }
+        print("accessTokenString \(accessTokenString)")
+        
+        if accessToken != nil {
+            FBSDKGraphRequest(graphPath: "me?fields=email,id,name,friends", parameters: nil).start { (connection, result, err) in
+                
+                if err != nil {
+                    print("FBLogin Error: \(String(describing: err))")
+                    return
+                }
+                print(result!)
+                let facebook_info = result as! [String : AnyObject]
+                if(facebook_info["email"] != nil) {
+                    let email = facebook_info["email"] as! String
+                    let name = facebook_info["name"]! as! String
+                    Alamofire.request(serverURL + "/social_sign/", method: .post, parameters: ["email": email, "name": name, "sign_up_type": "facebook"]).responseJSON(completionHandler: { (fbSignUpRes) in
+                        print("fbSignUpRes.result \(fbSignUpRes.result)")
+                        switch fbSignUpRes.result {
+                        case.success(let data):
+                            print("Data \(data)")
+                            let server_data = data as! [String: Any]
+                            let errorCode = server_data["ErrorCode"] as! Int
+                            switch errorCode {
+                            case 0:
+                                let mainTabbar = CrawlerTabBarController()
+                                let entireController = RootNaviController(rootViewController: EntireCrawlerController())
+                                let subscribedController = RootNaviController(rootViewController: SubscribedCrawlerController())
+                                mainTabbar.viewControllers = [entireController, subscribedController]
+                                self.navigationController?.pushViewController(mainTabbar, animated: false)
+                            case -1:
+                                self.showLoginErrorAlert(message: "이메일 혹은 비밀번호가 비어있습니다 확인해주세요")
+                            case -100:
+                                self.showLoginErrorAlert(message: "존재하지 않는 아이디입니다. 확인해주세요")
+                            case -200:
+                                self.showLoginErrorAlert(message: "비밀번호가 틀렸습니다. 확인해주세요")
+                            case -300:
+                                self.showLoginErrorAlert(message: "회원가입하신 이메일을 확인하여 인증해주세요")
+                            default: //알수없는 오류.
+                                self.showLoginErrorAlert(message: "이메일 혹은 비밀번호가 비어있습니다 확인해주세요")
+                            }
+                        case.failure(let err):
+                            print("Errr \(err)")
+                        }
+                    })
+                }
+                
+            }
+        }
     }
     
     func onClickRegisterBtn(_ sender: UIButton) {
@@ -124,10 +194,60 @@ extension LoginController {
     }
     
     func onClickLoginBtn(_ sender: UIButton) {
-        let mainTabbar = CrawlerTabBarController()
-        let entireController = RootNaviController(rootViewController: EntireCrawlerController())
-        let subscribedController = RootNaviController(rootViewController: SubscribedCrawlerController())
-        mainTabbar.viewControllers = [entireController, subscribedController]
-        self.navigationController?.pushViewController(mainTabbar, animated: false)
+        let refreshedToken = FIRInstanceID.instanceID().token()!
+        Alamofire.request(serverURL + "/signin/", method: .post, parameters: ["email": idTextField.text!, "password": pwTextField.text!, "push_token": refreshedToken]).responseJSON { (signinRes) in
+            print("signinRes.result \(signinRes.result)")
+            switch signinRes.result {
+            case.success(let data):
+                print("succes \(data)")
+                let server_data = data as! [String: Any]
+                let errorCode = server_data["ErrorCode"] as! Int
+                switch errorCode {
+                case 0:
+                    let mainTabbar = CrawlerTabBarController()
+                    let entireController = RootNaviController(rootViewController: EntireCrawlerController())
+                    let subscribedController = RootNaviController(rootViewController: SubscribedCrawlerController())
+                    mainTabbar.viewControllers = [entireController, subscribedController]
+                    self.navigationController?.pushViewController(mainTabbar, animated: false)
+                case -1:
+                    self.showLoginErrorAlert(message: "이메일 혹은 비밀번호가 비어있습니다 확인해주세요")
+                case -100:
+                    self.showLoginErrorAlert(message: "존재하지 않는 아이디입니다. 확인해주세요")
+                case -200:
+                    self.showLoginErrorAlert(message: "비밀번호가 틀렸습니다. 확인해주세요")
+                case -300:
+                    self.showLoginErrorAlert(message: "회원가입하신 이메일을 확인하여 인증해주세요")
+                default: //알수없는 오류.
+                    self.showLoginErrorAlert(message: "이메일 혹은 비밀번호가 비어있습니다 확인해주세요")
+                }
+            case.failure(let err):
+                print("err \(err)")
+            }
+        }
     }
+    
+    func showLoginErrorAlert(message: String) {
+        let alertController = UIAlertController(title: "", message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        let okAction = UIAlertAction(title: "확인", style: UIAlertActionStyle.default)
+        {
+            (result : UIAlertAction) -> Void in
+            print("로그인 실패!")
+            
+        }
+        alertController.addAction(okAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension LoginController: FBSDKLoginButtonDelegate {
+    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        print("[FB로그인]로그인성공!!!")
+    }
+    
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+        print("[FB로그인]로그아웃loginBtnDidLogout")
+    }
+    
+    
 }

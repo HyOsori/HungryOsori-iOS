@@ -11,3 +11,5 @@ import UIKit
 
 
 var statusHeight: CGFloat!
+
+var serverURL: String = "http://211.249.63.209:120"

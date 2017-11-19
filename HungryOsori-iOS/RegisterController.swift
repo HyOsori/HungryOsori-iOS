@@ -36,6 +36,7 @@ class RegisterController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .white
         registerViewConfig()
         // Do any additional setup after loading the view.
@@ -83,7 +84,9 @@ extension RegisterController {
         
         pwTextField = UITextField(frame: CGRect(x: userNameLabel.frame.origin.x, y: pwLabel.frame.origin.y + pwLabel.frame.height, width: userNameLabel.frame.width, height: userNameLabel.frame.height))
         pwTextField.placeholder = "Password"
+        
         pwTextField.borderStyle = .roundedRect
+        pwTextField.isSecureTextEntry = true
         
         rePWLabel = UILabel(frame: CGRect(x: userNameLabel.frame.origin.x, y: pwTextField.frame.origin.y + pwTextField.frame.height, width: userNameLabel.frame.width, height: userNameLabel.frame.height))
         rePWLabel.text = "Repeat Password :"
@@ -91,6 +94,7 @@ extension RegisterController {
         rePWTextField = UITextField(frame: CGRect(x: userNameLabel.frame.origin.x, y: rePWLabel.frame.origin.y + rePWLabel.frame.height, width: userNameLabel.frame.width, height: userNameLabel.frame.height))
         rePWTextField.placeholder = "Repeat Password"
         rePWTextField.borderStyle = .roundedRect
+        rePWTextField.isSecureTextEntry = true
         
         loginBtn = UIButton(frame: CGRect(x: userNameLabel.frame.origin.x, y: rePWTextField.frame.origin.y + rePWTextField.frame.height, width: userNameLabel.frame.width, height: userNameLabel.frame.height))
         loginBtn.setTitle("I have an account! Let me login", for: .normal)
@@ -118,6 +122,16 @@ extension RegisterController {
     }
     
     func onClickLoginBtn(_ sender: UIButton) {
-        self.dismiss(animated: false, completion: nil)
+        Alamofire.request(serverURL + "/users/", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!]).responseJSON { (registerRes) in
+            print("registerRes \(registerRes.result)")
+            switch registerRes.result {
+            case.success(let data):
+                print("data \(data)")
+                self.dismiss(animated: false, completion: nil)
+            case.failure(let err):
+                print("err \(err)")
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
     }
 }

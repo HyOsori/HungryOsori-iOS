@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .trimmingCharacters( in: characterSet )
             .replacingOccurrences( of: " ", with: "" ) as String
         print( "노티피케이션 등록을 성공함, 디바이스 토큰 : \(deviceTokenString)" )
-        //Tricky line
+        //Tricky line        
         FIRInstanceID.instanceID().setAPNSToken(deviceToken as Data, type: FIRInstanceIDAPNSTokenType.unknown)
         //print("The FCM token is: " + FIRInstanceID.instanceID().token()! as String)
     }

@@ -26,8 +26,6 @@
 		76A0E9171D34D53C0051FBDD /* CrawlerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9161D34D53C0051FBDD /* CrawlerListViewController.swift */; };
 		76A0E91C1D34D53C0051FBDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E91B1D34D53C0051FBDD /* Assets.xcassets */; };
 		76A0E91F1D34D53C0051FBDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */; };
-		76A0E92A1D34D53C0051FBDD /* HungryOsori_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9291D34D53C0051FBDD /* HungryOsori_iOSTests.swift */; };
-		76A0E9351D34D53C0051FBDD /* HungryOsori_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0E9341D34D53C0051FBDD /* HungryOsori_iOSUITests.swift */; };
 		76A9D64D1F93226B00BBDC52 /* EntireCrawlerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9D64C1F93226B00BBDC52 /* EntireCrawlerController.swift */; };
 		76A9D64F1F93228000BBDC52 /* SubscribedCrawlerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9D64E1F93228000BBDC52 /* SubscribedCrawlerController.swift */; };
 		76A9D6511F932AE700BBDC52 /* CrawlerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A9D6501F932AE700BBDC52 /* CrawlerTableCell.swift */; };
@@ -45,20 +43,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		76A0E9261D34D53C0051FBDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76A0E9071D34D53C0051FBDD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76A0E90E1D34D53C0051FBDD;
-			remoteInfo = "HungryOsori-iOS";
-		};
-		76A0E9311D34D53C0051FBDD /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 76A0E9071D34D53C0051FBDD /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 76A0E90E1D34D53C0051FBDD;
-			remoteInfo = "HungryOsori-iOS";
-		};
 		76E275A51D74B8CE002C22FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 76E2759A1D74B8CE002C22FB /* Alamofire.xcodeproj */;
@@ -149,12 +133,6 @@
 		76A0E91B1D34D53C0051FBDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		76A0E91E1D34D53C0051FBDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		76A0E9201D34D53C0051FBDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76A0E9251D34D53C0051FBDD /* HungryOsori-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HungryOsori-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		76A0E9291D34D53C0051FBDD /* HungryOsori_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HungryOsori_iOSTests.swift; sourceTree = "<group>"; };
-		76A0E92B1D34D53C0051FBDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		76A0E9301D34D53C0051FBDD /* HungryOsori-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HungryOsori-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		76A0E9341D34D53C0051FBDD /* HungryOsori_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HungryOsori_iOSUITests.swift; sourceTree = "<group>"; };
-		76A0E9361D34D53C0051FBDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		76A9D64C1F93226B00BBDC52 /* EntireCrawlerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntireCrawlerController.swift; sourceTree = "<group>"; };
 		76A9D64E1F93228000BBDC52 /* SubscribedCrawlerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribedCrawlerController.swift; sourceTree = "<group>"; };
 		76A9D6501F932AE700BBDC52 /* CrawlerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrawlerTableCell.swift; sourceTree = "<group>"; };
@@ -178,20 +156,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F68912CCC994D6E0BAD985B /* Pods_HungryOsori_iOS.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76A0E9221D34D53C0051FBDD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76A0E92D1D34D53C0051FBDD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,8 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				76A0E9111D34D53C0051FBDD /* HungryOsori-iOS */,
-				76A0E9281D34D53C0051FBDD /* HungryOsori-iOSTests */,
-				76A0E9331D34D53C0051FBDD /* HungryOsori-iOSUITests */,
 				76A0E9101D34D53C0051FBDD /* Products */,
 				C750EDE5984C2FD7CA8BA9DC /* Pods */,
 				D230AFD92ED12170EC82BB2A /* Frameworks */,
@@ -282,8 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				76A0E90F1D34D53C0051FBDD /* HungryOsori-iOS.app */,
-				76A0E9251D34D53C0051FBDD /* HungryOsori-iOSTests.xctest */,
-				76A0E9301D34D53C0051FBDD /* HungryOsori-iOSUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -299,24 +259,6 @@
 				76A0E91D1D34D53C0051FBDD /* LaunchScreen.storyboard */,
 			);
 			path = "HungryOsori-iOS";
-			sourceTree = "<group>";
-		};
-		76A0E9281D34D53C0051FBDD /* HungryOsori-iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				76A0E9291D34D53C0051FBDD /* HungryOsori_iOSTests.swift */,
-				76A0E92B1D34D53C0051FBDD /* Info.plist */,
-			);
-			path = "HungryOsori-iOSTests";
-			sourceTree = "<group>";
-		};
-		76A0E9331D34D53C0051FBDD /* HungryOsori-iOSUITests */ = {
-			isa = PBXGroup;
-			children = (
-				76A0E9341D34D53C0051FBDD /* HungryOsori_iOSUITests.swift */,
-				76A0E9361D34D53C0051FBDD /* Info.plist */,
-			);
-			path = "HungryOsori-iOSUITests";
 			sourceTree = "<group>";
 		};
 		76E2759B1D74B8CE002C22FB /* Products */ = {
@@ -376,42 +318,6 @@
 			productReference = 76A0E90F1D34D53C0051FBDD /* HungryOsori-iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
-		76A0E9241D34D53C0051FBDD /* HungryOsori-iOSTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 76A0E93C1D34D53C0051FBDD /* Build configuration list for PBXNativeTarget "HungryOsori-iOSTests" */;
-			buildPhases = (
-				76A0E9211D34D53C0051FBDD /* Sources */,
-				76A0E9221D34D53C0051FBDD /* Frameworks */,
-				76A0E9231D34D53C0051FBDD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				76A0E9271D34D53C0051FBDD /* PBXTargetDependency */,
-			);
-			name = "HungryOsori-iOSTests";
-			productName = "HungryOsori-iOSTests";
-			productReference = 76A0E9251D34D53C0051FBDD /* HungryOsori-iOSTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		76A0E92F1D34D53C0051FBDD /* HungryOsori-iOSUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 76A0E93F1D34D53C0051FBDD /* Build configuration list for PBXNativeTarget "HungryOsori-iOSUITests" */;
-			buildPhases = (
-				76A0E92C1D34D53C0051FBDD /* Sources */,
-				76A0E92D1D34D53C0051FBDD /* Frameworks */,
-				76A0E92E1D34D53C0051FBDD /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				76A0E9321D34D53C0051FBDD /* PBXTargetDependency */,
-			);
-			name = "HungryOsori-iOSUITests";
-			productName = "HungryOsori-iOSUITests";
-			productReference = 76A0E9301D34D53C0051FBDD /* HungryOsori-iOSUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -438,18 +344,6 @@
 							};
 						};
 					};
-					76A0E9241D34D53C0051FBDD = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = LVRKUWY6HJ;
-						LastSwiftMigration = 0820;
-						TestTargetID = 76A0E90E1D34D53C0051FBDD;
-					};
-					76A0E92F1D34D53C0051FBDD = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = LVRKUWY6HJ;
-						LastSwiftMigration = 0820;
-						TestTargetID = 76A0E90E1D34D53C0051FBDD;
-					};
 				};
 			};
 			buildConfigurationList = 76A0E90A1D34D53C0051FBDD /* Build configuration list for PBXProject "HungryOsori-iOS" */;
@@ -472,8 +366,6 @@
 			projectRoot = "";
 			targets = (
 				76A0E90E1D34D53C0051FBDD /* HungryOsori-iOS */,
-				76A0E9241D34D53C0051FBDD /* HungryOsori-iOSTests */,
-				76A0E92F1D34D53C0051FBDD /* HungryOsori-iOSUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -539,20 +431,6 @@
 				760CEEDF1E13D79F00A771B6 /* GoogleService-Info.plist in Resources */,
 				76A0E91C1D34D53C0051FBDD /* Assets.xcassets in Resources */,
 				7667D6AA1D7D858900A78A56 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76A0E9231D34D53C0051FBDD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76A0E92E1D34D53C0051FBDD /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -642,36 +520,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		76A0E9211D34D53C0051FBDD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				76A0E92A1D34D53C0051FBDD /* HungryOsori_iOSTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		76A0E92C1D34D53C0051FBDD /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				76A0E9351D34D53C0051FBDD /* HungryOsori_iOSUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		76A0E9271D34D53C0051FBDD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 76A0E90E1D34D53C0051FBDD /* HungryOsori-iOS */;
-			targetProxy = 76A0E9261D34D53C0051FBDD /* PBXContainerItemProxy */;
-		};
-		76A0E9321D34D53C0051FBDD /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 76A0E90E1D34D53C0051FBDD /* HungryOsori-iOS */;
-			targetProxy = 76A0E9311D34D53C0051FBDD /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7667D6A81D7D858900A78A56 /* Main.storyboard */ = {
@@ -696,7 +545,6 @@
 		76A0E9371D34D53C0051FBDD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -743,7 +591,6 @@
 		76A0E9381D34D53C0051FBDD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -816,56 +663,6 @@
 			};
 			name = Release;
 		};
-		76A0E93D1D34D53C0051FBDD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "HungryOsori-iOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HungryOsori-iOS.app/HungryOsori-iOS";
-			};
-			name = Debug;
-		};
-		76A0E93E1D34D53C0051FBDD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = "HungryOsori-iOSTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOSTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HungryOsori-iOS.app/HungryOsori-iOS";
-			};
-			name = Release;
-		};
-		76A0E9401D34D53C0051FBDD /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "HungryOsori-iOSUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "HungryOsori-iOS";
-			};
-			name = Debug;
-		};
-		76A0E9411D34D53C0051FBDD /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = "HungryOsori-iOSUITests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.osori.HungryOsori-iOSUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
-				TEST_TARGET_NAME = "HungryOsori-iOS";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -883,24 +680,6 @@
 			buildConfigurations = (
 				76A0E93A1D34D53C0051FBDD /* Debug */,
 				76A0E93B1D34D53C0051FBDD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		76A0E93C1D34D53C0051FBDD /* Build configuration list for PBXNativeTarget "HungryOsori-iOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				76A0E93D1D34D53C0051FBDD /* Debug */,
-				76A0E93E1D34D53C0051FBDD /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		76A0E93F1D34D53C0051FBDD /* Build configuration list for PBXNativeTarget "HungryOsori-iOSUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				76A0E9401D34D53C0051FBDD /* Debug */,
-				76A0E9411D34D53C0051FBDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

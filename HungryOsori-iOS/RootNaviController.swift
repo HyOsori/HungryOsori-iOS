@@ -18,11 +18,8 @@ class RootNaviController: UINavigationController {
         
         self.view.backgroundColor = .white
         
-//        UINavigationBar.appearance().tintColor = UIColor(netHex: 0x5b3f36)
-//        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
         navBar.isTranslucent = false
         navItem.backBarButtonItem?.title = ""
-//        navBar.barTintColor = UIColor(netHex: 0x5b3f36)
         // Do any additional setup after loading the view.
     }
     
