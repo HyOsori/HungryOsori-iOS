@@ -80,16 +80,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let characterSet: CharacterSet = CharacterSet( charactersIn: "<>" )
-        
-        let deviceTokenString: String = ( deviceToken.description as NSString )
-            .trimmingCharacters( in: characterSet )
-            .replacingOccurrences( of: " ", with: "" ) as String
-        print( "노티피케이션 등록을 성공함, 디바이스 토큰 : \(deviceTokenString)" )
+        print("deviceToken \(deviceToken)")
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print("deviceTokenString \(deviceTokenString)")
         //Tricky line
         Messaging.messaging().apnsToken = deviceToken
         InstanceID.instanceID().setAPNSToken(deviceToken as Data, type: InstanceIDAPNSTokenType.prod)
-        print("The FCM token is: " + InstanceID.instanceID().token()! as String)
+//        print("The FCM token is: " + InstanceID.instanceID().token()! as String)
     }
  
     
