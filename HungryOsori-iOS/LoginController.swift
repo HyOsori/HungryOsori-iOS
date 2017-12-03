@@ -150,7 +150,8 @@ extension LoginController {
                 if(facebook_info["email"] != nil) {
                     let email = facebook_info["email"] as! String
                     let name = facebook_info["name"]! as! String
-                    Alamofire.request(serverURL + "/social_sign/", method: .post, parameters: ["email": email, "name": name, "sign_up_type": "facebook"]).responseJSON(completionHandler: { (fbSignUpRes) in
+                    let refreshedToken = InstanceID.instanceID().token()!
+                    Alamofire.request(serverURL + "/social_sign/", method: .post, parameters: ["email": email, "name": name, "sign_up_type": "facebook", "push_token": refreshedToken]).responseJSON(completionHandler: { (fbSignUpRes) in
                         print("fbSignUpRes.result \(fbSignUpRes.result)")
                         switch fbSignUpRes.result {
                         case.success(let data):
@@ -194,7 +195,7 @@ extension LoginController {
     }
     
     func onClickLoginBtn(_ sender: UIButton) {
-        let refreshedToken = FIRInstanceID.instanceID().token()!
+        let refreshedToken = InstanceID.instanceID().token()!
         Alamofire.request(serverURL + "/signin/", method: .post, parameters: ["email": idTextField.text!, "password": pwTextField.text!, "push_token": refreshedToken]).responseJSON { (signinRes) in
             print("signinRes.result \(signinRes.result)")
             switch signinRes.result {

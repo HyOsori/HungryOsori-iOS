@@ -20,7 +20,7 @@ class ProtectedViewController: UIViewController {
         configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
         mgr = Alamofire.SessionManager(configuration: configuration)
 
-        let refreshedToken = FIRInstanceID.instanceID().token()!
+        let refreshedToken = InstanceID.instanceID().token()!
         /*
         var parameters:[String: String] = Dictionary()
         if (refreshedToken.isEmpty){

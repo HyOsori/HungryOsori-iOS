@@ -30,7 +30,7 @@ class CrawlerListViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         userKey = UserDefaults.standard.string(forKey: "New_user_key")
         
-        let refreshedToken = FIRInstanceID.instanceID().token()!
+        let refreshedToken = InstanceID.instanceID().token()!
         temp_pushToken = refreshedToken
         print("InstanceID token: \(refreshedToken)")
         super.viewDidLoad()

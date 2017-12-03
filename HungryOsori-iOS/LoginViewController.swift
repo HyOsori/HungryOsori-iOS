@@ -36,7 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.present(alert, animated:true, completion: nil)
     }
     func makePostRequest(){
-        let refreshedToken = FIRInstanceID.instanceID().token()!
+        let refreshedToken = InstanceID.instanceID().token()!
         var parameters:[String: String] = Dictionary()
         if (refreshedToken.isEmpty){
             parameters = ["user_id" : IDUITextField.text!,"password" : KeyUITextField.text!]
