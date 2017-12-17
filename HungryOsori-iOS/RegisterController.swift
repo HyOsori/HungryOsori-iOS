@@ -106,6 +106,7 @@ extension RegisterController {
         registerBtn.backgroundColor = .blue
         registerBtn.setTitle("Register", for: .normal)
         registerBtn.setTitleColor(.white, for: .normal)
+        registerBtn.addTarget(self, action: #selector(onClickRegisterButton(_:)), for: .touchUpInside)
         
         self.view.addSubview(registerPageLabel)
         self.view.addSubview(userNameLabel)
@@ -121,8 +122,25 @@ extension RegisterController {
         
     }
     
+    func onClickRegisterButton(_ sender: UIButton) {
+        print("userNameTextField.text \(userNameTextField.text)")
+        print("idTextField.text \(idTextField.text)")
+        print("pwTextField.text \(pwTextField.text)")
+        Alamofire.request(serverURL + "/api/signup", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!, "sign_up_type": "email"], encoding: JSONEncoding.default).responseJSON { (signupRes) in
+            print("signupRes \(signupRes.result)")
+            switch signupRes.result {
+            case.success(let data):
+                print("Data \(data)")
+                let server_data = data as! [String: Any]
+                print("server_data \(server_data)")
+            case.failure(let err):
+                print("err \(err)")
+            }
+        }
+    }
+    
     func onClickLoginBtn(_ sender: UIButton) {
-        Alamofire.request(serverURL + "/users/", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!]).responseJSON { (registerRes) in
+        Alamofire.request(serverURL + "/api/users/", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!]).responseJSON { (registerRes) in
             print("registerRes \(registerRes.result)")
             switch registerRes.result {
             case.success(let data):

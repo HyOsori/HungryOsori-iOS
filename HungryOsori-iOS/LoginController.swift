@@ -151,7 +151,7 @@ extension LoginController {
                     let email = facebook_info["email"] as! String
                     let name = facebook_info["name"]! as! String
                     let refreshedToken = InstanceID.instanceID().token()!
-                    Alamofire.request(serverURL + "/social_sign/", method: .post, parameters: ["email": email, "name": name, "sign_up_type": "facebook", "push_token": refreshedToken]).responseJSON(completionHandler: { (fbSignUpRes) in
+                    Alamofire.request(serverURL + "/api/social_sign/", method: .post, parameters: ["email": email, "name": name, "sign_up_type": "facebook", "push_token": refreshedToken], encoding: JSONEncoding.default).responseJSON(completionHandler: { (fbSignUpRes) in
                         print("fbSignUpRes.result \(fbSignUpRes.result)")
                         switch fbSignUpRes.result {
                         case.success(let data):
@@ -160,11 +160,17 @@ extension LoginController {
                             let errorCode = server_data["ErrorCode"] as! Int
                             switch errorCode {
                             case 0:
-                                let mainTabbar = CrawlerTabBarController()
-                                let entireController = RootNaviController(rootViewController: EntireCrawlerController())
-                                let subscribedController = RootNaviController(rootViewController: SubscribedCrawlerController())
-                                mainTabbar.viewControllers = [entireController, subscribedController]
-                                self.navigationController?.pushViewController(mainTabbar, animated: false)
+                                self.getEntireCrawlerList(getEntireHandler: { (entireRes) in
+                                    if(entireRes) {
+                                        let mainTabbar = CrawlerTabBarController()
+                                        let entireController = RootNaviController(rootViewController: EntireCrawlerController())
+                                        let subscribedController = RootNaviController(rootViewController: SubscribedCrawlerController())
+                                        mainTabbar.viewControllers = [entireController, subscribedController]
+                                        self.navigationController?.pushViewController(mainTabbar, animated: false)
+                                    } else {
+                                        print("ggggggg")
+                                    }
+                                })
                             case -1:
                                 self.showLoginErrorAlert(message: "이메일 혹은 비밀번호가 비어있습니다 확인해주세요")
                             case -100:
@@ -186,6 +192,23 @@ extension LoginController {
         }
     }
     
+    func getEntireCrawlerList(getEntireHandler: @escaping CompletionHandler) {
+        let refreshedToken = InstanceID.instanceID().token()!
+        Alamofire.request(serverURL + "/api/crawlers", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization" : refreshedToken]).responseJSON { (getEntireRes) in
+            print("getEntireRes \(getEntireRes.result)")
+            switch getEntireRes.result {
+            case.success(let data):
+                print("Data \(data)")
+                let serverResult = data as! [String: Any]
+                print("serverResult \(serverResult)")
+                getEntireHandler(true)
+            case.failure(let err):
+                print("Err \(err)")
+                getEntireHandler(false)
+            }
+        }
+    }
+    
     func onClickRegisterBtn(_ sender: UIButton) {
         self.present(RegisterController(), animated: false, completion: nil)
     }
@@ -196,7 +219,7 @@ extension LoginController {
     
     func onClickLoginBtn(_ sender: UIButton) {
         let refreshedToken = InstanceID.instanceID().token()!
-        Alamofire.request(serverURL + "/signin/", method: .post, parameters: ["email": idTextField.text!, "password": pwTextField.text!, "push_token": refreshedToken]).responseJSON { (signinRes) in
+        Alamofire.request(serverURL + "/api/signin/", method: .post, parameters: ["email": idTextField.text!, "password": pwTextField.text!, "push_token": refreshedToken]).responseJSON { (signinRes) in
             print("signinRes.result \(signinRes.result)")
             switch signinRes.result {
             case.success(let data):

@@ -13,3 +13,6 @@ import UIKit
 var statusHeight: CGFloat!
 
 var serverURL: String = "http://211.249.63.209:120"
+
+
+typealias CompletionHandler = (_ success:Bool) -> Void
