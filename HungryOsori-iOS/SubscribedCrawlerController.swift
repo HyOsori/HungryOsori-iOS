@@ -13,25 +13,24 @@ import SDWebImage
 
 class SubscribedCrawlerController: UIViewController {
     
-    var subscribedCrawlerTableView: UITableView!
+    var subscribedCrawlerTableView: UITableView?
     
-    var testCrawlerList: [CrawlerList]! = []
+    var localSubscribeCrawlerList: [CrawlerList]! = []
     
+    var localEntireCrawlerList: [CrawlerList]! = []
+    var requestToken: String?
     init() {
         super.init(nibName: nil, bundle: nil)
+        self.title = "구독리스트"        
+    }
+    init(token: String?, entireCrawlerList: [CrawlerList]) {
+        super.init(nibName: nil, bundle: nil)
+        requestToken = token
         self.title = "구독리스트"
-        let testC1 = CrawlerList(id: "1", title: "test1 title", description: "test1 description", thumnailURL: "test1", link_url: "test1")
-        let testC2 = CrawlerList(id: "2", title: "test2 title", description: "test2 description", thumnailURL: "test2", link_url: "test2")
-        let testC3 = CrawlerList(id: "3", title: "test3 title", description: "test3 description", thumnailURL: "test3", link_url: "test3")
-        let testC4 = CrawlerList(id: "4", title: "test4 title", description: "test4 description", thumnailURL: "test4", link_url: "test4")
-        testCrawlerList.append(testC1)
-        testCrawlerList.append(testC2)
-        testCrawlerList.append(testC3)
-        testCrawlerList.append(testC4)
-        testCrawlerList.append(testC1)
-        testCrawlerList.append(testC2)
-        testCrawlerList.append(testC3)
-        testCrawlerList.append(testC4)
+        for crawler in entireCrawlerList {
+            localEntireCrawlerList.append(crawler)
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(notiSubscribe(_:)), name: .notiSubscribe, object: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,16 +39,9 @@ class SubscribedCrawlerController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = .white
+        refreshSubscribe()
         
-        subscribedCrawlerTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - (self.tabBarController?.tabBar.frame.height)! - (self.navigationController?.navigationBar.frame.height)! - statusHeight))
-        subscribedCrawlerTableView.delegate = self
-        subscribedCrawlerTableView.dataSource = self
-        subscribedCrawlerTableView.tableFooterView = UIView(frame: .zero)
-        subscribedCrawlerTableView.register(EntireCrawlerCell.self, forCellReuseIdentifier: "EntireCrawlerCell")
-        
-        self.view.addSubview(subscribedCrawlerTableView)
         // Do any additional setup after loading the view.
     }
 
@@ -60,21 +52,100 @@ class SubscribedCrawlerController: UIViewController {
 
 }
 
+extension SubscribedCrawlerController {
+    func notiSubscribe(_ sender: Notification) {
+        refreshSubscribe()
+    }
+    
+    func refreshSubscribe() {
+        Alamofire.request(serverURL + "/subscription/", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: ["Authorization" : "Token " + requestToken!]).responseJSON { (getSubscribeRes) in
+            print("subscription \(getSubscribeRes.result)")
+            switch getSubscribeRes.result {
+            case.success(let data):
+                print("subscription Data \(data)")
+                let serverResult = data as! [String: Any]
+                let getCrawlerErrorCode = serverResult["ErrorCode"] as! Int
+                switch getCrawlerErrorCode {
+                case 0:
+                    let serverSubscriptionList = Mapper<Subscriptions>().mapArray(JSONArray: serverResult["subscriptions"] as! [[String : Any]])
+                    self.localSubscribeCrawlerList.removeAll()
+                    for serverSubscription in serverSubscriptionList {
+                        for entireCralwer in self.localEntireCrawlerList {
+                            if(serverSubscription.crawler == entireCralwer.crawler_id) {
+                                self.localSubscribeCrawlerList.append(entireCralwer)
+                                break
+                            }
+                        }
+                    }
+                    if(self.subscribedCrawlerTableView == nil) {
+                        self.subscribedCrawlerTableView = UITableView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height - (self.tabBarController?.tabBar.frame.height)! - (self.navigationController?.navigationBar.frame.height)! - statusHeight))
+                        self.subscribedCrawlerTableView?.delegate = self
+                        self.subscribedCrawlerTableView?.dataSource = self
+                        self.subscribedCrawlerTableView?.tableFooterView = UIView(frame: .zero)
+                        self.subscribedCrawlerTableView?.register(EntireCrawlerCell.self, forCellReuseIdentifier: "EntireCrawlerCell")
+                        self.view.addSubview(self.subscribedCrawlerTableView!)
+                    } else {
+                        self.subscribedCrawlerTableView?.reloadData()
+                    }
+                case -100:
+                    print("크롤러가 한개도 없음...!")
+                default:
+                    print("서버 에러")
+                }
+            case.failure(let err):
+                print("Err \(err)")
+            }
+        }
+    }
+    
+    func unsubscribeAction(indexPath: IndexPath) {
+        let crawler_id = self.localSubscribeCrawlerList[indexPath.row].crawler_id!
+        Alamofire.request(serverURL + "/subscription/", method: .delete, parameters: ["crawler_id": crawler_id], encoding: JSONEncoding.default, headers: ["Authorization" : "Token " + requestToken!]).responseJSON { (unsubscriptionRes) in
+            print("unsubscriptionRes result \(unsubscriptionRes.result)")
+            switch unsubscriptionRes.result {
+            case.success(let data):
+                let serverResult = data as! [String: Any]
+                print("serverResult \(serverResult)")
+                let getCrawlerErrorCode = serverResult["ErrorCode"] as! Int
+                switch getCrawlerErrorCode {
+                case 0:
+                    self.refreshSubscribe()
+                case -101:
+                    print("request에 크롤러 데이터 없음.")
+                case -200:
+                    print("유효하지 않은 구독목록")
+                default:
+                    print("서버 에러")
+                }
+            case.failure(let err):
+                print("err \(err)")
+            }
+        }
+    }
+}
+
 extension SubscribedCrawlerController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testCrawlerList.count
+        return localSubscribeCrawlerList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntireCrawlerCell", for: indexPath) as! EntireCrawlerCell
-        cell.crawlerImage.image = UIImage(named: testCrawlerList[indexPath.row].thumnailURL!)
-        cell.crawlerTitle.text = testCrawlerList[indexPath.row].title
-        cell.crawlerDescription.text = testCrawlerList[indexPath.row].description
-        
+        cell.crawlerImage.image = UIImage(named: localSubscribeCrawlerList[indexPath.row].thumbnail_url!)
+        if(cell.crawlerImage.image == nil) {
+            cell.crawlerImage.image = UIImage(named: "juju")
+        }
+        cell.crawlerTitle.text = localSubscribeCrawlerList[indexPath.row].title
+        cell.crawlerDescription.text = localSubscribeCrawlerList[indexPath.row].description
+        cell.subscribeButton.setTitle("구독취소", for: .normal)
+        cell.subscribeAction = {
+            (celll) in
+            self.unsubscribeAction(indexPath: indexPath)
+        }
         return cell
     }
     
@@ -82,3 +153,8 @@ extension SubscribedCrawlerController: UITableViewDelegate, UITableViewDataSourc
         return 88
     }
 }
+
+extension Notification.Name {
+    static let notiSubscribe = Notification.Name("notiSubscribe")
+}
+

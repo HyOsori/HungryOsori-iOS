@@ -10,17 +10,17 @@ import Foundation
 import ObjectMapper
 
 class CrawlerList : Mappable {
-    var id: String?
+    var crawler_id: String?
     var title: String?
     var description: String?
-    var thumnailURL: String?
+    var thumbnail_url: String?
     var link_url: String?
     
-    init(id: String, title: String, description: String, thumnailURL: String, link_url: String) {
-        self.id = id
+    init(crawler_id: String, title: String, description: String, thumbnail_url: String, link_url: String) {
+        self.crawler_id = crawler_id
         self.title = title
         self.description = description
-        self.thumnailURL = thumnailURL
+        self.thumbnail_url = thumbnail_url
         self.link_url = link_url
     }
     
@@ -29,11 +29,28 @@ class CrawlerList : Mappable {
     }
     
     func mapping(map: Map) {
-        id              <- map["id"]
-        title           <- map["title"]
-        description     <- map["description"]
-        thumnailURL     <- map["thumnailURL"]
-        link_url        <- map["link_url"]
+        crawler_id                  <- map["crawler_id"]
+        title                       <- map["title"]
+        description                 <- map["description"]
+        thumbnail_url               <- map["thumbnail_url"]
+        link_url                    <- map["link_url"]
     }
 }
+
+class Subscriptions : Mappable {
+    var crawler: String?
+    var latest_pushtime: String?
+    var subscriber: Int?
+    
+    required init?(map: Map) {
+        
+    }
+    
+    func mapping(map: Map) {
+        crawler                     <- map["crawler"]
+        latest_pushtime             <- map["latest_pushtime"]
+        subscriber                  <- map["subscriber"]
+    }
+}
+
 

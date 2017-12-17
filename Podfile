@@ -17,5 +17,6 @@ target 'HungryOsori-iOS' do
   pod 'FBSDKCoreKit', '4.28.0'
   pod 'FBSDKShareKit', '4.28.0'
   pod 'FBSDKLoginKit', '4.28.0'
+  pod 'IQKeyboardManagerSwift'
 
 end

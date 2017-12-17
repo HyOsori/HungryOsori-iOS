@@ -15,23 +15,23 @@ class EntireCrawlerController: UIViewController {
     
     var entireCrawlerTableView: UITableView!
     
-    var testCrawlerList: [CrawlerList]! = []
+    var localCrawlerList: [CrawlerList]! = []
+    
+    var requestToken: String?
     
     init() {
         super.init(nibName: nil, bundle: nil)
         self.title = "전체리스트"
-        let testC1 = CrawlerList(id: "1", title: "test1 title", description: "test1 description", thumnailURL: "test1", link_url: "test1")
-        let testC2 = CrawlerList(id: "2", title: "test2 title", description: "test2 description", thumnailURL: "test2", link_url: "test2")
-        let testC3 = CrawlerList(id: "3", title: "test3 title", description: "test3 description", thumnailURL: "test3", link_url: "test3")
-        let testC4 = CrawlerList(id: "4", title: "test4 title", description: "test4 description", thumnailURL: "test4", link_url: "test4")
-        testCrawlerList.append(testC1)
-        testCrawlerList.append(testC2)
-        testCrawlerList.append(testC3)
-        testCrawlerList.append(testC4)
-        testCrawlerList.append(testC1)
-        testCrawlerList.append(testC2)
-        testCrawlerList.append(testC3)
-        testCrawlerList.append(testC4)
+    }
+    
+    init(crawlerList: [CrawlerList], token: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.title = "전체리스트"
+        for crawler in crawlerList {
+            localCrawlerList.append(crawler)
+        }
+        requestToken = token
+        print("requestToken \(requestToken)")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,21 +60,54 @@ class EntireCrawlerController: UIViewController {
     
 }
 
+extension EntireCrawlerController {
+    func subscribeAction(indexPath: IndexPath) {
+        let crawler_id = self.localCrawlerList[indexPath.row].crawler_id!
+        Alamofire.request(serverURL + "/subscription/", method: .post, parameters: ["crawler_id": crawler_id], encoding: JSONEncoding.default, headers: ["Authorization" : "Token " + requestToken!]).responseJSON { (subscriptionRes) in
+            print("subscriptionRes.result \(subscriptionRes.result)")
+            switch subscriptionRes.result {
+            case.success(let data):
+                let serverResult = data as! [String: Any]
+                print("serverResult \(serverResult)")
+                let getCrawlerErrorCode = serverResult["ErrorCode"] as! Int
+                switch getCrawlerErrorCode {
+                case 0:
+                    NotificationCenter.default.post(name: .notiSubscribe, object: nil)
+                case -101:
+                    print("크롤러 데이터 전송좀")
+                case -200:
+                    print("그런 크롤러 없음")
+                default:
+                    print("서버 에러")
+                }
+            case.failure(let err):
+                print("err \(err)")
+            }
+        }
+    }
+}
+
 extension EntireCrawlerController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return testCrawlerList.count
+        return localCrawlerList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "EntireCrawlerCell", for: indexPath) as! EntireCrawlerCell
-        cell.crawlerImage.image = UIImage(named: testCrawlerList[indexPath.row].thumnailURL!)
-        cell.crawlerTitle.text = testCrawlerList[indexPath.row].title
-        cell.crawlerDescription.text = testCrawlerList[indexPath.row].description
-        
+        cell.crawlerImage.image = UIImage(named: localCrawlerList[indexPath.row].thumbnail_url!)
+        if(cell.crawlerImage.image == nil) {
+            cell.crawlerImage.image = UIImage(named: "juju")
+        }
+        cell.crawlerTitle.text = localCrawlerList[indexPath.row].title
+        cell.crawlerDescription.text = localCrawlerList[indexPath.row].description
+        cell.subscribeAction = {
+            (celll) in
+            self.subscribeAction(indexPath: indexPath)
+        }
         return cell
     }
     

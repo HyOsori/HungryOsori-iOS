@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import IQKeyboardManagerSwift
 
 class RegisterController: UIViewController {
 
@@ -39,6 +40,7 @@ class RegisterController: UIViewController {
         self.hideKeyboardWhenTappedAround()
         self.view.backgroundColor = .white
         registerViewConfig()
+        IQKeyboardManager.sharedManager().enable = true
         // Do any additional setup after loading the view.
     }
 
@@ -123,10 +125,7 @@ extension RegisterController {
     }
     
     func onClickRegisterButton(_ sender: UIButton) {
-        print("userNameTextField.text \(userNameTextField.text)")
-        print("idTextField.text \(idTextField.text)")
-        print("pwTextField.text \(pwTextField.text)")
-        Alamofire.request(serverURL + "/api/signup", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!, "sign_up_type": "email"], encoding: JSONEncoding.default).responseJSON { (signupRes) in
+        Alamofire.request(serverURL + "/signup/", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!, "sign_up_type": "email"], encoding: JSONEncoding.default).responseJSON { (signupRes) in
             print("signupRes \(signupRes.result)")
             switch signupRes.result {
             case.success(let data):
@@ -140,7 +139,7 @@ extension RegisterController {
     }
     
     func onClickLoginBtn(_ sender: UIButton) {
-        Alamofire.request(serverURL + "/api/users/", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!]).responseJSON { (registerRes) in
+        Alamofire.request(serverURL + "/users/", method: .post, parameters: ["name": userNameTextField.text!, "email": idTextField.text!, "password": pwTextField.text!]).responseJSON { (registerRes) in
             print("registerRes \(registerRes.result)")
             switch registerRes.result {
             case.success(let data):

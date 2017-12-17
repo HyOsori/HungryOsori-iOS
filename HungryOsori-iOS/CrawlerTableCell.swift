@@ -14,6 +14,8 @@ class EntireCrawlerCell: UITableViewCell {
     var crawlerImage: UIImageView!
     var crawlerTitle: UILabel!
     var crawlerDescription: UILabel!
+    var subscribeButton: UIButton!
+    var subscribeAction: ((UITableViewCell) -> Void)?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -24,9 +26,15 @@ class EntireCrawlerCell: UITableViewCell {
         
         crawlerDescription = UILabel(frame: CGRect(x: crawlerImage.frame.origin.x + crawlerImage.frame.width + 5, y: crawlerImage.frame.height/2, width: self.frame.width/2, height: crawlerImage.frame.height/2))
         
+        subscribeButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - UIScreen.main.bounds.width/5, y: 22, width: UIScreen.main.bounds.width/5, height: 44))
+        subscribeButton.setTitle("구독", for: .normal)
+        subscribeButton.setTitleColor(.black, for: .normal)
+        subscribeButton.addTarget(self, action: #selector(onClickSubscribeButton(_:)), for: .touchUpInside)
+        
         addSubview(crawlerImage)
         addSubview(crawlerTitle)
         addSubview(crawlerDescription)
+        addSubview(subscribeButton)
         
         self.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0)
         
@@ -34,6 +42,10 @@ class EntireCrawlerCell: UITableViewCell {
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+    }
+    
+    @objc func onClickSubscribeButton(_ sender: UIButton) {
+        subscribeAction!(self)
     }
     
     override func prepareForReuse() {
