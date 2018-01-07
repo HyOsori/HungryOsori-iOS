@@ -179,7 +179,7 @@ extension LoginController {
                                                 let entireController = RootNaviController(rootViewController: EntireCrawlerController(crawlerList: serverCrawlerList, token: token!))
                                                 let subscribedController = RootNaviController(rootViewController: SubscribedCrawlerController(token: token!,entireCrawlerList: serverCrawlerList))
                                                 mainTabbar.viewControllers = [entireController, subscribedController]
-                                                self.navigationController?.pushViewController(mainTabbar, animated: false)
+                                                self.present(mainTabbar, animated: false, completion: nil)
                                             case -100:
                                                 print("크롤러가 한개도 없음...!")
                                             default:
