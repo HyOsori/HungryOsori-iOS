@@ -24,6 +24,8 @@ xcuserdata/
 ## Other
 *.moved-aside
 *.xcuserstate
+HungryOsori-iOS/Configuration.swift
+Configuration.swift
 
 ## Obj-C/Swift specific
 *.hmap

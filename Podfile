@@ -18,5 +18,6 @@ target 'HungryOsori-iOS' do
   pod 'FBSDKShareKit', '4.28.0'
   pod 'FBSDKLoginKit', '4.28.0'
   pod 'IQKeyboardManagerSwift'
+  pod 'naveridlogin-sdk-ios'
 
 end

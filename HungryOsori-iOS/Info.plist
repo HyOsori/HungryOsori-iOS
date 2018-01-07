@@ -4,6 +4,8 @@
 <dict>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>naversearchthirdlogin</string>
+		<string>naversearchapp</string>
 		<string>fbapi</string>
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
@@ -11,6 +13,14 @@
 	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.osori-crawler.ios</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>com.osori-crawler.ios</string>
+		</dict>
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import UserNotifications
+import NaverThirdPartyLogin
 
 
 @UIApplicationMain
@@ -23,6 +24,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         Messaging.messaging().delegate = self
         
+        let naverConnection = NaverThirdPartyLoginConnection.getSharedInstance()
+        
+        naverConnection?.isNaverAppOauthEnable = true
+        
+        naverConnection?.isInAppOauthEnable = true
+        
+        naverConnection?.setOnlyPortraitSupportInIphone(true)
+        
+        
+        
+        naverConnection?.appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String // 앱이름
+        //D9JC0tvyd8THKyU9erd7
+        naverConnection?.serviceUrlScheme = "com.osori-crawler.ios"        
+        
+                
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self

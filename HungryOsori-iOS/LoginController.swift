@@ -12,6 +12,7 @@ import Firebase
 import ObjectMapper
 import FBSDKLoginKit
 import IQKeyboardManagerSwift
+import NaverThirdPartyLogin
 
 class LoginController: UIViewController {
 
@@ -34,6 +35,8 @@ class LoginController: UIViewController {
     var findPWBtn: UIButton!
     
     var fbLoginBtn: UIButton!
+    
+    var naverLogin: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,6 +110,12 @@ extension LoginController {
         fbLoginBtn.setTitleColor(.white, for: .normal)
         fbLoginBtn.addTarget(self, action: #selector(onClickFBButton(_:)), for: .touchUpInside)
         
+        naverLogin = UIButton(frame: CGRect(x: 0, y: fbLoginBtn.frame.origin.y + fbLoginBtn.frame.height + 5, width: self.view.frame.width/4, height: loginBtn.frame.height))
+        naverLogin.backgroundColor = .black
+        naverLogin.setTitle("naver", for: .normal)
+        naverLogin.setTitleColor(.white, for: .normal)
+        naverLogin.addTarget(self, action: #selector(onClickNaverButton(_:)), for: .touchUpInside)
+        
         self.view.addSubview(titleLabel)
         self.view.addSubview(idLabel)
         self.view.addSubview(idTextField)
@@ -117,6 +126,16 @@ extension LoginController {
         self.view.addSubview(orLabel)
         self.view.addSubview(findPWBtn)
         self.view.addSubview(fbLoginBtn)
+        self.view.addSubview(naverLogin)
+    }
+    
+    @objc func onClickNaverButton(_ sender: UIButton) {
+        print("onClickNaverButton")
+        let naverConnection = NaverThirdPartyLoginConnection.getSharedInstance()
+        
+        naverConnection?.delegate = self
+        
+        naverConnection?.requestThirdPartyLogin()
     }
     
     @objc func onClickFBButton(_ sender: UIButton) {
@@ -297,6 +316,32 @@ extension LoginController: FBSDKLoginButtonDelegate {
     func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         print("[FB로그인]로그아웃loginBtnDidLogout")
     }
+}
+
+extension LoginController: NaverThirdPartyLoginConnectionDelegate {
+    func oauth20ConnectionDidOpenInAppBrowser(forOAuth request: URLRequest!) {
+        print("oauth20ConnectionDidOpenInAppBrowser")
+    }
     
+    func oauth20ConnectionDidFinishRequestACTokenWithAuthCode() {
+        print("oauth20ConnectionDidFinishRequestACTokenWithAuthCode")
+    }
+    
+    func oauth20ConnectionDidFinishRequestACTokenWithRefreshToken() {
+        print("oauth20ConnectionDidFinishRequestACTokenWithRefreshToken")
+    }
+    
+    func oauth20ConnectionDidFinishDeleteToken() {
+        //로그아웃이나 토큰 삭제되는 경우.
+        print("oauth20ConnectionDidFinishDeleteToken")
+    }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFailWithError error: Error!) {
+        print("oauthConnection didfailWithErrror \(error)")
+    }
+    
+    func oauth20Connection(_ oauthConnection: NaverThirdPartyLoginConnection!, didFinishAuthorizationWithResult recieveType: THIRDPARTYLOGIN_RECEIVE_TYPE) {
+        print("oauthConnection didFinishAuthorizationWithResult \(recieveType)")
+    }
     
 }
