@@ -35,6 +35,7 @@
 		76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */; };
 		76CD536B1D5085BD008931B9 /* SubscribeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */; };
 		76CFDB4C1FD4033400654476 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 76CFDB4B1FD4033400654476 /* GoogleService-Info.plist */; };
+		76DAFD3920025CC000273F20 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DAFD3820025CC000273F20 /* Configuration.swift */; };
 		76E6F3921D8CFF0700E6529C /* ProtectedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E6F3911D8CFF0700E6529C /* ProtectedViewController.swift */; };
 		76E6F39C1D8E78BA00E6529C /* UserInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E6F39B1D8E78BA00E6529C /* UserInformation.swift */; };
 		76E6F39E1D8E83FD00E6529C /* FindPWD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E6F39D1D8E83FD00E6529C /* FindPWD.swift */; };
@@ -142,6 +143,7 @@
 		76CD53661D4F2E99008931B9 /* MyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
 		76CD536A1D5085BD008931B9 /* SubscribeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscribeTableViewCell.swift; sourceTree = "<group>"; };
 		76CFDB4B1FD4033400654476 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		76DAFD3820025CC000273F20 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		76E2759A1D74B8CE002C22FB /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		76E6F3911D8CFF0700E6529C /* ProtectedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProtectedViewController.swift; sourceTree = "<group>"; };
 		76E6F39B1D8E78BA00E6529C /* UserInformation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInformation.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				76A0E9121D34D53C0051FBDD /* AppDelegate.swift */,
 				7643EFD91F8FB5730065C537 /* Crawlers.swift */,
+				76DAFD3820025CC000273F20 /* Configuration.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				76A9D64F1F93228000BBDC52 /* SubscribedCrawlerController.swift in Sources */,
 				76CD53671D4F2E99008931B9 /* MyTableViewCell.swift in Sources */,
 				7643EFDE1F8FB6EE0065C537 /* Util.swift in Sources */,
+				76DAFD3920025CC000273F20 /* Configuration.swift in Sources */,
 				76055BB91D7454CE00140E85 /* GlobalVariable.swift in Sources */,
 				76A9D64D1F93226B00BBDC52 /* EntireCrawlerController.swift in Sources */,
 				76BB948E1D6C267B00A34C71 /* Crawler.swift in Sources */,

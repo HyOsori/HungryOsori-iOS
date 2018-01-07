@@ -36,7 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         naverConnection?.appName = Bundle.main.infoDictionary![kCFBundleNameKey as String] as! String // 앱이름
         //D9JC0tvyd8THKyU9erd7
-        naverConnection?.serviceUrlScheme = "com.osori-crawler.ios"        
+        naverConnection?.serviceUrlScheme = "com.osori-crawler.ios"
+        naverConnection?.consumerKey = naverConsumerID
+        naverConnection?.consumerSecret = naverConsumerKey
         
                 
         if #available(iOS 10.0, *) {
